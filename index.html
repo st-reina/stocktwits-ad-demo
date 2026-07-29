@@ -561,6 +561,11 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     <div class="panel">
       <div class="rr-head"><span>Latest <span class="jsSym">AAPL</span> News</span><span class="view">View ›</span></div>
       <div class="news-item">
+        <div class="tx"><div class="news-title">Apple Stock Hits a New All-Time High: Is It Still a Buy?</div><div class="news-src">Nasdaq · 3h ago</div></div>
+        <div class="news-thumb"></div>
+      </div>
+      <!-- Sponsored News (ad unit) — toggled from Ad units -->
+      <div class="news-item" id="sponsoredNewsItem">
         <div class="tx">
           <div class="news-title" id="newsHeadline">Your sponsored headline goes here — a partnership, product launch, or milestone.</div>
           <div class="news-src"><span class="stbadge">S</span><span id="newsSponsor">Stocktwits</span> · <span class="ad-word">Ad</span></div>
@@ -572,11 +577,11 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         </div>
       </div>
       <div class="news-item">
-        <div class="tx"><div class="news-title">Apple Stock Hits a New All-Time High: Is It Still a Buy?</div><div class="news-src">Nasdaq · 3h ago</div></div>
+        <div class="tx"><div class="news-title">Why Apple (AAPL) is a Top Momentum Stock for the Long Term</div><div class="news-src">Zacks · 4h ago</div></div>
         <div class="news-thumb"></div>
       </div>
       <div class="news-item">
-        <div class="tx"><div class="news-title">Why Apple (AAPL) is a Top Momentum Stock for the Long Term</div><div class="news-src">Zacks · 4h ago</div></div>
+        <div class="tx"><div class="news-title">Apple Q3 Earnings Preview: What Wall Street Expects</div><div class="news-src">MarketWatch · 5h ago</div></div>
         <div class="news-thumb"></div>
       </div>
     </div>
@@ -603,7 +608,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="rr-head"><span>Related Symbols</span></div>
       <div class="rel-row"><span class="rel-ic">RIVN</span><div><div class="rel-nm">RIVN</div><div class="rel-co">Rivian Automotive</div></div><span class="rel-add">＋</span></div>
       <!-- Promoted Related Symbol (Ad) — editable -->
-      <div class="rel-row">
+      <div class="rel-row" id="promotedRelRow">
         <div class="adslot rel-ad-logo" data-role="Related Symbol · Promoted Logo" data-dim="Logo">
           <button class="adclear" style="width:16px;height:16px;font-size:9px">✕</button><img class="adfill" alt="">
           <div class="adempty" style="border-width:2px;font-size:0"></div>
@@ -673,8 +678,10 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   <div class="ctl-sec">
     <div class="sec-title">🧩 Ad units</div>
 
+    <div class="fld-note" style="margin:-4px 0 12px">Tick a unit to add it to the page and edit it. Unticked units don’t appear.</div>
+
     <div class="unit">
-      <div class="unit-head"><input type="checkbox" class="unit-tick"> Pinned Post</div>
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="pinned"> Pinned Post</div>
       <div class="unit-body">
         <div class="fld"><label>Username</label><input type="text" id="inPinUser" data-autofill="1" value="voyagertech"></div>
         <div class="fld"><label>Official rep pill</label><input type="text" id="inPinPill" value="Official VOYG Representative"></div>
@@ -686,7 +693,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     </div>
 
     <div class="unit">
-      <div class="unit-head"><input type="checkbox" class="unit-tick"> Native Add-to-Watchlist</div>
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="native"> Native Add-to-Watchlist</div>
       <div class="unit-body">
         <div class="fld"><label>Brand name</label><input type="text" id="inNativeName" data-autofill="1" value="Your Brand"></div>
         <div class="fld"><label>Ad copy / description</label><textarea id="inNativeDesc">Your ad copy goes here — describe the partnership, product, or offer in a sentence or two.</textarea></div>
@@ -697,7 +704,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     </div>
 
     <div class="unit">
-      <div class="unit-head"><input type="checkbox" class="unit-tick"> Sponsored News</div>
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="news"> Sponsored News</div>
       <div class="unit-body">
         <div class="fld"><label>Headline</label><textarea id="inNewsHeadline">Your sponsored headline goes here — a partnership, product launch, or milestone.</textarea></div>
         <div class="fld"><label>Advertiser name</label><input type="text" id="inNewsSponsor" data-autofill="1" value="Stocktwits"></div>
@@ -706,7 +713,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     </div>
 
     <div class="unit">
-      <div class="unit-head"><input type="checkbox" class="unit-tick"> Related Symbol (Promoted Ad)</div>
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="rel"> Related Symbol (Promoted Ad)</div>
       <div class="unit-body">
         <div class="fld"><label>Ticker</label><input type="text" id="inRelSymTicker" value="NVDA"></div>
         <div class="fld"><label>Company name</label><input type="text" id="inRelSymName" data-autofill="1" value="NVIDIA"></div>
@@ -714,14 +721,20 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         <button class="btn" id="btnRelSymLogo">Upload logo</button>
       </div>
     </div>
+
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="bottom"> Bottom rail 728×90</div>
+      <div class="unit-body">
+        <div class="fld-note" style="margin-bottom:8px">Sticky leaderboard pinned to the bottom of the page.</div>
+        <button class="btn" id="btnBottomImg">Upload 728×90 creative</button>
+      </div>
+    </div>
   </div>
 
   <div class="ctl-sec">
     <div class="sec-title">🎬 Presentation</div>
-    <div class="switch"><span>Bottom rail 728×90 <span style="color:var(--ink-3);font-weight:500">(sticky bottom ad)</span></span><span class="sw" id="swTakeover"></span></div>
+    <div class="switch"><span>🔒 Present &amp; lock <span style="color:var(--ink-3);font-weight:500">(hide guides + freeze to present)</span></span><span class="sw" id="swLock"></span></div>
     <div class="switch"><span>Pre-roll pop-out on scroll <span style="color:var(--ink-3);font-weight:500">(floats bottom-right)</span></span><span class="sw" id="swPopout"></span></div>
-    <div class="switch"><span>Presentation mode <span style="color:var(--ink-3);font-weight:500">(hide guides)</span></span><span class="sw" id="swPresent"></span></div>
-    <div class="switch"><span>🔒 Lock creatives <span style="color:var(--ink-3);font-weight:500">(freeze before presenting)</span></span><span class="sw" id="swLock"></span></div>
     <div class="switch"><span>Glow / pulse on ads</span><span class="sw on" id="swGlow"></span></div>
     <div style="margin-top:10px"><label style="font-weight:700;font-size:12px;display:block;margin-bottom:8px">Highlight color</label>
       <div class="swatches" id="swatches">
@@ -816,12 +829,27 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   document.getElementById("btnPinLogo").addEventListener("click",function(){ uploadTo(setPinLogo); });
   document.getElementById("btnPinImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Pinned Post · Image"]'); target=s; picker.value=""; picker.click(); });
   document.getElementById("btnRelSymLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); target=s; picker.value=""; picker.click(); });
+  document.getElementById("btnBottomImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Bottom rail · 728x90"]'); target=s; picker.value=""; picker.click(); });
 
-  /* ---------- Ad-units accordion (tick to edit) ---------- */
+  /* ---------- Ad units: tick = show on page + open its editor; untick = remove + collapse ---------- */
+  function unitBlock(name){
+    if(name==="pinned") return document.querySelector('[data-card="pinned"]');
+    if(name==="native") return document.querySelector('[data-card="native"]');
+    if(name==="news") return document.getElementById("sponsoredNewsItem");
+    if(name==="rel") return document.getElementById("promotedRelRow");
+    return null; /* bottom handled via body.takeover */
+  }
+  function syncUnit(u){
+    var cb=u.querySelector(".unit-tick"), name=cb.dataset.unit, on=cb.checked;
+    u.classList.toggle("open",on);
+    if(name==="bottom"){ document.body.classList.toggle("takeover",on); }
+    else { var b=unitBlock(name); if(b) b.style.display = on ? "" : "none"; }
+  }
   [].forEach.call(document.querySelectorAll(".unit"),function(u){
-    var tick=u.querySelector(".unit-tick"), head=u.querySelector(".unit-head");
-    tick.addEventListener("change",function(){ u.classList.toggle("open",tick.checked); });
-    head.addEventListener("click",function(e){ if(e.target===tick) return; tick.checked=!tick.checked; u.classList.toggle("open",tick.checked); });
+    var cb=u.querySelector(".unit-tick"), head=u.querySelector(".unit-head");
+    cb.addEventListener("change",function(){ syncUnit(u); });
+    head.addEventListener("click",function(e){ if(e.target===cb) return; cb.checked=!cb.checked; syncUnit(u); });
+    syncUnit(u); /* apply default (unchecked → hidden) on load */
   });
 
   /* ---------- Client / advertiser: name auto-fill + reusable logo ---------- */
@@ -890,8 +918,6 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   document.getElementById("ctlClose").addEventListener("click",function(){ ctl.classList.remove("open"); });
   function sw(id,cls,onInit,after){ var el=document.getElementById(id); if(onInit) el.classList.add("on");
     el.addEventListener("click",function(){ var on=!el.classList.contains("on"); el.classList.toggle("on",on); document.body.classList.toggle(cls,on); if(after)after(on); }); }
-  sw("swTakeover","takeover",false);
-  sw("swPresent","present",false,function(on){ if(on) ctl.classList.remove("open"); });
   sw("swGlow","glow-on",true);
   document.getElementById("swGlow").classList.add("on");
   document.getElementById("swatches").addEventListener("click",function(e){ var s=e.target.closest(".swatch"); if(!s)return; [].forEach.call(this.children,function(c){c.classList.remove("sel");}); s.classList.add("sel"); document.documentElement.style.setProperty("--glow",s.dataset.c); });
@@ -934,8 +960,9 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     allFieldEls().forEach(function(el){ if(el.id && el.id!=="inSaveName") st.fields[el.id]=el.value; });
     slots.forEach(function(sl){ if(sl.classList.contains("filled")) st.slots[sl.dataset.id]=sl.querySelector(".adfill").src; });
     ["symLogo","nativeLogo","pinLogo"].forEach(function(id){ var im=document.querySelector("#"+id+" img"); st.logos[id]=im?im.src:null; });
-    st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), takeover:document.body.classList.contains("takeover"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow") };
+    st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow") };
     st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel};
+    st.units={}; [].forEach.call(document.querySelectorAll(".unit-tick"),function(cb){ st.units[cb.dataset.unit]=cb.checked; });
     return st;
   }
   function applyState(st){
@@ -944,9 +971,10 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     slots.forEach(clear);
     Object.keys(st.slots||{}).forEach(function(sid){ for(var i=0;i<slots.length;i++){ if(slots[i].dataset.id===sid){ fill(slots[i],st.slots[sid]); break; } } });
     if(st.logos){ if(st.logos.symLogo) setSymbolLogo(st.logos.symLogo); if(st.logos.nativeLogo) setNativeLogo(st.logos.nativeLogo); if(st.logos.pinLogo) setPinLogo(st.logos.pinLogo); }
-    if(st.flags){ setFlag("glow-on",st.flags.glow,"swGlow"); setChartState(st.flags.chartCollapsed); setFlag("takeover",st.flags.takeover,"swTakeover"); setPopout(st.flags.popout); if(st.flags.glowColor) document.documentElement.style.setProperty("--glow",st.flags.glowColor.trim()); }
+    if(st.flags){ setFlag("glow-on",st.flags.glow,"swGlow"); setChartState(st.flags.chartCollapsed); setPopout(st.flags.popout); if(st.flags.glowColor) document.documentElement.style.setProperty("--glow",st.flags.glowColor.trim()); }
     clientLogo=st.clientLogo||null; showClientLogo();
     if(st.linked){ ["pin","native","rel"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
+    if(st.units){ [].forEach.call(document.querySelectorAll(".unit"),function(u){ var cb=u.querySelector(".unit-tick"); var n=cb.dataset.unit; if(st.units[n]!==undefined) cb.checked=st.units[n]; syncUnit(u); }); }
   }
 
   var PAGES="st_ad_demo_pages";
@@ -964,9 +992,11 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   swLock.addEventListener("click",function(){
     var on=!swLock.classList.contains("on"); swLock.classList.toggle("on",on);
     document.body.classList.toggle("locked",on);
+    document.body.classList.toggle("present",on); /* Present & lock: also hide guides */
     [].forEach.call(document.querySelectorAll(".ctl input, .ctl textarea, .ctl select"),function(el){ if(el.id!=="inSaveName"&&el.id!=="savedPages") el.disabled=on; });
     [].forEach.call(document.querySelectorAll(".ctl .btn"),function(b){ if(!SAVE_BTNS[b.id]) b.disabled=on; });
     document.getElementById("ctlToggle").textContent = on ? "🔒 Demo Controls" : "⚙ Demo Controls";
+    if(on) ctl.classList.remove("open");
   });
 
   /* ---------- SORTABLE FEED (drag handle initiates) ---------- */
