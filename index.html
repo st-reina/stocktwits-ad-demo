@@ -157,6 +157,12 @@ img{max-width:100%}
 .drag-handle{position:absolute;top:10px;right:10px;width:26px;height:22px;border-radius:6px;background:var(--chip);color:var(--ink-3);display:flex;align-items:center;justify-content:center;cursor:grab;font-size:13px;z-index:6;user-select:none}
 .drag-handle:active{cursor:grabbing}
 .feed-tag{position:absolute;top:12px;left:16px;font-size:9.5px;font-weight:800;letter-spacing:.4px;color:var(--ink-3);text-transform:uppercase}
+.pin-label{color:var(--ink-3);font-weight:700;font-size:12.5px;display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.pin-av{width:36px;height:36px;border-radius:50%;flex:none;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;overflow:hidden}
+.pin-av img{width:100%;height:100%;object-fit:cover}
+.vbadge{width:15px;height:15px;border-radius:50%;background:var(--ink);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:800}
+.pin-pill{display:inline-block;background:#e9eef6;color:#3a4a63;font-size:11.5px;font-weight:700;border-radius:6px;padding:2px 9px;margin-top:5px}
+.engage{display:flex;gap:26px;color:var(--ink-3);font-size:13px;margin-top:12px}
 
 /* ===== RIGHT RAIL ===== */
 .rr-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;font-weight:800}
@@ -392,20 +398,24 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         <!-- ===== SORTABLE FEED ===== -->
         <div class="feed" id="feed">
 
-          <!-- Exec interview (below the pills, per request) — fully editable -->
-          <div class="feed-card" data-card="exec">
-            <span class="feed-tag">Pinned · Executive Interview</span><span class="drag-handle" title="Drag to reorder">⠿</span>
-            <div style="height:14px"></div>
-            <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
-              <span class="rel-ic" id="execLogo">EX</span>
-              <div><div style="font-weight:700" id="execName">Executive Name, Title</div><div style="color:var(--ink-3);font-size:12px" id="execCo">Company · Exclusive Interview</div></div>
+          <!-- Pinned Post (brand's pinned post) — fully editable -->
+          <div class="feed-card" data-card="pinned">
+            <div class="pin-label">📌 Pinned Post</div><span class="drag-handle" title="Drag to reorder">⠿</span>
+            <div class="post-head">
+              <span class="pin-av" id="pinLogo">V</span>
+              <div>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span class="post-user" id="pinUser">voyagertech</span><span class="vbadge">✓</span><span class="post-time">· Jul 13</span>
+                </div>
+                <span class="pin-pill" id="pinPill">Official VOYG Representative</span>
+              </div>
             </div>
-            <div id="execDesc" style="margin-bottom:10px;line-height:1.4">Interview headline or summary goes here — what the executive discusses in the video.</div>
-            <div class="adslot slot-exec" data-role="Pinned Executive Interview" data-dim="Exec interview">
-              <span class="adtag">Exec Interview</span><button class="adclear">✕</button><img class="adfill" alt=""><span class="play-badge">▶</span>
-              <div class="adempty"><span class="dim">Video Thumbnail</span><span class="role">upload the interview still</span><span class="hint">click / drop</span></div>
+            <div id="pinDesc" style="margin-top:8px;line-height:1.45">Your pinned post copy goes here — announce the news, milestone, or campaign in the brand's own voice.</div>
+            <div class="adslot slot-exec" data-role="Pinned Post · Image" data-dim="Post image" style="margin-top:10px">
+              <span class="adtag">Pinned</span><button class="adclear">✕</button><img class="adfill" alt="">
+              <div class="adempty"><span class="dim">Post Image / Creative</span><span class="role">the visual attached to the pinned post</span><span class="hint">click / drop</span></div>
             </div>
-            <div class="ad-caption"><span>Sponsored Interview</span><span class="ad-word">Ad</span></div>
+            <div class="engage"><span>💬 2</span><span>↻ 1</span><span>♡ 7</span><span>↗</span></div>
           </div>
 
           <!-- Post w/ images -->
@@ -514,13 +524,6 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     <div class="panel">
       <div class="rr-head"><span>Related Symbols</span></div>
       <div class="rel-row"><span class="rel-ic">RIVN</span><div><div class="rel-nm">RIVN</div><div class="rel-co">Rivian Automotive</div></div><span class="rel-add">＋</span></div>
-      <div class="rel-row">
-        <div class="adslot slot-relad" data-role="Related Symbol · Promoted (Ad)" data-dim="Logo">
-          <button class="adclear" style="width:16px;height:16px;font-size:9px">✕</button><img class="adfill" alt="">
-          <div class="adempty" style="border-width:2px;font-size:0"></div>
-        </div>
-        <div><div class="rel-nm"><span id="relName">Your Brand</span> <span class="tag-ad">Ad</span></div><div class="rel-co">Promoted account</div></div><span class="rel-add">＋</span>
-      </div>
       <div class="rel-row"><span class="rel-ic">GOOG</span><div><div class="rel-nm">GOOG</div><div class="rel-co">Alphabet Inc</div></div><span class="rel-add">✓</span></div>
       <div class="rel-row"><span class="rel-ic">LCID</span><div><div class="rel-nm">LCID</div><div class="rel-co">Lucid Group</div></div><span class="rel-add">＋</span></div>
     </div>
@@ -537,11 +540,11 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   </div>
 </div>
 
-<!-- STICKY BOTTOM 728x90 (takeover only) -->
+<!-- STICKY BOTTOM 728x90 -->
 <div class="sticky-lb">
-  <div class="adslot slot-728x90" data-role="Bottom leaderboard (Takeover)" data-dim="728 × 90">
+  <div class="adslot slot-728x90" data-role="Bottom rail · 728x90" data-dim="728 × 90">
     <span class="adtag">728×90</span><button class="adclear">✕</button><img class="adfill" alt="">
-    <div class="adempty"><span class="dim">728 × 90</span><span class="role">sticky bottom leaderboard</span><span class="hint">click / drop</span></div>
+    <div class="adempty"><span class="dim">728 × 90</span><span class="role">sticky bottom rail</span><span class="hint">click / drop</span></div>
   </div>
 </div>
 
@@ -583,23 +586,17 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   </div>
 
   <div class="ctl-sec">
-    <h4>Executive Interview unit</h4>
-    <div class="fld"><label>Name / title</label><input type="text" id="inExecName" value="Executive Name, Title"></div>
-    <div class="fld"><label>Company / label</label><input type="text" id="inExecCo" value="Company · Exclusive Interview"></div>
-    <div class="fld"><label>Headline / summary</label><textarea id="inExecDesc">Interview headline or summary goes here — what the executive discusses in the video.</textarea></div>
-    <button class="btn" id="btnExecLogo">Upload speaker logo / avatar</button>
-    <button class="btn" id="btnExecImg">Upload video thumbnail</button>
-  </div>
-
-  <div class="ctl-sec">
-    <h4>Promoted unit (Related Symbols)</h4>
-    <div class="fld"><label>Brand / account name</label><input type="text" id="inRelName" value="Your Brand"></div>
-    <button class="btn" id="btnRelLogo">Upload promoted logo</button>
+    <h4>Pinned Post unit</h4>
+    <div class="fld"><label>Username</label><input type="text" id="inPinUser" value="voyagertech"></div>
+    <div class="fld"><label>Official rep pill</label><input type="text" id="inPinPill" value="Official VOYG Representative"></div>
+    <div class="fld"><label>Headline / summary</label><textarea id="inPinDesc">Your pinned post copy goes here — announce the news, milestone, or campaign in the brand's own voice.</textarea></div>
+    <button class="btn" id="btnPinLogo">Upload account avatar</button>
+    <button class="btn" id="btnPinImg">Upload post image</button>
   </div>
 
   <div class="ctl-sec">
     <h4>Presentation</h4>
-    <div class="switch"><span>Takeover mode <span style="color:var(--ink-3);font-weight:500">(+ bottom 728×90 leaderboard)</span></span><span class="sw" id="swTakeover"></span></div>
+    <div class="switch"><span>Bottom rail 728×90 <span style="color:var(--ink-3);font-weight:500">(sticky bottom ad)</span></span><span class="sw" id="swTakeover"></span></div>
     <div class="switch"><span>Presentation mode <span style="color:var(--ink-3);font-weight:500">(hide guides)</span></span><span class="sw" id="swPresent"></span></div>
     <div class="switch"><span>Glow / pulse on ads</span><span class="sw on" id="swGlow"></span></div>
     <div style="margin-top:10px"><label style="font-weight:700;font-size:12px;display:block;margin-bottom:8px">Highlight color</label>
@@ -665,10 +662,9 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   bind("inNewsSponsor",function(v){ document.getElementById("newsSponsor").textContent=v; });
   bind("inNativeName",function(v){ document.getElementById("nativeName").textContent=v; });
   bind("inNativeDesc",function(v){ document.getElementById("nativeDesc").textContent=v; });
-  bind("inExecName",function(v){ document.getElementById("execName").textContent=v; });
-  bind("inExecCo",function(v){ document.getElementById("execCo").textContent=v; });
-  bind("inExecDesc",function(v){ document.getElementById("execDesc").textContent=v; });
-  bind("inRelName",function(v){ document.getElementById("relName").textContent=v; });
+  bind("inPinUser",function(v){ document.getElementById("pinUser").textContent=v; });
+  bind("inPinPill",function(v){ document.getElementById("pinPill").textContent=v; });
+  bind("inPinDesc",function(v){ document.getElementById("pinDesc").textContent=v; });
   function setInput(id,val){ var el=document.getElementById(id); el.value=val; el.dispatchEvent(new Event("input")); }
 
   /* company logo tile + native logo */
@@ -679,10 +675,9 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   document.getElementById("btnLogo").addEventListener("click",function(){ uploadTo(setSymbolLogo); });
   document.getElementById("btnNativeLogo").addEventListener("click",function(){ uploadTo(setNativeLogo); });
   document.getElementById("btnNativeImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Add to Watchlist · Feed native"]'); target=s; picker.value=""; picker.click(); });
-  function setExecLogo(src){ var box=document.getElementById("execLogo"); var img=new Image(); img.onload=function(){ box.textContent=""; box.appendChild(img); }; img.src=src; }
-  document.getElementById("btnExecLogo").addEventListener("click",function(){ uploadTo(setExecLogo); });
-  document.getElementById("btnExecImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Pinned Executive Interview"]'); target=s; picker.value=""; picker.click(); });
-  document.getElementById("btnRelLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Related Symbol · Promoted (Ad)"]'); target=s; picker.value=""; picker.click(); });
+  function setPinLogo(src){ var box=document.getElementById("pinLogo"); var img=new Image(); img.onload=function(){ box.textContent=""; box.appendChild(img); }; img.src=src; }
+  document.getElementById("btnPinLogo").addEventListener("click",function(){ uploadTo(setPinLogo); });
+  document.getElementById("btnPinImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Pinned Post · Image"]'); target=s; picker.value=""; picker.click(); });
   document.getElementById("btnNewsImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Sponsored News · Image"]'); target=s; picker.value=""; picker.click(); });
 
   /* ---------- LIVE PULL (JSONP) ---------- */
