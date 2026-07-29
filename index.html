@@ -194,7 +194,8 @@ body.chart-collapsed .chart-collapsible{display:none}
 .news-src{color:var(--ink-3);font-size:11.5px;margin-top:6px;display:flex;align-items:center;gap:6px}
 .news-thumb{width:60px;height:60px;border-radius:9px;background:var(--chip);flex:none;overflow:hidden}
 .news-thumb img{width:100%;height:100%;object-fit:cover}
-.stbadge{width:16px;height:16px;border-radius:50%;background:var(--ink);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:800}
+.stbadge{width:16px;height:16px;border-radius:50%;background:var(--ink);color:#fff;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.stbadge svg{width:10px;height:auto;display:block}
 .ad-word{color:var(--ink-3)}
 .fullbtn{margin-top:9px;display:inline-block;border:1px solid var(--line);border-radius:18px;padding:5px 14px;font-weight:700;font-size:12.5px}
 .rel-row{display:flex;align-items:center;gap:9px;padding:9px 14px;border-top:1px solid var(--line-2)}
@@ -290,6 +291,8 @@ body.takeover .takeover-only{display:block}
 .unit-head{display:flex;align-items:center;gap:10px;padding:11px 12px;background:#f4f7fb;font-weight:800;font-size:13px;cursor:pointer;user-select:none}
 .unit.open .unit-head{background:#e9eff8;border-bottom:1px solid var(--line)}
 .unit-head .unit-tick{width:17px;height:17px;cursor:pointer;flex:none;accent-color:var(--green)}
+.unit-caret{margin-left:auto;color:var(--ink-3);font-size:11px;transition:transform .2s;padding-left:8px}
+.unit.open .unit-caret{transform:rotate(180deg)}
 .unit-body{display:none;padding:12px}
 .unit.open .unit-body{display:block}
 .use-client{display:flex;align-items:center;gap:8px;font-weight:700;font-size:12.5px;margin:2px 0 12px;cursor:pointer}
@@ -571,7 +574,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="news-item" id="sponsoredNewsItem" data-unit-block="news" style="display:none">
         <div class="tx">
           <div class="news-title" id="newsHeadline">Your sponsored headline goes here — a partnership, product launch, or milestone.</div>
-          <div class="news-src"><span class="stbadge">S</span><span id="newsSponsor">Stocktwits</span> · <span class="ad-word">Ad</span></div>
+          <div class="news-src"><span class="stbadge"><svg viewBox="0 0 32 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.43835 0.374634H29.818V0.375255C31.4269 0.375255 32.333 1.62625 31.8327 3.15452L26.4417 19.6217C26.0621 20.7813 24.7526 21.7307 23.532 21.7307H17.8413L7.84361 27.9106L9.86606 21.7307H2.15224C0.54355 21.7307 -0.36256 20.4797 0.13772 18.9514L5.52869 2.48361C5.90831 1.32401 7.21782 0.374634 8.43835 0.374634ZM20.3165 2.59513L18.82 4.5743C17.9663 4.57338 17.2605 4.57175 16.7138 4.57048C16.5421 4.5701 16.386 4.56971 16.2461 4.56945C13.0738 4.56089 10.8185 7.35907 11.7039 9.81416C12.0889 11.1591 13.6515 11.7941 14.8779 12.2925L14.8964 12.2999C15.1545 12.4046 15.3971 12.503 15.6099 12.6013C16.1784 12.8481 15.9633 13.6945 15.3424 13.6982C14.2449 13.7085 8.19588 13.7311 8.19588 13.7311L5.4818 17.3202H9.2007L7.70839 19.2933H11.4273L12.9196 17.3202H13.1469C13.4144 17.3214 13.691 17.3281 13.9738 17.3354C15.4795 17.3732 17.1339 17.414 18.2636 16.673C20.1472 15.5853 20.7169 13.6921 20.2672 12.0761H20.2666C19.8816 10.7305 18.319 10.0955 17.0926 9.59715L17.0604 9.58409C16.8081 9.48152 16.5703 9.3849 16.3612 9.28828C15.7927 9.04086 16.0078 8.19569 16.6287 8.19143C17.7262 8.18107 23.7752 8.15854 23.7752 8.15854L26.4893 4.56945C25.0463 4.57247 23.7265 4.5743 22.5389 4.57492L24.0366 2.59513H20.3165Z" fill="currentColor"></path></svg></span><span>Stocktwits</span> · <span class="ad-word">Ad</span></div>
           <span class="fullbtn">Full Article</span>
         </div>
         <div class="adslot slot-newsthumb" data-role="Sponsored News · Image" data-dim="Thumb">
@@ -680,7 +683,8 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   <!-- ============ AD UNITS ============ -->
   <div class="ctl-sec">
     <div class="sec-title">🧩 Ad units</div>
-    <div class="fld-note" style="margin:-4px 0 10px">Tick a unit to add it to the page and edit it. Unticked units don’t appear.</div>
+    <div class="fld-note" style="margin:-4px 0 10px">Tick a unit to add it to the page and edit it. Unticked units don’t appear. Use the ▾ to collapse a unit’s fields without removing it.</div>
+    <div class="switch" style="margin:0 0 12px"><span><b>All ad units</b> <span style="color:var(--ink-3);font-weight:500">on / off</span></span><span class="sw" id="swAllUnits"></span></div>
 
     <div class="unit-cat">Left Rail</div>
     <div class="unit">
@@ -724,8 +728,9 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="news"> Sponsored News</div>
       <div class="unit-body">
         <div class="fld"><label>Headline</label><textarea id="inNewsHeadline">Your sponsored headline goes here — a partnership, product launch, or milestone.</textarea></div>
-        <div class="fld"><label>Advertiser name</label><input type="text" id="inNewsSponsor" data-autofill="1" value="Stocktwits"></div>
-        <button class="btn" id="btnNewsImg">Upload news image</button>
+        <div class="fld-note" style="margin:-2px 0 10px">Source stays “Stocktwits” — it’s a Stocktwits article about the client.</div>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="newsimg"> Use client logo (thumbnail)</label>
+        <button class="btn" id="btnNewsImg">Upload thumbnail instead</button>
       </div>
     </div>
     <div class="unit">
@@ -829,7 +834,6 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   bind("inChg",function(v){ var el=document.getElementById("symChg"); el.textContent=v; var neg=/-|↓/.test(v); el.classList.toggle("up",!neg); el.classList.toggle("down",neg); });
   bind("inWatch",function(v){ document.getElementById("watchers").textContent=v; });
   bind("inNewsHeadline",function(v){ document.getElementById("newsHeadline").textContent=v; });
-  bind("inNewsSponsor",function(v){ document.getElementById("newsSponsor").textContent=v; });
   bind("inNativeName",function(v){ document.getElementById("nativeName").textContent=v; });
   bind("inNativeDesc",function(v){ document.getElementById("nativeDesc").textContent=v; });
   bind("inRelSymTicker",function(v){ document.getElementById("relSymTicker").textContent=v; });
@@ -856,27 +860,34 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
 
   /* ---------- Ad units: tick = show on page + open its editor; untick = remove + collapse ---------- */
   function unitBlock(name){ return document.querySelector('[data-unit-block="'+name+'"]'); }
-  function syncUnit(u){
+  function syncUnit(u, autoOpen){
     var cb=u.querySelector(".unit-tick"), name=cb.dataset.unit, on=cb.checked;
-    u.classList.toggle("open",on);
+    if(!on) u.classList.remove("open"); else if(autoOpen) u.classList.add("open"); /* on/off is separate from expand */
     if(name==="bottom"){ document.body.classList.toggle("takeover",on); }
     else { var b=unitBlock(name); if(b) b.style.display = on ? "" : "none"; }
   }
+  var swAllUnits=document.getElementById("swAllUnits");
+  function updateMaster(){ if(!swAllUnits) return; var all=[].every.call(document.querySelectorAll(".unit-tick"),function(c){return c.checked;}); swAllUnits.classList.toggle("on",all); }
   [].forEach.call(document.querySelectorAll(".unit"),function(u){
     var cb=u.querySelector(".unit-tick"), head=u.querySelector(".unit-head");
-    cb.addEventListener("change",function(){ syncUnit(u); });
-    head.addEventListener("click",function(e){ if(e.target===cb) return; cb.checked=!cb.checked; syncUnit(u); });
-    syncUnit(u); /* apply default (unchecked → hidden) on load */
+    var caret=document.createElement("span"); caret.className="unit-caret"; caret.textContent="▾"; head.appendChild(caret);
+    cb.addEventListener("change",function(){ syncUnit(u,true); updateMaster(); }); /* checkbox = on/off (and opens for editing) */
+    head.addEventListener("click",function(e){ if(e.target===cb) return; u.classList.toggle("open"); }); /* caret / label = expand/collapse only */
+    syncUnit(u,false); /* default: off → hidden + collapsed */
+  });
+  if(swAllUnits) swAllUnits.addEventListener("click",function(){
+    var on=!swAllUnits.classList.contains("on"); swAllUnits.classList.toggle("on",on);
+    [].forEach.call(document.querySelectorAll(".unit"),function(u){ u.querySelector(".unit-tick").checked=on; syncUnit(u,false); });
   });
 
   /* ---------- Client / advertiser: name auto-fill + reusable logo ---------- */
-  var clientLogo=null, linked={pin:false,native:false,rel:false};
-  function setUnitLogo(t,src){ if(t==="pin") setPinLogo(src); else if(t==="native") setNativeLogo(src); else if(t==="rel"){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); if(s) fill(s,src); } }
+  var clientLogo=null, linked={pin:false,native:false,rel:false,newsimg:false};
+  function setUnitLogo(t,src){ if(t==="pin") setPinLogo(src); else if(t==="native") setNativeLogo(src); else if(t==="rel"){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); if(s) fill(s,src); } else if(t==="newsimg"){ var n=document.querySelector('[data-role="Sponsored News · Image"]'); if(n) fill(n,src); } }
   function applyClientLogo(){ if(!clientLogo) return; Object.keys(linked).forEach(function(t){ if(linked[t]) setUnitLogo(t,clientLogo); }); }
   function showClientLogo(){ var p=document.getElementById("clientLogoPrev"); if(clientLogo){ p.innerHTML='<img alt="">'; p.firstChild.src=clientLogo; document.getElementById("clientLogoRow").style.display="flex"; } else { p.innerHTML=""; document.getElementById("clientLogoRow").style.display="none"; } }
   function setClientLogo(src){ clientLogo=src; showClientLogo();
     /* friendly default: the first time a client logo is set, link all logo units */
-    if(!linked.pin && !linked.native && !linked.rel){ ["pin","native","rel"].forEach(function(t){ linked[t]=true; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=true; }); }
+    if(!linked.pin && !linked.native && !linked.rel && !linked.newsimg){ ["pin","native","rel","newsimg"].forEach(function(t){ linked[t]=true; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=true; }); }
     applyClientLogo();
   }
   document.getElementById("btnClientLogo").addEventListener("click",function(){ uploadTo(setClientLogo); });
@@ -978,7 +989,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     slots.forEach(function(sl){ if(sl.classList.contains("filled")) st.slots[sl.dataset.id]=sl.querySelector(".adfill").src; });
     ["symLogo","nativeLogo","pinLogo"].forEach(function(id){ var im=document.querySelector("#"+id+" img"); st.logos[id]=im?im.src:null; });
     st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow") };
-    st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel};
+    st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel,newsimg:linked.newsimg};
     st.units={}; [].forEach.call(document.querySelectorAll(".unit-tick"),function(cb){ st.units[cb.dataset.unit]=cb.checked; });
     return st;
   }
@@ -990,7 +1001,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     if(st.logos){ if(st.logos.symLogo) setSymbolLogo(st.logos.symLogo); if(st.logos.nativeLogo) setNativeLogo(st.logos.nativeLogo); if(st.logos.pinLogo) setPinLogo(st.logos.pinLogo); }
     if(st.flags){ setFlag("glow-on",st.flags.glow,"swGlow"); setChartState(st.flags.chartCollapsed); setPopout(st.flags.popout); if(st.flags.glowColor) document.documentElement.style.setProperty("--glow",st.flags.glowColor.trim()); }
     clientLogo=st.clientLogo||null; showClientLogo();
-    if(st.linked){ ["pin","native","rel"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
+    if(st.linked){ ["pin","native","rel","newsimg"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
     if(st.units){ [].forEach.call(document.querySelectorAll(".unit"),function(u){ var cb=u.querySelector(".unit-tick"); var n=cb.dataset.unit; if(st.units[n]!==undefined) cb.checked=st.units[n]; syncUnit(u); }); }
   }
 
