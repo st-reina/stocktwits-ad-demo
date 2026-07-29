@@ -68,8 +68,8 @@ img{max-width:100%}
 .tape .fade{position:absolute;right:0;top:0;bottom:0;width:44px;background:linear-gradient(90deg,transparent,var(--bg))}
 
 /* demo banner */
-.demo-banner{max-width:1300px;margin:9px auto 0;padding:6px 22px;color:var(--ink-3);font-size:12px}
-.demo-banner b{color:var(--ink-2)}
+.demo-banner{max-width:1300px;margin:10px auto 0;padding:9px 14px;font-size:12.5px;background:#fff3d1;border:1px solid #eecb6b;color:#8a6300;border-radius:9px;display:flex;align-items:center;gap:8px;font-weight:600}
+.demo-banner b{color:#7a5600;font-weight:800}
 
 /* ===== GRID ===== */
 .wrap{max-width:1320px;margin:14px auto 0;padding:0 22px;display:grid;grid-template-columns:312px minmax(0,1fr) 336px;gap:20px;align-items:start}
@@ -230,10 +230,24 @@ body.glow-on .adslot.filled{animation:pulse 2.4s ease-in-out infinite}
 .slot-300x250{width:300px;height:250px;margin:0 auto}
 .slot-video{width:100%;height:172px;border-radius:10px}
 .slot-newsthumb{width:60px;height:60px;border-radius:9px;flex:none}
-.slot-feednative{width:100%;height:150px;border-radius:10px}
+.slot-feednative{width:100%;max-width:580px;aspect-ratio:580/300;border-radius:10px}
 .slot-exec{width:100%;height:200px;border-radius:10px}
 .slot-relad{width:26px;height:26px;border-radius:50%;flex:none}
 .slot-300x600{width:300px;height:600px;margin:0 auto}
+/* Related Ticker Unit (320x50) */
+.rt-unit{display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid var(--line-2)}
+.rt-logo{width:36px;height:36px;border-radius:9px;flex:none;background:var(--chip)}
+.rt-logo .adfill{object-fit:cover}
+.rt-text{flex:1;min-width:0}
+.rt-top{display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px}
+.rt-desc{color:var(--ink-3);font-size:11.5px;line-height:1.3}
+.rt-btn{background:var(--ink);color:#fff;border-radius:18px;padding:7px 13px;font-weight:700;font-size:12px;white-space:nowrap;flex:none}
+/* locked (freeze creatives) */
+body.locked .adslot{pointer-events:none}
+body.locked .drag-handle{display:none}
+body.locked .adclear{display:none!important}
+body.locked .dismiss-btn{pointer-events:none;opacity:.4}
+.ctl input:disabled,.ctl textarea:disabled,.ctl .btn:disabled{opacity:.5;cursor:not-allowed}
 /* pre-roll pop-out */
 #prerollWrap{position:relative}
 .preroll-spacer{display:none}
@@ -317,7 +331,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   </div>
 </div></div>
 
-<div class="demo-banner"><b>Sales demo mockup.</b> Not a live page. Click any dashed slot to upload a creative (or drag an image onto it). Use ⠿ to reorder feed cards.</div>
+<div class="demo-banner"><span style="font-size:15px">⚠️</span><span><b>Sales demo mockup — not a live page.</b> All prices, charts &amp; figures are placeholders for illustration only. Click any dashed slot to upload a creative; use ⠿ to reorder feed cards.</span></div>
 
 <div class="wrap">
 
@@ -345,14 +359,14 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     <div>
       <div class="adslot slot-300x250" data-role="Left rail · Display 1" data-dim="300 × 250">
         <span class="adtag">300×250</span><button class="adclear">✕</button><img class="adfill" alt="">
-        <div class="adempty"><span class="dim">300 × 250</span><span class="role">left rail display</span><span class="hint">click / drop</span></div>
+        <div class="adempty"><span class="dim">300 × 250</span><span class="role">Watchlist Display</span><span class="hint">click / drop</span></div>
       </div>
       <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
     </div>
     <div>
       <div class="adslot slot-300x250" data-role="Left rail · Display 2" data-dim="300 × 250">
         <span class="adtag">300×250</span><button class="adclear">✕</button><img class="adfill" alt="">
-        <div class="adempty"><span class="dim">300 × 250</span><span class="role">left rail display</span><span class="hint">click / drop</span></div>
+        <div class="adempty"><span class="dim">300 × 250</span><span class="role">Watchlist Display</span><span class="hint">click / drop</span></div>
       </div>
       <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
     </div>
@@ -491,7 +505,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
             <a style="color:var(--blue);font-weight:700;font-size:13px;display:inline-block;margin-bottom:10px">＋ Add $<span class="jsSym">AAPL</span> to Watchlist</a>
             <div class="adslot slot-feednative" data-role="Add to Watchlist · Feed native" data-dim="Native creative">
               <span class="adtag">Native</span><button class="adclear">✕</button><img class="adfill" alt="">
-              <div class="adempty"><span class="dim">Add to Watchlist</span><span class="role">native creative · desktop feed</span><span class="hint">click / drop</span></div>
+              <div class="adempty"><span class="dim">580 × 300</span><span class="role">Watchlist Native</span><span class="hint">click / drop</span></div>
             </div>
             <div class="ad-caption"><span>Disclosures</span><span class="ad-word">Ad</span></div>
           </div>
@@ -551,7 +565,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     <div>
       <div class="adslot slot-300x250" data-role="Right rail · Display" data-dim="300 × 250">
         <span class="adtag">300×250</span><button class="adclear">✕</button><img class="adfill" alt="">
-        <div class="adempty"><span class="dim">300 × 250</span><span class="role">right-rail display</span><span class="hint">click / drop</span></div>
+        <div class="adempty"><span class="dim">300 × 250</span><span class="role">Watchlist Display</span><span class="hint">click / drop</span></div>
       </div>
       <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
     </div>
@@ -570,13 +584,26 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="rel-row"><span class="rel-ic">RIVN</span><div><div class="rel-nm">RIVN</div><div class="rel-co">Rivian Automotive</div></div><span class="rel-add">＋</span></div>
       <div class="rel-row"><span class="rel-ic">GOOG</span><div><div class="rel-nm">GOOG</div><div class="rel-co">Alphabet Inc</div></div><span class="rel-add">✓</span></div>
       <div class="rel-row"><span class="rel-ic">LCID</span><div><div class="rel-nm">LCID</div><div class="rel-co">Lucid Group</div></div><span class="rel-add">＋</span></div>
+      <!-- Related Ticker Unit (320x50 Watchlist Display) — editable -->
+      <div class="rt-unit">
+        <div class="adslot rt-logo" data-role="Related Ticker Unit · Logo" data-dim="Logo">
+          <button class="adclear" style="width:16px;height:16px;font-size:9px">✕</button><img class="adfill" alt="">
+          <div class="adempty" style="border-width:2px;font-size:0"></div>
+        </div>
+        <div class="rt-text">
+          <div class="rt-top"><span id="rtTicker">$SPCM</span> <span class="tag-ad">Ad</span></div>
+          <div class="rt-desc" id="rtDesc">2X Long and Short SpaceX ETFs</div>
+        </div>
+        <span class="rt-btn">Add to Watchlist</span>
+      </div>
+      <div class="ad-caption" style="padding:6px 14px 10px"><span>320 × 50 Watchlist Display</span></div>
     </div>
 
     <!-- 6. 300x600 half-page -->
     <div>
       <div class="adslot slot-300x600" data-role="Right rail · 300x600 Half-page" data-dim="300 × 600">
         <span class="adtag">300×600</span><button class="adclear">✕</button><img class="adfill" alt="">
-        <div class="adempty"><span class="dim">300 × 600</span><span class="role">half-page / skyscraper</span><span class="hint">click / drop</span></div>
+        <div class="adempty"><span class="dim">300 × 600</span><span class="role">Display</span><span class="hint">click / drop</span></div>
       </div>
       <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
     </div>
@@ -588,7 +615,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
 <div class="sticky-lb">
   <div class="adslot slot-728x90" data-role="Bottom rail · 728x90" data-dim="728 × 90">
     <span class="adtag">728×90</span><button class="adclear">✕</button><img class="adfill" alt="">
-    <div class="adempty"><span class="dim">728 × 90</span><span class="role">sticky bottom rail</span><span class="hint">click / drop</span></div>
+    <div class="adempty"><span class="dim">728 × 90</span><span class="role">Watchlist Display</span><span class="hint">click / drop</span></div>
   </div>
 </div>
 
@@ -630,6 +657,13 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   </div>
 
   <div class="ctl-sec">
+    <h4>320×50 Watchlist Display (Related Ticker)</h4>
+    <div class="fld"><label>Ticker</label><input type="text" id="inRtTicker" value="$SPCM"></div>
+    <div class="fld"><label>Description</label><input type="text" id="inRtDesc" value="2X Long and Short SpaceX ETFs"></div>
+    <button class="btn" id="btnRtLogo">Upload ticker logo</button>
+  </div>
+
+  <div class="ctl-sec">
     <h4>Pinned Post unit</h4>
     <div class="fld"><label>Username</label><input type="text" id="inPinUser" value="voyagertech"></div>
     <div class="fld"><label>Official rep pill</label><input type="text" id="inPinPill" value="Official VOYG Representative"></div>
@@ -643,6 +677,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     <div class="switch"><span>Bottom rail 728×90 <span style="color:var(--ink-3);font-weight:500">(sticky bottom ad)</span></span><span class="sw" id="swTakeover"></span></div>
     <div class="switch"><span>Pre-roll pop-out on scroll <span style="color:var(--ink-3);font-weight:500">(floats bottom-right)</span></span><span class="sw" id="swPopout"></span></div>
     <div class="switch"><span>Presentation mode <span style="color:var(--ink-3);font-weight:500">(hide guides)</span></span><span class="sw" id="swPresent"></span></div>
+    <div class="switch"><span>🔒 Lock creatives <span style="color:var(--ink-3);font-weight:500">(freeze before presenting)</span></span><span class="sw" id="swLock"></span></div>
     <div class="switch"><span>Glow / pulse on ads</span><span class="sw on" id="swGlow"></span></div>
     <div style="margin-top:10px"><label style="font-weight:700;font-size:12px;display:block;margin-bottom:8px">Highlight color</label>
       <div class="swatches" id="swatches">
@@ -653,6 +688,18 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         <span class="swatch" data-c="#ff7a00" style="background:#ff7a00"></span>
       </div>
     </div>
+  </div>
+
+  <div class="ctl-sec">
+    <h4>Save &amp; restore a client page</h4>
+    <div class="fld"><label>Page name (e.g. client)</label><input type="text" id="inSaveName" placeholder="Galaxy — Aug pitch" autocomplete="off"></div>
+    <button class="btn dark" id="btnSavePage">💾 Save this page</button>
+    <div class="fld" style="margin-top:10px"><label>Saved pages (this browser)</label>
+      <select id="savedPages" style="width:100%;height:38px;border:1px solid var(--line);border-radius:9px;padding:0 10px;font-size:14px;font-family:inherit"></select>
+    </div>
+    <div class="row2"><button class="btn" id="btnLoadPage">Load</button><button class="btn warn" id="btnDeletePage">Delete</button></div>
+    <div class="fld-note" style="margin-top:10px">Saved pages live in <b>this browser</b> only. To move a pitch to another computer or hand it off, use export/import:</div>
+    <div class="row2"><button class="btn" id="btnExport">⭳ Export file</button><button class="btn" id="btnImport">⭱ Import file</button></div>
   </div>
 
   <div class="ctl-sec">
@@ -707,6 +754,8 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   bind("inNewsSponsor",function(v){ document.getElementById("newsSponsor").textContent=v; });
   bind("inNativeName",function(v){ document.getElementById("nativeName").textContent=v; });
   bind("inNativeDesc",function(v){ document.getElementById("nativeDesc").textContent=v; });
+  bind("inRtTicker",function(v){ document.getElementById("rtTicker").textContent=v; });
+  bind("inRtDesc",function(v){ document.getElementById("rtDesc").textContent=v; });
   bind("inPinUser",function(v){ document.getElementById("pinUser").textContent=v; });
   bind("inPinPill",function(v){ document.getElementById("pinPill").textContent=v; });
   bind("inPinDesc",function(v){ document.getElementById("pinDesc").textContent=v; });
@@ -723,6 +772,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   function setPinLogo(src){ var box=document.getElementById("pinLogo"); var img=new Image(); img.onload=function(){ box.textContent=""; box.appendChild(img); }; img.src=src; }
   document.getElementById("btnPinLogo").addEventListener("click",function(){ uploadTo(setPinLogo); });
   document.getElementById("btnPinImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Pinned Post · Image"]'); target=s; picker.value=""; picker.click(); });
+  document.getElementById("btnRtLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Related Ticker Unit · Logo"]'); target=s; picker.value=""; picker.click(); });
   document.getElementById("btnNewsImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Sponsored News · Image"]'); target=s; picker.value=""; picker.click(); });
 
   /* ---------- LIVE PULL (JSONP) ---------- */
@@ -790,13 +840,61 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   var swPopout=document.getElementById("swPopout");
   swPopout.addEventListener("click",function(){ popoutOn=!swPopout.classList.contains("on"); swPopout.classList.toggle("on",popoutOn); if(!popoutOn){ prUnpop(); prDismissed=false; } else { prOnScroll(); } });
 
+  /* ---------- Save / restore a client page ---------- */
+  function allFieldEls(){ return [].slice.call(document.querySelectorAll('.ctl input[type=text], .ctl textarea')); }
+  function setFlag(cls,on,swId){ document.body.classList.toggle(cls,!!on); var el=document.getElementById(swId); if(el) el.classList.toggle("on",!!on); }
+  function setChartState(collapsed){ document.body.classList.toggle("chart-collapsed",!!collapsed); document.getElementById("chartToggleTxt").textContent=collapsed?"Full Chart":"Hide Chart"; }
+  function setPopout(on){ popoutOn=!!on; swPopout.classList.toggle("on",popoutOn); if(!popoutOn) prUnpop(); }
+
+  function captureState(){
+    var st={fields:{},slots:{},logos:{},flags:{}};
+    allFieldEls().forEach(function(el){ if(el.id && el.id!=="inSaveName") st.fields[el.id]=el.value; });
+    slots.forEach(function(sl){ if(sl.classList.contains("filled")) st.slots[sl.dataset.id]=sl.querySelector(".adfill").src; });
+    ["symLogo","nativeLogo","pinLogo"].forEach(function(id){ var im=document.querySelector("#"+id+" img"); st.logos[id]=im?im.src:null; });
+    st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), takeover:document.body.classList.contains("takeover"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow") };
+    return st;
+  }
+  function applyState(st){
+    if(!st) return;
+    Object.keys(st.fields||{}).forEach(function(id){ var el=document.getElementById(id); if(el){ el.value=st.fields[id]; el.dispatchEvent(new Event("input")); } });
+    slots.forEach(clear);
+    Object.keys(st.slots||{}).forEach(function(sid){ for(var i=0;i<slots.length;i++){ if(slots[i].dataset.id===sid){ fill(slots[i],st.slots[sid]); break; } } });
+    if(st.logos){ if(st.logos.symLogo) setSymbolLogo(st.logos.symLogo); if(st.logos.nativeLogo) setNativeLogo(st.logos.nativeLogo); if(st.logos.pinLogo) setPinLogo(st.logos.pinLogo); }
+    if(st.flags){ setFlag("glow-on",st.flags.glow,"swGlow"); setChartState(st.flags.chartCollapsed); setFlag("takeover",st.flags.takeover,"swTakeover"); setPopout(st.flags.popout); if(st.flags.glowColor) document.documentElement.style.setProperty("--glow",st.flags.glowColor.trim()); }
+  }
+
+  var PAGES="st_ad_demo_pages";
+  function loadPages(){ try{ return JSON.parse(localStorage.getItem(PAGES)||"{}"); }catch(e){ return {}; } }
+  function persistPages(o){ try{ localStorage.setItem(PAGES,JSON.stringify(o)); return true; }catch(e){ alert("Couldn’t save — this browser’s storage is full. Use “Export file” to keep this page instead."); return false; } }
+  function refreshPageList(){ var sel=document.getElementById("savedPages"); var names=Object.keys(loadPages()); sel.innerHTML=""; var o0=document.createElement("option"); o0.value=""; o0.textContent=names.length?"— choose a saved page —":"— no saved pages yet —"; sel.appendChild(o0); names.forEach(function(n){ var o=document.createElement("option"); o.value=n; o.textContent=n; sel.appendChild(o); }); }
+  document.getElementById("btnSavePage").addEventListener("click",function(){ var name=(document.getElementById("inSaveName").value||"").trim(); if(!name){ alert("Give the page a name first (e.g. the client)."); return; } var o=loadPages(); o[name]=captureState(); if(persistPages(o)){ refreshPageList(); document.getElementById("savedPages").value=name; } });
+  document.getElementById("btnLoadPage").addEventListener("click",function(){ var n=document.getElementById("savedPages").value; if(!n) return; applyState(loadPages()[n]); document.getElementById("inSaveName").value=n; });
+  document.getElementById("btnDeletePage").addEventListener("click",function(){ var n=document.getElementById("savedPages").value; if(!n) return; if(!confirm("Delete saved page “"+n+"”?")) return; var o=loadPages(); delete o[n]; persistPages(o); refreshPageList(); });
+  refreshPageList();
+
+  document.getElementById("btnExport").addEventListener("click",function(){ var raw=(document.getElementById("inSaveName").value||"ad-demo").trim(); var fn=(raw.replace(/[^a-z0-9_-]+/gi,"_")||"ad-demo"); var blob=new Blob([JSON.stringify({name:raw,state:captureState()})],{type:"application/json"}); var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=fn+".stdemo.json"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(a.href); },1500); });
+  var importPicker=document.createElement("input"); importPicker.type="file"; importPicker.accept=".json,application/json";
+  document.getElementById("btnImport").addEventListener("click",function(){ importPicker.value=""; importPicker.click(); });
+  importPicker.addEventListener("change",function(){ var f=importPicker.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(){ try{ var d=JSON.parse(r.result); applyState(d.state||d); if(d.name) document.getElementById("inSaveName").value=d.name; }catch(e){ alert("That doesn’t look like a saved demo file."); } }; r.readAsText(f); });
+
+  /* ---------- Lock (freeze creatives before presenting) ---------- */
+  var swLock=document.getElementById("swLock");
+  var SAVE_BTNS={btnExport:1,btnImport:1,btnLoadPage:1,btnSavePage:1,btnDeletePage:1};
+  swLock.addEventListener("click",function(){
+    var on=!swLock.classList.contains("on"); swLock.classList.toggle("on",on);
+    document.body.classList.toggle("locked",on);
+    [].forEach.call(document.querySelectorAll(".ctl input, .ctl textarea, .ctl select"),function(el){ if(el.id!=="inSaveName"&&el.id!=="savedPages") el.disabled=on; });
+    [].forEach.call(document.querySelectorAll(".ctl .btn"),function(b){ if(!SAVE_BTNS[b.id]) b.disabled=on; });
+    document.getElementById("ctlToggle").textContent = on ? "🔒 Demo Controls" : "⚙ Demo Controls";
+  });
+
   /* ---------- SORTABLE FEED (drag handle initiates) ---------- */
   var feed=document.getElementById("feed"), dragEl=null;
   function afterEl(y){ var els=[].slice.call(feed.querySelectorAll(".feed-card:not(.dragging)"));
     return els.reduce(function(best,ch){ var b=ch.getBoundingClientRect(); var off=y-b.top-b.height/2; if(off<0&&off>best.off) return {off:off,el:ch}; return best; },{off:-Infinity}).el||null; }
   feed.querySelectorAll(".feed-card").forEach(function(card){
     var h=card.querySelector(".drag-handle");
-    if(h) h.addEventListener("mousedown",function(){ card.setAttribute("draggable","true"); });
+    if(h) h.addEventListener("mousedown",function(){ if(document.body.classList.contains("locked")) return; card.setAttribute("draggable","true"); });
     card.addEventListener("dragstart",function(e){ dragEl=card; card.classList.add("dragging"); e.dataTransfer.effectAllowed="move"; try{e.dataTransfer.setData("text/x-card","1");}catch(_){}} );
     card.addEventListener("dragend",function(){ card.classList.remove("dragging"); card.removeAttribute("draggable"); dragEl=null; });
   });
