@@ -638,11 +638,22 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
 <div class="ctl" id="ctl">
   <button class="ctl-close" id="ctlClose">✕</button>
   <h3>Ad Demo Controls</h3>
-  <p class="muted"><b>1.</b> Set the ticker page &nbsp;<b>2.</b> Set the client &nbsp;<b>3.</b> Tick a unit to edit it</p>
+  <p class="muted"><b>1.</b> Set the client &nbsp;<b>2.</b> Set the ticker page &nbsp;<b>3.</b> Tick a unit to edit it</p>
+
+  <!-- ============ CLIENT / ADVERTISER (first) ============ -->
+  <div class="ctl-sec">
+    <div class="sec-title">🏷️ Client / advertiser</div>
+    <div class="fld"><label>Client name or ticker</label><input type="text" id="inClientName" placeholder="e.g. Voyager or VOYG" autocomplete="off"></div>
+    <button class="btn dark" id="btnClientPull">⤓ Pull client from Stocktwits</button>
+    <div id="clientPullStatus" class="pull-status"></div>
+    <button class="btn" id="btnClientLogo">Upload client logo instead</button>
+    <div class="client-logo-row" id="clientLogoRow" style="display:none"><span class="client-logo-prev" id="clientLogoPrev"></span><span class="cl-note">Client logo set — units with “Use client logo” will use this.</span></div>
+    <div class="fld-note" style="margin-top:8px">Pull by ticker to grab the logo &amp; name, or upload a logo. The name pre-fills each unit’s brand text; “Use client logo” reuses this logo. Both overridable per unit.</div>
+  </div>
 
   <!-- ============ TICKER PAGE ============ -->
   <div class="ctl-sec">
-    <div class="sec-title">📈 Ticker page <span class="sec-sub">whose page this is</span></div>
+    <div class="sec-title">📈 Ticker page</div>
     <div class="fld"><label>Ticker</label><input type="text" id="inTicker" value="AAPL" autocomplete="off" spellcheck="false"></div>
     <button class="btn dark" id="btnPull">⤓ Pull live from Stocktwits</button>
     <div id="pullStatus" class="pull-status"></div>
@@ -656,18 +667,9 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     <button class="btn" id="btnLogo">Upload page logo</button>
   </div>
 
-  <!-- ============ CLIENT / ADVERTISER ============ -->
+  <!-- ============ AD UNITS ============ -->
   <div class="ctl-sec">
-    <div class="sec-title">🏷️ Client / advertiser <span class="sec-sub">whose ads these are</span></div>
-    <div class="fld"><label>Client name</label><input type="text" id="inClientName" placeholder="e.g. Voyager" autocomplete="off"></div>
-    <button class="btn" id="btnClientLogo">Upload client logo</button>
-    <div class="client-logo-row" id="clientLogoRow" style="display:none"><span class="client-logo-prev" id="clientLogoPrev"></span><span class="cl-note">Client logo set — units with “Use client logo” will use this.</span></div>
-    <div class="fld-note" style="margin-top:8px">Set once. The name pre-fills each unit’s brand text, and “Use client logo” reuses this logo. Both overridable per unit.</div>
-  </div>
-
-  <!-- ============ AD UNITS (tick to edit) ============ -->
-  <div class="ctl-sec">
-    <div class="sec-title">🧩 Ad units <span class="sec-sub">tick to edit</span></div>
+    <div class="sec-title">🧩 Ad units</div>
 
     <div class="unit">
       <div class="unit-head"><input type="checkbox" class="unit-tick"> Pinned Post</div>
@@ -825,11 +827,33 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   function setUnitLogo(t,src){ if(t==="pin") setPinLogo(src); else if(t==="native") setNativeLogo(src); else if(t==="rel"){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); if(s) fill(s,src); } }
   function applyClientLogo(){ if(!clientLogo) return; Object.keys(linked).forEach(function(t){ if(linked[t]) setUnitLogo(t,clientLogo); }); }
   function showClientLogo(){ var p=document.getElementById("clientLogoPrev"); if(clientLogo){ p.innerHTML='<img alt="">'; p.firstChild.src=clientLogo; document.getElementById("clientLogoRow").style.display="flex"; } else { p.innerHTML=""; document.getElementById("clientLogoRow").style.display="none"; } }
-  document.getElementById("btnClientLogo").addEventListener("click",function(){ uploadTo(function(src){ clientLogo=src; showClientLogo(); applyClientLogo(); }); });
-  [].forEach.call(document.querySelectorAll(".uc"),function(cb){ cb.addEventListener("change",function(){ var t=cb.dataset.target; linked[t]=cb.checked; if(cb.checked){ if(clientLogo) setUnitLogo(t,clientLogo); else alert("Upload a client logo first (in the Client / advertiser section)."); } }); });
-  /* dirty-track the auto-fill fields so client name won't overwrite a manual edit */
+  function setClientLogo(src){ clientLogo=src; showClientLogo();
+    /* friendly default: the first time a client logo is set, link all logo units */
+    if(!linked.pin && !linked.native && !linked.rel){ ["pin","native","rel"].forEach(function(t){ linked[t]=true; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=true; }); }
+    applyClientLogo();
+  }
+  document.getElementById("btnClientLogo").addEventListener("click",function(){ uploadTo(setClientLogo); });
+  [].forEach.call(document.querySelectorAll(".uc"),function(cb){ cb.addEventListener("change",function(){ var t=cb.dataset.target; linked[t]=cb.checked; if(cb.checked){ if(clientLogo) setUnitLogo(t,clientLogo); else alert("Set a client logo first (pull from Stocktwits or upload, in the Client section)."); } }); });
+  /* dirty-track the auto-fill fields so the client name won't overwrite a manual edit */
   [].forEach.call(document.querySelectorAll("[data-autofill]"),function(el){ el.addEventListener("input",function(e){ if(e.isTrusted) el.dataset.dirty="1"; }); });
-  document.getElementById("inClientName").addEventListener("input",function(e){ if(!e.isTrusted) return; var v=this.value; [].forEach.call(document.querySelectorAll("[data-autofill]"),function(el){ if(el.dataset.dirty!=="1"){ el.value=v; el.dispatchEvent(new Event("input")); } }); });
+  function autofillFromClient(v){ [].forEach.call(document.querySelectorAll("[data-autofill]"),function(el){ if(el.dataset.dirty!=="1"){ el.value=v; el.dispatchEvent(new Event("input")); } }); }
+  document.getElementById("inClientName").addEventListener("input",function(e){ if(!e.isTrusted) return; autofillFromClient(this.value); });
+
+  /* Pull client name + logo from Stocktwits (by ticker) */
+  function cstatus(m,c){ var el=document.getElementById("clientPullStatus"); el.textContent=m; el.className="pull-status"+(c?" "+c:""); }
+  document.getElementById("btnClientPull").addEventListener("click",function(){
+    var sym=(document.getElementById("inClientName").value||"").trim().toUpperCase().replace(/^\$/,"");
+    if(!sym){ cstatus("Type the client’s ticker first (e.g. VOYG).","err"); return; }
+    cstatus("Fetching "+sym+" from Stocktwits…","busy");
+    jsonp("https://api.stocktwits.com/api/2/streams/symbol/"+encodeURIComponent(sym)+".json",function(err,data){
+      if(err||!data||!data.symbol){ cstatus("Couldn’t reach Stocktwits for “"+sym+"”. Upload a logo instead.","err"); return; }
+      var s=data.symbol, title=(s.title||sym).split(" - ")[0].trim(), disp=s.symbol_display||sym;
+      var cn=document.getElementById("inClientName"); cn.value=title; autofillFromClient(title);
+      var rt=document.getElementById("inRelSymTicker"); if(rt && rt.dataset.dirty!=="1"){ rt.value=disp; rt.dispatchEvent(new Event("input")); }
+      var img=new Image(); img.onload=function(){ setClientLogo(img.src); }; img.onerror=function(){ setClientLogo("https://logos.stocktwits-cdn.com/"+sym+".png"); }; img.src=s.logo_url||("https://logos.stocktwits-cdn.com/"+sym+".png");
+      cstatus("✓ Pulled "+title+": name & logo, applied to logo units.","ok");
+    });
+  });
   document.getElementById("btnNewsImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Sponsored News · Image"]'); target=s; picker.value=""; picker.click(); });
 
   /* ---------- LIVE PULL (JSONP) ---------- */
