@@ -283,6 +283,9 @@ body.takeover .takeover-only{display:block}
 .ctl-sec h4{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-3)}
 .sec-title{display:flex;align-items:center;gap:7px;margin:0 0 12px;font-size:13px;font-weight:800;color:var(--ink);background:var(--chip);border-radius:8px;padding:8px 11px}
 .sec-sub{margin-left:auto;font-size:11px;font-weight:600;color:var(--ink-3);text-transform:none}
+.unit-cat{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-3);margin:16px 0 7px}
+.unit-cat:first-of-type{margin-top:2px}
+.pos{color:var(--ink-3);font-weight:500;font-size:12px}
 .unit{border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden}
 .unit-head{display:flex;align-items:center;gap:10px;padding:11px 12px;background:#f4f7fb;font-weight:800;font-size:13px;cursor:pointer;user-select:none}
 .unit.open .unit-head{background:#e9eff8;border-bottom:1px solid var(--line)}
@@ -376,14 +379,14 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     </div>
 
     <!-- Left rail display ads (standard) -->
-    <div>
+    <div data-unit-block="left1" style="display:none">
       <div class="adslot slot-300x250" data-role="Left rail · Display 1" data-dim="300 × 250">
         <span class="adtag">300×250</span><button class="adclear">✕</button><img class="adfill" alt="">
         <div class="adempty"><span class="dim">300 × 250</span><span class="role">Watchlist Display</span><span class="hint">click / drop</span></div>
       </div>
       <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
     </div>
-    <div>
+    <div data-unit-block="left2" style="display:none">
       <div class="adslot slot-300x250" data-role="Left rail · Display 2" data-dim="300 × 250">
         <span class="adtag">300×250</span><button class="adclear">✕</button><img class="adfill" alt="">
         <div class="adempty"><span class="dim">300 × 250</span><span class="role">Watchlist Display</span><span class="hint">click / drop</span></div>
@@ -469,7 +472,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         <div class="feed" id="feed">
 
           <!-- Pinned Post (brand's pinned post) — fully editable -->
-          <div class="feed-card" data-card="pinned">
+          <div class="feed-card" data-card="pinned" data-unit-block="pinned" style="display:none">
             <div class="pin-label">📌 Pinned Post</div><span class="drag-handle" title="Drag to reorder">⠿</span>
             <div class="post-head">
               <span class="pin-av" id="pinLogo">V</span>
@@ -514,7 +517,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
           </div>
 
           <!-- Add to Watchlist native unit (below poll, per request; desktop-adapted) -->
-          <div class="feed-card" data-card="native">
+          <div class="feed-card" data-card="native" data-unit-block="native" style="display:none">
             <span class="feed-tag">Native · Add to Watchlist</span><span class="drag-handle" title="Drag to reorder">⠿</span>
             <div style="height:14px"></div>
             <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
@@ -547,7 +550,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   <div class="stack">
 
     <!-- 1. Pre-roll video unit -->
-    <div id="prerollWrap">
+    <div id="prerollWrap" data-unit-block="video" style="display:none">
       <button class="preroll-close" id="prerollClose" title="Close">✕</button>
       <div class="adslot slot-video" data-role="Right rail · Pre-roll Video" data-dim="Pre-roll video">
         <span class="adtag">Video</span><button class="adclear">✕</button><img class="adfill" alt="">
@@ -565,7 +568,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         <div class="news-thumb"></div>
       </div>
       <!-- Sponsored News (ad unit) — toggled from Ad units -->
-      <div class="news-item" id="sponsoredNewsItem">
+      <div class="news-item" id="sponsoredNewsItem" data-unit-block="news" style="display:none">
         <div class="tx">
           <div class="news-title" id="newsHeadline">Your sponsored headline goes here — a partnership, product launch, or milestone.</div>
           <div class="news-src"><span class="stbadge">S</span><span id="newsSponsor">Stocktwits</span> · <span class="ad-word">Ad</span></div>
@@ -587,7 +590,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     </div>
 
     <!-- 3. 300x250 display -->
-    <div>
+    <div data-unit-block="rightdisplay" style="display:none">
       <div class="adslot slot-300x250" data-role="Right rail · Display" data-dim="300 × 250">
         <span class="adtag">300×250</span><button class="adclear">✕</button><img class="adfill" alt="">
         <div class="adempty"><span class="dim">300 × 250</span><span class="role">Display</span><span class="hint">click / drop</span></div>
@@ -608,7 +611,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="rr-head"><span>Related Symbols</span></div>
       <div class="rel-row"><span class="rel-ic">RIVN</span><div><div class="rel-nm">RIVN</div><div class="rel-co">Rivian Automotive</div></div><span class="rel-add">＋</span></div>
       <!-- Promoted Related Symbol (Ad) — editable -->
-      <div class="rel-row" id="promotedRelRow">
+      <div class="rel-row" id="promotedRelRow" data-unit-block="rel" style="display:none">
         <div class="adslot rel-ad-logo" data-role="Related Symbol · Promoted Logo" data-dim="Logo">
           <button class="adclear" style="width:16px;height:16px;font-size:9px">✕</button><img class="adfill" alt="">
           <div class="adempty" style="border-width:2px;font-size:0"></div>
@@ -621,7 +624,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     </div>
 
     <!-- 6. 300x600 half-page -->
-    <div>
+    <div data-unit-block="half" style="display:none">
       <div class="adslot slot-300x600" data-role="Right rail · 300x600 Half-page" data-dim="300 × 600">
         <span class="adtag">300×600</span><button class="adclear">✕</button><img class="adfill" alt="">
         <div class="adempty"><span class="dim">300 × 600</span><span class="role">Display</span><span class="hint">click / drop</span></div>
@@ -677,9 +680,19 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   <!-- ============ AD UNITS ============ -->
   <div class="ctl-sec">
     <div class="sec-title">🧩 Ad units</div>
+    <div class="fld-note" style="margin:-4px 0 10px">Tick a unit to add it to the page and edit it. Unticked units don’t appear.</div>
 
-    <div class="fld-note" style="margin:-4px 0 12px">Tick a unit to add it to the page and edit it. Unticked units don’t appear.</div>
+    <div class="unit-cat">Left Rail</div>
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="left1"> 300×250 Watchlist Display <span class="pos">· upper</span></div>
+      <div class="unit-body"><button class="btn slot-upload" data-slot="Left rail · Display 1">Upload 300×250 creative</button></div>
+    </div>
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="left2"> 300×250 Watchlist Display <span class="pos">· lower</span></div>
+      <div class="unit-body"><button class="btn slot-upload" data-slot="Left rail · Display 2">Upload 300×250 creative</button></div>
+    </div>
 
+    <div class="unit-cat">Center Feed</div>
     <div class="unit">
       <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="pinned"> Pinned Post</div>
       <div class="unit-body">
@@ -691,9 +704,8 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         <button class="btn" id="btnPinImg">Upload post image</button>
       </div>
     </div>
-
     <div class="unit">
-      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="native"> Native Add-to-Watchlist</div>
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="native"> 580×300 Watchlist Native</div>
       <div class="unit-body">
         <div class="fld"><label>Brand name</label><input type="text" id="inNativeName" data-autofill="1" value="Your Brand"></div>
         <div class="fld"><label>Ad copy / description</label><textarea id="inNativeDesc">Your ad copy goes here — describe the partnership, product, or offer in a sentence or two.</textarea></div>
@@ -703,6 +715,11 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       </div>
     </div>
 
+    <div class="unit-cat">Right Rail</div>
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="video"> Pre-roll Video</div>
+      <div class="unit-body"><button class="btn slot-upload" data-slot="Right rail · Pre-roll Video">Upload video creative</button></div>
+    </div>
     <div class="unit">
       <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="news"> Sponsored News</div>
       <div class="unit-body">
@@ -711,7 +728,10 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         <button class="btn" id="btnNewsImg">Upload news image</button>
       </div>
     </div>
-
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="rightdisplay"> 300×250 Display</div>
+      <div class="unit-body"><button class="btn slot-upload" data-slot="Right rail · Display">Upload 300×250 creative</button></div>
+    </div>
     <div class="unit">
       <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="rel"> Related Symbol (Promoted Ad)</div>
       <div class="unit-body">
@@ -721,20 +741,22 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         <button class="btn" id="btnRelSymLogo">Upload logo</button>
       </div>
     </div>
-
     <div class="unit">
-      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="bottom"> Bottom rail 728×90</div>
-      <div class="unit-body">
-        <div class="fld-note" style="margin-bottom:8px">Sticky leaderboard pinned to the bottom of the page.</div>
-        <button class="btn" id="btnBottomImg">Upload 728×90 creative</button>
-      </div>
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="half"> 300×600 Display</div>
+      <div class="unit-body"><button class="btn slot-upload" data-slot="Right rail · 300x600 Half-page">Upload 300×600 creative</button></div>
     </div>
+
+    <div class="unit-cat">Bottom Rail</div>
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="bottom"> 728×90 Watchlist Display</div>
+      <div class="unit-body"><button class="btn slot-upload" data-slot="Bottom rail · 728x90">Upload 728×90 creative</button></div>
+    </div>
+    <div class="switch" style="margin-top:8px"><span>Pre-roll pop-out on scroll</span><span class="sw" id="swPopout"></span></div>
   </div>
 
   <div class="ctl-sec">
     <div class="sec-title">🎬 Presentation</div>
     <div class="switch"><span>🔒 Present &amp; lock <span style="color:var(--ink-3);font-weight:500">(hide guides + freeze to present)</span></span><span class="sw" id="swLock"></span></div>
-    <div class="switch"><span>Pre-roll pop-out on scroll <span style="color:var(--ink-3);font-weight:500">(floats bottom-right)</span></span><span class="sw" id="swPopout"></span></div>
     <div class="switch"><span>Glow / pulse on ads</span><span class="sw on" id="swGlow"></span></div>
     <div style="margin-top:10px"><label style="font-weight:700;font-size:12px;display:block;margin-bottom:8px">Highlight color</label>
       <div class="swatches" id="swatches">
@@ -829,16 +851,11 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   document.getElementById("btnPinLogo").addEventListener("click",function(){ uploadTo(setPinLogo); });
   document.getElementById("btnPinImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Pinned Post · Image"]'); target=s; picker.value=""; picker.click(); });
   document.getElementById("btnRelSymLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); target=s; picker.value=""; picker.click(); });
-  document.getElementById("btnBottomImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Bottom rail · 728x90"]'); target=s; picker.value=""; picker.click(); });
+  /* generic image-only unit uploads (left/right displays, video, 300x600, 728x90) */
+  [].forEach.call(document.querySelectorAll(".slot-upload"),function(b){ b.addEventListener("click",function(){ var s=document.querySelector('[data-role="'+b.dataset.slot+'"]'); target=s; picker.value=""; picker.click(); }); });
 
   /* ---------- Ad units: tick = show on page + open its editor; untick = remove + collapse ---------- */
-  function unitBlock(name){
-    if(name==="pinned") return document.querySelector('[data-card="pinned"]');
-    if(name==="native") return document.querySelector('[data-card="native"]');
-    if(name==="news") return document.getElementById("sponsoredNewsItem");
-    if(name==="rel") return document.getElementById("promotedRelRow");
-    return null; /* bottom handled via body.takeover */
-  }
+  function unitBlock(name){ return document.querySelector('[data-unit-block="'+name+'"]'); }
   function syncUnit(u){
     var cb=u.querySelector(".unit-tick"), name=cb.dataset.unit, on=cb.checked;
     u.classList.toggle("open",on);
