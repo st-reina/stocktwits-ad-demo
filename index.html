@@ -72,8 +72,7 @@ img{max-width:100%}
 .demo-banner b{color:var(--ink-2)}
 
 /* ===== GRID ===== */
-.wrap{max-width:1300px;margin:14px auto 0;padding:0 22px;display:grid;grid-template-columns:236px minmax(0,1fr) 340px;gap:20px;align-items:start}
-body.takeover .wrap{grid-template-columns:314px minmax(0,1fr) 340px}
+.wrap{max-width:1320px;margin:14px auto 0;padding:0 22px;display:grid;grid-template-columns:312px minmax(0,1fr) 336px;gap:20px;align-items:start}
 .stack{display:flex;flex-direction:column;gap:16px}
 .panel{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius)}
 
@@ -207,7 +206,10 @@ body.glow-on .adslot.filled{animation:pulse 2.4s ease-in-out infinite}
 .slot-feednative{width:100%;height:150px;border-radius:10px}
 .slot-exec{width:100%;height:200px;border-radius:10px}
 .slot-relad{width:26px;height:26px;border-radius:50%;flex:none}
+.slot-300x600{width:300px;height:600px;margin:0 auto}
 .slot-728x90{width:728px;max-width:100%;height:90px;margin:0 auto}
+.disc-row{display:flex;gap:9px;padding:11px 14px;border-top:1px solid var(--line-2);align-items:flex-start}
+.disc-row .rel-co{font-size:12.5px;line-height:1.35;color:var(--ink-2);white-space:normal}
 
 /* sticky bottom (takeover only) */
 .sticky-lb{position:fixed;left:0;right:0;bottom:0;z-index:45;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 22px;display:none;align-items:center;justify-content:center;gap:16px}
@@ -304,13 +306,20 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="wl-row" data-sym="TSLA"><span class="wl-ic">TSLA</span><div class="wl-nm"><div class="wl-sym">TSLA</div><div class="wl-co">Tesla Inc</div></div><div class="wl-px"><div class="wl-price mono">$434.41</div><div class="wl-chg up mono">↑2.72%</div></div></div>
     </div>
 
-    <!-- TAKEOVER: left 300x250 -->
-    <div class="takeover-only">
-      <div class="adslot slot-300x250" data-role="Left rail · Display (Takeover)" data-dim="300 × 250">
+    <!-- Left rail display ads (standard) -->
+    <div>
+      <div class="adslot slot-300x250" data-role="Left rail · Display 1" data-dim="300 × 250">
         <span class="adtag">300×250</span><button class="adclear">✕</button><img class="adfill" alt="">
-        <div class="adempty"><span class="dim">300 × 250</span><span class="role">Left rail display</span><span class="hint">click / drop</span></div>
+        <div class="adempty"><span class="dim">300 × 250</span><span class="role">left rail display</span><span class="hint">click / drop</span></div>
       </div>
-      <div class="ad-caption"><span>Medium Rectangle · left rail</span></div>
+      <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
+    </div>
+    <div>
+      <div class="adslot slot-300x250" data-role="Left rail · Display 2" data-dim="300 × 250">
+        <span class="adtag">300×250</span><button class="adclear">✕</button><img class="adfill" alt="">
+        <div class="adempty"><span class="dim">300 × 250</span><span class="role">left rail display</span><span class="hint">click / drop</span></div>
+      </div>
+      <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
     </div>
 
     <div class="foot">
@@ -451,7 +460,16 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   <!-- ================= RIGHT RAIL (ad column) ================= -->
   <div class="stack">
 
-    <!-- Latest News + Sponsored (editable) -->
+    <!-- 1. Pre-roll video unit -->
+    <div>
+      <div class="adslot slot-video" data-role="Right rail · Pre-roll Video" data-dim="Pre-roll video">
+        <span class="adtag">Video</span><button class="adclear">✕</button><img class="adfill" alt="">
+        <div class="adempty"><span class="dim">Pre-roll Video</span><span class="role">right-rail video ad</span><span class="hint">click / drop</span></div>
+      </div>
+      <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
+    </div>
+
+    <!-- 2. News unit + editable Sponsored News -->
     <div class="panel">
       <div class="rr-head"><span>Latest <span class="jsSym">AAPL</span> News</span><span class="view">View ›</span></div>
       <div class="news-item">
@@ -475,45 +493,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       </div>
     </div>
 
-    <!-- Right-rail video / display Advertisement -->
-    <div>
-      <div class="adslot slot-video" data-role="Right rail · Video / Display Ad" data-dim="Video ad">
-        <span class="adtag">Video</span><button class="adclear">✕</button><img class="adfill" alt="">
-        <div class="adempty"><span class="dim">Advertisement</span><span class="role">right-rail video / rich display</span><span class="hint">click / drop</span></div>
-      </div>
-      <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
-    </div>
-
-    <!-- Related Symbols (with one native "Ad") -->
-    <div class="panel">
-      <div class="rr-head"><span>Related Symbols</span></div>
-      <div class="rel-row"><span class="rel-ic">RIVN</span><div><div class="rel-nm">RIVN</div><div class="rel-co">Rivian Automotive</div></div><span class="rel-add">＋</span></div>
-      <div class="rel-row">
-        <div class="adslot slot-relad" data-role="Related Symbol · Promoted (Ad)" data-dim="Logo">
-          <button class="adclear" style="width:16px;height:16px;font-size:9px">✕</button><img class="adfill" alt="">
-          <div class="adempty" style="border-width:2px;font-size:0"></div>
-        </div>
-        <div><div class="rel-nm">Your Ticker <span class="tag-ad">Ad</span></div><div class="rel-co">Promoted symbol</div></div><span class="rel-add">＋</span>
-      </div>
-      <div class="rel-row"><span class="rel-ic">GOOG</span><div><div class="rel-nm">GOOG</div><div class="rel-co">Alphabet Inc</div></div><span class="rel-add">✓</span></div>
-      <div class="rel-row"><span class="rel-ic">LCID</span><div><div class="rel-nm">LCID</div><div class="rel-co">Lucid Group</div></div><span class="rel-add">＋</span></div>
-    </div>
-
-    <!-- Prediction Leaderboard + sponsor -->
-    <div class="panel">
-      <div class="rr-head"><span>Prediction Leaderboard</span><span class="view">›</span></div>
-      <div class="rel-row"><span class="rel-ic">1</span><div><div class="rel-nm">EmpererFox</div></div><span style="color:var(--red);font-weight:700;font-size:12px">🔥 31d</span></div>
-      <div class="rel-row"><span class="rel-ic">2</span><div><div class="rel-nm">The Bullish Penguin</div></div><span style="color:var(--red);font-weight:700;font-size:12px">🔥 29d</span></div>
-      <div class="rel-row" style="justify-content:center;color:var(--ink-3);font-size:12px;gap:8px">
-        <span>Sponsored by</span>
-        <div class="adslot" data-role="Leaderboard · Sponsor logo" data-dim="Logo" style="width:80px;height:22px;border-radius:5px">
-          <button class="adclear" style="width:16px;height:16px;font-size:9px">✕</button><img class="adfill" alt="">
-          <div class="adempty" style="border-width:1px;font-size:0"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right-rail 300x250 display -->
+    <!-- 3. 300x250 display -->
     <div>
       <div class="adslot slot-300x250" data-role="Right rail · Display" data-dim="300 × 250">
         <span class="adtag">300×250</span><button class="adclear">✕</button><img class="adfill" alt="">
@@ -522,18 +502,36 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
     </div>
 
-    <!-- Who To Follow (with one "Ad") -->
+    <!-- 4. Top Discussions (replaces Who To Follow) -->
     <div class="panel">
-      <div class="rr-head"><span>Who To Follow</span><span class="view">›</span></div>
-      <div class="wtf-row"><span class="wtf-av"></span><div><div class="rel-nm">BullishBanana</div><div class="rel-co">@Bullishbanana</div></div><span class="followbtn">Follow</span></div>
-      <div class="wtf-row">
-        <div class="adslot slot-relad" data-role="Who To Follow · Promoted (Ad)" data-dim="Logo" style="width:30px;height:30px">
+      <div class="rr-head"><span>Top Discussions</span><span class="view">›</span></div>
+      <div class="disc-row"><span class="rel-ic">LMND</span><div><div class="rel-nm">LMND</div><div class="rel-co">Lemonade ($LMND) is down sharply following Q2 earnings and a CFO succession announcement.</div></div></div>
+      <div class="disc-row"><span class="rel-ic">NBIS</span><div><div class="rel-nm">NBIS</div><div class="rel-co">Neocloud stocks like $NBIS, $CRWV, $APLD and $IREN have fallen sharply. Buying the dip on any?</div></div></div>
+      <div class="disc-row"><span class="rel-ic">SOFI</span><div><div class="rel-nm">SOFI</div><div class="rel-co">SoFi ($SOFI) is down despite record Q2 revenue and raised full-year guidance. Buying the dip?</div></div></div>
+    </div>
+
+    <!-- 5. Related Symbols (editable promoted "Ad") -->
+    <div class="panel">
+      <div class="rr-head"><span>Related Symbols</span></div>
+      <div class="rel-row"><span class="rel-ic">RIVN</span><div><div class="rel-nm">RIVN</div><div class="rel-co">Rivian Automotive</div></div><span class="rel-add">＋</span></div>
+      <div class="rel-row">
+        <div class="adslot slot-relad" data-role="Related Symbol · Promoted (Ad)" data-dim="Logo">
           <button class="adclear" style="width:16px;height:16px;font-size:9px">✕</button><img class="adfill" alt="">
           <div class="adempty" style="border-width:2px;font-size:0"></div>
         </div>
-        <div><div class="rel-nm">Your Brand <span class="tag-ad">Ad</span></div><div class="rel-co">Promoted account</div></div><span class="followbtn">Learn More</span>
+        <div><div class="rel-nm"><span id="relName">Your Brand</span> <span class="tag-ad">Ad</span></div><div class="rel-co">Promoted account</div></div><span class="rel-add">＋</span>
       </div>
-      <div class="wtf-row"><span class="wtf-av"></span><div><div class="rel-nm">StonkWizard</div><div class="rel-co">@StonkWizard</div></div><span class="followbtn">Follow</span></div>
+      <div class="rel-row"><span class="rel-ic">GOOG</span><div><div class="rel-nm">GOOG</div><div class="rel-co">Alphabet Inc</div></div><span class="rel-add">✓</span></div>
+      <div class="rel-row"><span class="rel-ic">LCID</span><div><div class="rel-nm">LCID</div><div class="rel-co">Lucid Group</div></div><span class="rel-add">＋</span></div>
+    </div>
+
+    <!-- 6. 300x600 half-page -->
+    <div>
+      <div class="adslot slot-300x600" data-role="Right rail · 300x600 Half-page" data-dim="300 × 600">
+        <span class="adtag">300×600</span><button class="adclear">✕</button><img class="adfill" alt="">
+        <div class="adempty"><span class="dim">300 × 600</span><span class="role">half-page / skyscraper</span><span class="hint">click / drop</span></div>
+      </div>
+      <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
     </div>
 
   </div>
@@ -594,8 +592,14 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   </div>
 
   <div class="ctl-sec">
+    <h4>Promoted unit (Related Symbols)</h4>
+    <div class="fld"><label>Brand / account name</label><input type="text" id="inRelName" value="Your Brand"></div>
+    <button class="btn" id="btnRelLogo">Upload promoted logo</button>
+  </div>
+
+  <div class="ctl-sec">
     <h4>Presentation</h4>
-    <div class="switch"><span>Takeover mode <span style="color:var(--ink-3);font-weight:500">(+ left 300×250 &amp; bottom 728×90)</span></span><span class="sw" id="swTakeover"></span></div>
+    <div class="switch"><span>Takeover mode <span style="color:var(--ink-3);font-weight:500">(+ bottom 728×90 leaderboard)</span></span><span class="sw" id="swTakeover"></span></div>
     <div class="switch"><span>Presentation mode <span style="color:var(--ink-3);font-weight:500">(hide guides)</span></span><span class="sw" id="swPresent"></span></div>
     <div class="switch"><span>Glow / pulse on ads</span><span class="sw on" id="swGlow"></span></div>
     <div style="margin-top:10px"><label style="font-weight:700;font-size:12px;display:block;margin-bottom:8px">Highlight color</label>
@@ -664,6 +668,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   bind("inExecName",function(v){ document.getElementById("execName").textContent=v; });
   bind("inExecCo",function(v){ document.getElementById("execCo").textContent=v; });
   bind("inExecDesc",function(v){ document.getElementById("execDesc").textContent=v; });
+  bind("inRelName",function(v){ document.getElementById("relName").textContent=v; });
   function setInput(id,val){ var el=document.getElementById(id); el.value=val; el.dispatchEvent(new Event("input")); }
 
   /* company logo tile + native logo */
@@ -677,6 +682,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   function setExecLogo(src){ var box=document.getElementById("execLogo"); var img=new Image(); img.onload=function(){ box.textContent=""; box.appendChild(img); }; img.src=src; }
   document.getElementById("btnExecLogo").addEventListener("click",function(){ uploadTo(setExecLogo); });
   document.getElementById("btnExecImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Pinned Executive Interview"]'); target=s; picker.value=""; picker.click(); });
+  document.getElementById("btnRelLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Related Symbol · Promoted (Ad)"]'); target=s; picker.value=""; picker.click(); });
   document.getElementById("btnNewsImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Sponsored News · Image"]'); target=s; picker.value=""; picker.click(); });
 
   /* ---------- LIVE PULL (JSONP) ---------- */
