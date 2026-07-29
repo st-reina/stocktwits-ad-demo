@@ -205,7 +205,8 @@ body.chart-collapsed .chart-collapsible{display:none}
 .wtf-row{display:flex;align-items:center;gap:9px;padding:9px 14px;border-top:1px solid var(--line-2)}
 .wtf-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#a7f3d0,#93c5fd);flex:none;overflow:hidden}
 .followbtn{margin-left:auto;border:1px solid var(--line);border-radius:18px;padding:4px 13px;font-weight:700;font-size:12px}
-.ad-caption{display:flex;align-items:center;justify-content:space-between;padding:6px 4px 0;color:var(--ink-3);font-size:11px}
+.ad-caption{display:flex;align-items:center;justify-content:center;gap:8px;padding:6px 4px 0;color:var(--ink-3);font-size:11px}
+.ad-caption a::before{content:"|";margin-right:8px;color:var(--ink-3)}
 .ad-caption a{color:var(--ink-3)}
 
 /* ===== AD SLOTS ===== */
@@ -216,8 +217,8 @@ body.chart-collapsed .chart-collapsible{display:none}
 .adempty .dim{font-weight:800;color:var(--ink-2);font-size:12.5px}
 .adempty .role{font-size:11px;font-weight:600}.adempty .hint{font-size:10px;opacity:.85}
 .adslot.filled .adempty{display:none}
-.adslot.filled{box-shadow:0 0 0 3px var(--glow),0 0 22px 2px color-mix(in srgb,var(--glow) 55%,transparent),0 10px 30px rgba(10,10,10,.16);border-radius:10px}
-body.glow-on .adslot.filled{animation:pulse 2.4s ease-in-out infinite}
+.adslot.filled{border-radius:10px}
+body.glow-on .adslot.filled{box-shadow:0 0 0 3px var(--glow),0 0 22px 2px color-mix(in srgb,var(--glow) 55%,transparent),0 10px 30px rgba(10,10,10,.16);animation:pulse 2.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 3px var(--glow),0 0 18px 1px color-mix(in srgb,var(--glow) 45%,transparent),0 10px 28px rgba(10,10,10,.14)}
   50%{box-shadow:0 0 0 3px var(--glow),0 0 30px 5px color-mix(in srgb,var(--glow) 70%,transparent),0 12px 32px rgba(10,10,10,.18)}}
 .adslot.dragover .adempty{border-color:var(--glow);background:color-mix(in srgb,var(--glow) 10%,#fff)}
@@ -236,6 +237,7 @@ body.glow-on .adslot.filled{animation:pulse 2.4s ease-in-out infinite}
 .slot-300x600{width:300px;height:600px;margin:0 auto}
 /* Related Ticker Unit (320x50) */
 .rel-ad-logo{width:26px;height:26px;border-radius:50%;flex:none;background:var(--chip)}
+.rel-ad-logo .adclear{display:none!important}
 .rel-ad-logo .adfill{object-fit:cover}
 .rt-unit{display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid var(--line-2)}
 .rt-logo{width:36px;height:36px;border-radius:9px;flex:none;background:var(--chip)}
@@ -583,7 +585,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     <div>
       <div class="adslot slot-300x250" data-role="Right rail · Display" data-dim="300 × 250">
         <span class="adtag">300×250</span><button class="adclear">✕</button><img class="adfill" alt="">
-        <div class="adempty"><span class="dim">300 × 250</span><span class="role">Watchlist Display</span><span class="hint">click / drop</span></div>
+        <div class="adempty"><span class="dim">300 × 250</span><span class="role">Display</span><span class="hint">click / drop</span></div>
       </div>
       <div class="ad-caption"><span>Advertisement</span><a>Remove ads.</a></div>
     </div>
