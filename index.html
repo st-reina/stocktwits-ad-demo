@@ -235,6 +235,8 @@ body.glow-on .adslot.filled{animation:pulse 2.4s ease-in-out infinite}
 .slot-relad{width:26px;height:26px;border-radius:50%;flex:none}
 .slot-300x600{width:300px;height:600px;margin:0 auto}
 /* Related Ticker Unit (320x50) */
+.rel-ad-logo{width:26px;height:26px;border-radius:50%;flex:none;background:var(--chip)}
+.rel-ad-logo .adfill{object-fit:cover}
 .rt-unit{display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid var(--line-2)}
 .rt-logo{width:36px;height:36px;border-radius:9px;flex:none;background:var(--chip)}
 .rt-logo .adfill{object-fit:cover}
@@ -277,6 +279,20 @@ body.takeover .takeover-only{display:block}
 .ctl h3{margin:0 0 4px;font-size:16px}.ctl .muted{color:var(--ink-3);font-size:12px;margin:0 0 16px}
 .ctl-sec{border-top:1px solid var(--line-2);padding:15px 0}.ctl-sec:first-of-type{border-top:none;padding-top:0}
 .ctl-sec h4{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-3)}
+.sec-title{display:flex;align-items:center;gap:7px;margin:0 0 12px;font-size:13px;font-weight:800;color:var(--ink);background:var(--chip);border-radius:8px;padding:8px 11px}
+.sec-sub{margin-left:auto;font-size:11px;font-weight:600;color:var(--ink-3);text-transform:none}
+.unit{border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.unit-head{display:flex;align-items:center;gap:10px;padding:11px 12px;background:#f4f7fb;font-weight:800;font-size:13px;cursor:pointer;user-select:none}
+.unit.open .unit-head{background:#e9eff8;border-bottom:1px solid var(--line)}
+.unit-head .unit-tick{width:17px;height:17px;cursor:pointer;flex:none;accent-color:var(--green)}
+.unit-body{display:none;padding:12px}
+.unit.open .unit-body{display:block}
+.use-client{display:flex;align-items:center;gap:8px;font-weight:700;font-size:12.5px;margin:2px 0 12px;cursor:pointer}
+.use-client input{width:16px;height:16px;accent-color:var(--green)}
+.client-logo-row{display:flex;align-items:center;gap:9px;margin-top:10px}
+.client-logo-prev{width:32px;height:32px;border-radius:7px;background:var(--chip);overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center}
+.client-logo-prev img{width:100%;height:100%;object-fit:cover}
+.cl-note{font-size:11px;color:var(--ink-3);line-height:1.35}
 .fld{margin-bottom:10px}.fld label{display:block;font-weight:700;font-size:12px;margin-bottom:4px}
 .fld input,.fld textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:14px;font-family:inherit}
 .fld textarea{resize:vertical;min-height:52px}
@@ -584,21 +600,17 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     <div class="panel">
       <div class="rr-head"><span>Related Symbols</span></div>
       <div class="rel-row"><span class="rel-ic">RIVN</span><div><div class="rel-nm">RIVN</div><div class="rel-co">Rivian Automotive</div></div><span class="rel-add">＋</span></div>
-      <div class="rel-row"><span class="rel-ic">GOOG</span><div><div class="rel-nm">GOOG</div><div class="rel-co">Alphabet Inc</div></div><span class="rel-add">✓</span></div>
-      <div class="rel-row"><span class="rel-ic">LCID</span><div><div class="rel-nm">LCID</div><div class="rel-co">Lucid Group</div></div><span class="rel-add">＋</span></div>
-      <!-- Related Ticker Unit (320x50 Watchlist Display) — editable -->
-      <div class="rt-unit">
-        <div class="adslot rt-logo" data-role="Related Ticker Unit · Logo" data-dim="Logo">
+      <!-- Promoted Related Symbol (Ad) — editable -->
+      <div class="rel-row">
+        <div class="adslot rel-ad-logo" data-role="Related Symbol · Promoted Logo" data-dim="Logo">
           <button class="adclear" style="width:16px;height:16px;font-size:9px">✕</button><img class="adfill" alt="">
           <div class="adempty" style="border-width:2px;font-size:0"></div>
         </div>
-        <div class="rt-text">
-          <div class="rt-top"><span id="rtTicker">$SPCM</span> <span class="tag-ad">Ad</span></div>
-          <div class="rt-desc" id="rtDesc">2X Long and Short SpaceX ETFs</div>
-        </div>
-        <span class="rt-btn">Add to Watchlist</span>
+        <div><div class="rel-nm"><span id="relSymTicker">NVDA</span> <span class="tag-ad">Ad</span></div><div class="rel-co" id="relSymName">NVIDIA</div></div>
+        <span class="rel-add">＋</span>
       </div>
-      <div class="ad-caption" style="padding:6px 14px 10px"><span>320 × 50 Watchlist Display</span></div>
+      <div class="rel-row"><span class="rel-ic">GOOG</span><div><div class="rel-nm">GOOG</div><div class="rel-co">Alphabet Inc</div></div><span class="rel-add">✓</span></div>
+      <div class="rel-row"><span class="rel-ic">LCID</span><div><div class="rel-nm">LCID</div><div class="rel-co">Lucid Group</div></div><span class="rel-add">＋</span></div>
     </div>
 
     <!-- 6. 300x600 half-page -->
@@ -626,10 +638,11 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
 <div class="ctl" id="ctl">
   <button class="ctl-close" id="ctlClose">✕</button>
   <h3>Ad Demo Controls</h3>
-  <p class="muted">Set the client, then upload creatives into any slot.</p>
+  <p class="muted"><b>1.</b> Set the ticker page &nbsp;<b>2.</b> Set the client &nbsp;<b>3.</b> Tick a unit to edit it</p>
 
+  <!-- ============ TICKER PAGE ============ -->
   <div class="ctl-sec">
-    <h4>Client / Symbol</h4>
+    <div class="sec-title">📈 Ticker page <span class="sec-sub">whose page this is</span></div>
     <div class="fld"><label>Ticker</label><input type="text" id="inTicker" value="AAPL" autocomplete="off" spellcheck="false"></div>
     <button class="btn dark" id="btnPull">⤓ Pull live from Stocktwits</button>
     <div id="pullStatus" class="pull-status"></div>
@@ -638,44 +651,69 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="fld"><label>Price <span class="man">manual</span></label><input type="text" id="inPrice" value="$328.21"></div>
       <div class="fld"><label>Change <span class="man">manual</span></label><input type="text" id="inChg" value="↑ $1.62 (0.50%) Today"></div>
     </div>
-    <div class="fld-note">⚠︎ Price &amp; change don’t refresh live — type the figure you want on screen (e.g. the price on the campaign date).</div>
+    <div class="fld-note">⚠︎ Price &amp; change don’t refresh live — type the figure you want on screen.</div>
     <div class="fld"><label>Watchers <span class="live">auto</span></label><input type="text" id="inWatch" value="983,677"></div>
-    <button class="btn" id="btnLogo">Upload company logo</button>
+    <button class="btn" id="btnLogo">Upload page logo</button>
+  </div>
+
+  <!-- ============ CLIENT / ADVERTISER ============ -->
+  <div class="ctl-sec">
+    <div class="sec-title">🏷️ Client / advertiser <span class="sec-sub">whose ads these are</span></div>
+    <div class="fld"><label>Client name</label><input type="text" id="inClientName" placeholder="e.g. Voyager" autocomplete="off"></div>
+    <button class="btn" id="btnClientLogo">Upload client logo</button>
+    <div class="client-logo-row" id="clientLogoRow" style="display:none"><span class="client-logo-prev" id="clientLogoPrev"></span><span class="cl-note">Client logo set — units with “Use client logo” will use this.</span></div>
+    <div class="fld-note" style="margin-top:8px">Set once. The name pre-fills each unit’s brand text, and “Use client logo” reuses this logo. Both overridable per unit.</div>
+  </div>
+
+  <!-- ============ AD UNITS (tick to edit) ============ -->
+  <div class="ctl-sec">
+    <div class="sec-title">🧩 Ad units <span class="sec-sub">tick to edit</span></div>
+
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick"> Pinned Post</div>
+      <div class="unit-body">
+        <div class="fld"><label>Username</label><input type="text" id="inPinUser" data-autofill="1" value="voyagertech"></div>
+        <div class="fld"><label>Official rep pill</label><input type="text" id="inPinPill" value="Official VOYG Representative"></div>
+        <div class="fld"><label>Headline / summary</label><textarea id="inPinDesc">Your pinned post copy goes here — announce the news, milestone, or campaign in the brand's own voice.</textarea></div>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="pin"> Use client logo</label>
+        <button class="btn" id="btnPinLogo">Upload account avatar</button>
+        <button class="btn" id="btnPinImg">Upload post image</button>
+      </div>
+    </div>
+
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick"> Native Add-to-Watchlist</div>
+      <div class="unit-body">
+        <div class="fld"><label>Brand name</label><input type="text" id="inNativeName" data-autofill="1" value="Your Brand"></div>
+        <div class="fld"><label>Ad copy / description</label><textarea id="inNativeDesc">Your ad copy goes here — describe the partnership, product, or offer in a sentence or two.</textarea></div>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="native"> Use client logo</label>
+        <button class="btn" id="btnNativeLogo">Upload brand logo</button>
+        <button class="btn" id="btnNativeImg">Upload display image</button>
+      </div>
+    </div>
+
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick"> Sponsored News</div>
+      <div class="unit-body">
+        <div class="fld"><label>Headline</label><textarea id="inNewsHeadline">Your sponsored headline goes here — a partnership, product launch, or milestone.</textarea></div>
+        <div class="fld"><label>Advertiser name</label><input type="text" id="inNewsSponsor" data-autofill="1" value="Stocktwits"></div>
+        <button class="btn" id="btnNewsImg">Upload news image</button>
+      </div>
+    </div>
+
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick"> Related Symbol (Promoted Ad)</div>
+      <div class="unit-body">
+        <div class="fld"><label>Ticker</label><input type="text" id="inRelSymTicker" value="NVDA"></div>
+        <div class="fld"><label>Company name</label><input type="text" id="inRelSymName" data-autofill="1" value="NVIDIA"></div>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="rel"> Use client logo</label>
+        <button class="btn" id="btnRelSymLogo">Upload logo</button>
+      </div>
+    </div>
   </div>
 
   <div class="ctl-sec">
-    <h4>Sponsored News unit</h4>
-    <div class="fld"><label>Headline</label><textarea id="inNewsHeadline">Your sponsored headline goes here — a partnership, product launch, or milestone.</textarea></div>
-    <div class="fld"><label>Advertiser name</label><input type="text" id="inNewsSponsor" value="Stocktwits"></div>
-    <button class="btn" id="btnNewsImg">Upload news image</button>
-  </div>
-
-  <div class="ctl-sec">
-    <h4>Native unit (feed)</h4>
-    <div class="fld"><label>Brand name</label><input type="text" id="inNativeName" value="Your Brand"></div>
-    <div class="fld"><label>Ad copy / description</label><textarea id="inNativeDesc">Your ad copy goes here — describe the partnership, product, or offer in a sentence or two.</textarea></div>
-    <button class="btn" id="btnNativeLogo">Upload native brand logo</button>
-    <button class="btn" id="btnNativeImg">Upload native display image</button>
-  </div>
-
-  <div class="ctl-sec">
-    <h4>320×50 Watchlist Display (Related Ticker)</h4>
-    <div class="fld"><label>Ticker</label><input type="text" id="inRtTicker" value="$SPCM"></div>
-    <div class="fld"><label>Description</label><input type="text" id="inRtDesc" value="2X Long and Short SpaceX ETFs"></div>
-    <button class="btn" id="btnRtLogo">Upload ticker logo</button>
-  </div>
-
-  <div class="ctl-sec">
-    <h4>Pinned Post unit</h4>
-    <div class="fld"><label>Username</label><input type="text" id="inPinUser" value="voyagertech"></div>
-    <div class="fld"><label>Official rep pill</label><input type="text" id="inPinPill" value="Official VOYG Representative"></div>
-    <div class="fld"><label>Headline / summary</label><textarea id="inPinDesc">Your pinned post copy goes here — announce the news, milestone, or campaign in the brand's own voice.</textarea></div>
-    <button class="btn" id="btnPinLogo">Upload account avatar</button>
-    <button class="btn" id="btnPinImg">Upload post image</button>
-  </div>
-
-  <div class="ctl-sec">
-    <h4>Presentation</h4>
+    <div class="sec-title">🎬 Presentation</div>
     <div class="switch"><span>Bottom rail 728×90 <span style="color:var(--ink-3);font-weight:500">(sticky bottom ad)</span></span><span class="sw" id="swTakeover"></span></div>
     <div class="switch"><span>Pre-roll pop-out on scroll <span style="color:var(--ink-3);font-weight:500">(floats bottom-right)</span></span><span class="sw" id="swPopout"></span></div>
     <div class="switch"><span>Presentation mode <span style="color:var(--ink-3);font-weight:500">(hide guides)</span></span><span class="sw" id="swPresent"></span></div>
@@ -693,7 +731,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   </div>
 
   <div class="ctl-sec">
-    <h4>Save &amp; restore a client page</h4>
+    <div class="sec-title">💾 Save &amp; restore a client page</div>
     <div class="fld"><label>Page name (e.g. client)</label><input type="text" id="inSaveName" placeholder="Galaxy — Aug pitch" autocomplete="off"></div>
     <button class="btn dark" id="btnSavePage">💾 Save this page</button>
     <div class="fld" style="margin-top:10px"><label>Saved pages (this browser)</label>
@@ -704,7 +742,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   </div>
 
   <div class="ctl-sec">
-    <h4>Reset</h4>
+    <div class="sec-title">↺ Reset</div>
     <button class="btn warn" id="btnClear">Clear all uploaded ads</button>
   </div>
 </div>
@@ -755,8 +793,8 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   bind("inNewsSponsor",function(v){ document.getElementById("newsSponsor").textContent=v; });
   bind("inNativeName",function(v){ document.getElementById("nativeName").textContent=v; });
   bind("inNativeDesc",function(v){ document.getElementById("nativeDesc").textContent=v; });
-  bind("inRtTicker",function(v){ document.getElementById("rtTicker").textContent=v; });
-  bind("inRtDesc",function(v){ document.getElementById("rtDesc").textContent=v; });
+  bind("inRelSymTicker",function(v){ document.getElementById("relSymTicker").textContent=v; });
+  bind("inRelSymName",function(v){ document.getElementById("relSymName").textContent=v; });
   bind("inPinUser",function(v){ document.getElementById("pinUser").textContent=v; });
   bind("inPinPill",function(v){ document.getElementById("pinPill").textContent=v; });
   bind("inPinDesc",function(v){ document.getElementById("pinDesc").textContent=v; });
@@ -773,7 +811,25 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   function setPinLogo(src){ var box=document.getElementById("pinLogo"); var img=new Image(); img.onload=function(){ box.textContent=""; box.appendChild(img); }; img.src=src; }
   document.getElementById("btnPinLogo").addEventListener("click",function(){ uploadTo(setPinLogo); });
   document.getElementById("btnPinImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Pinned Post · Image"]'); target=s; picker.value=""; picker.click(); });
-  document.getElementById("btnRtLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Related Ticker Unit · Logo"]'); target=s; picker.value=""; picker.click(); });
+  document.getElementById("btnRelSymLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); target=s; picker.value=""; picker.click(); });
+
+  /* ---------- Ad-units accordion (tick to edit) ---------- */
+  [].forEach.call(document.querySelectorAll(".unit"),function(u){
+    var tick=u.querySelector(".unit-tick"), head=u.querySelector(".unit-head");
+    tick.addEventListener("change",function(){ u.classList.toggle("open",tick.checked); });
+    head.addEventListener("click",function(e){ if(e.target===tick) return; tick.checked=!tick.checked; u.classList.toggle("open",tick.checked); });
+  });
+
+  /* ---------- Client / advertiser: name auto-fill + reusable logo ---------- */
+  var clientLogo=null, linked={pin:false,native:false,rel:false};
+  function setUnitLogo(t,src){ if(t==="pin") setPinLogo(src); else if(t==="native") setNativeLogo(src); else if(t==="rel"){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); if(s) fill(s,src); } }
+  function applyClientLogo(){ if(!clientLogo) return; Object.keys(linked).forEach(function(t){ if(linked[t]) setUnitLogo(t,clientLogo); }); }
+  function showClientLogo(){ var p=document.getElementById("clientLogoPrev"); if(clientLogo){ p.innerHTML='<img alt="">'; p.firstChild.src=clientLogo; document.getElementById("clientLogoRow").style.display="flex"; } else { p.innerHTML=""; document.getElementById("clientLogoRow").style.display="none"; } }
+  document.getElementById("btnClientLogo").addEventListener("click",function(){ uploadTo(function(src){ clientLogo=src; showClientLogo(); applyClientLogo(); }); });
+  [].forEach.call(document.querySelectorAll(".uc"),function(cb){ cb.addEventListener("change",function(){ var t=cb.dataset.target; linked[t]=cb.checked; if(cb.checked){ if(clientLogo) setUnitLogo(t,clientLogo); else alert("Upload a client logo first (in the Client / advertiser section)."); } }); });
+  /* dirty-track the auto-fill fields so client name won't overwrite a manual edit */
+  [].forEach.call(document.querySelectorAll("[data-autofill]"),function(el){ el.addEventListener("input",function(e){ if(e.isTrusted) el.dataset.dirty="1"; }); });
+  document.getElementById("inClientName").addEventListener("input",function(e){ if(!e.isTrusted) return; var v=this.value; [].forEach.call(document.querySelectorAll("[data-autofill]"),function(el){ if(el.dataset.dirty!=="1"){ el.value=v; el.dispatchEvent(new Event("input")); } }); });
   document.getElementById("btnNewsImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Sponsored News · Image"]'); target=s; picker.value=""; picker.click(); });
 
   /* ---------- LIVE PULL (JSONP) ---------- */
@@ -853,6 +909,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     slots.forEach(function(sl){ if(sl.classList.contains("filled")) st.slots[sl.dataset.id]=sl.querySelector(".adfill").src; });
     ["symLogo","nativeLogo","pinLogo"].forEach(function(id){ var im=document.querySelector("#"+id+" img"); st.logos[id]=im?im.src:null; });
     st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), takeover:document.body.classList.contains("takeover"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow") };
+    st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel};
     return st;
   }
   function applyState(st){
@@ -862,6 +919,8 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     Object.keys(st.slots||{}).forEach(function(sid){ for(var i=0;i<slots.length;i++){ if(slots[i].dataset.id===sid){ fill(slots[i],st.slots[sid]); break; } } });
     if(st.logos){ if(st.logos.symLogo) setSymbolLogo(st.logos.symLogo); if(st.logos.nativeLogo) setNativeLogo(st.logos.nativeLogo); if(st.logos.pinLogo) setPinLogo(st.logos.pinLogo); }
     if(st.flags){ setFlag("glow-on",st.flags.glow,"swGlow"); setChartState(st.flags.chartCollapsed); setFlag("takeover",st.flags.takeover,"swTakeover"); setPopout(st.flags.popout); if(st.flags.glowColor) document.documentElement.style.setProperty("--glow",st.flags.glowColor.trim()); }
+    clientLogo=st.clientLogo||null; showClientLogo();
+    if(st.linked){ ["pin","native","rel"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
   }
 
   var PAGES="st_ad_demo_pages";
