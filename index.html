@@ -226,7 +226,7 @@ body.glow-on .adslot.filled{box-shadow:0 0 0 3px var(--glow),0 0 22px 2px color-
 .adclear{position:absolute;top:6px;right:6px;z-index:5;width:23px;height:23px;border-radius:50%;background:rgba(10,10,10,.72);color:#fff;border:none;cursor:pointer;font-size:12px;display:none;align-items:center;justify-content:center}
 .adslot.filled .adclear{display:flex}
 .adtag{position:absolute;top:6px;left:6px;z-index:5;background:var(--glow);color:#fff;font-size:9px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:2px 6px;border-radius:6px;display:none}
-.adslot.filled .adtag{display:block}
+.adslot .adtag{display:none!important}
 .play-badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;display:none;align-items:center;justify-content:center;font-size:17px;z-index:4;pointer-events:none;padding-left:3px}
 .adslot.filled .play-badge{display:flex}
 .slot-300x250{width:300px;height:250px;margin:0 auto}
@@ -756,7 +756,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="bottom"> 728×90 Watchlist Display</div>
       <div class="unit-body"><button class="btn slot-upload" data-slot="Bottom rail · 728x90">Upload 728×90 creative</button></div>
     </div>
-    <div class="switch" style="margin-top:8px"><span>Pre-roll pop-out on scroll</span><span class="sw" id="swPopout"></span></div>
+    <div class="switch" style="margin-top:8px"><span>Pre-roll video pop-out on scroll</span><span class="sw" id="swPopout"></span></div>
   </div>
 
   <div class="ctl-sec">
