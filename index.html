@@ -176,6 +176,12 @@ body.chart-collapsed .chart-collapsible{display:none}
 .edge-badge{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);background:#0a1633;color:#ffcf4d;font-size:6.5px;font-weight:800;padding:1px 4px;border-radius:3px;letter-spacing:.4px}
 .edge-check{display:inline-flex;width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#f5c451,#dfa62b);color:#fff;align-items:center;justify-content:center;font-size:9px;font-weight:800;vertical-align:middle}
 .drag-handle{position:absolute;top:10px;right:10px;width:26px;height:22px;border-radius:6px;background:var(--chip);color:var(--ink-3);display:flex;align-items:center;justify-content:center;cursor:grab;font-size:13px;z-index:6;user-select:none}
+.rail-handle{position:absolute;left:-17px;top:12px;width:16px;height:22px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);cursor:grab;font-size:13px;z-index:9;user-select:none;line-height:1}
+.rail-handle:hover{color:var(--ink)}
+.rail-handle:active{cursor:grabbing}
+.rail-dragging{opacity:.4}
+body.present .rail-handle,body.locked .rail-handle{display:none}
+html.spotlight .rail-handle,html.spotlight .drag-handle{display:none!important}
 .drag-handle:active{cursor:grabbing}
 .feed-tag{position:absolute;top:12px;left:16px;font-size:9.5px;font-weight:800;letter-spacing:.4px;color:var(--ink-3);text-transform:uppercase}
 .pin-label{color:var(--ink-3);font-weight:700;font-size:12.5px;display:flex;align-items:center;gap:6px;margin-bottom:10px}
@@ -1046,6 +1052,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow"), banner:document.getElementById("swBanner").classList.contains("on"), topDisc:document.getElementById("swTopDisc").classList.contains("on"), relSym:document.getElementById("swRelSym").classList.contains("on"), whoFollow:document.getElementById("swWhoFollow").classList.contains("on"), wlCount:(document.querySelector("#wlSeg button.on")||{}).dataset ? +document.querySelector("#wlSeg button.on").dataset.n : 6 };
     st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel,newsimg:linked.newsimg};
     st.units={}; [].forEach.call(document.querySelectorAll(".unit-tick"),function(cb){ st.units[cb.dataset.unit]=cb.checked; });
+    st.railOrder = window.__railOrder ? window.__railOrder() : null;
     return st;
   }
   function applyState(st){
@@ -1058,6 +1065,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     clientLogo=st.clientLogo||null; showClientLogo();
     if(st.linked){ ["pin","native","rel","newsimg"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
     if(st.units){ [].forEach.call(document.querySelectorAll(".unit"),function(u){ var cb=u.querySelector(".unit-tick"); var n=cb.dataset.unit; if(st.units[n]!==undefined) cb.checked=st.units[n]; syncUnit(u); }); }
+    if(window.__applyRailOrder) window.__applyRailOrder(st.railOrder);
   }
 
   var PAGES="st_ad_demo_pages";
@@ -1093,6 +1101,35 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     card.addEventListener("dragend",function(){ card.classList.remove("dragging"); card.removeAttribute("draggable"); dragEl=null; });
   });
   feed.addEventListener("dragover",function(e){ if(!dragEl) return; e.preventDefault(); var a=afterEl(e.clientY); if(a==null) feed.appendChild(dragEl); else feed.insertBefore(dragEl,a); });
+
+  /* ---------- DRAG-REORDER RAIL BLOCKS (left & right on the page; center = the feed above) ---------- */
+  function afterBlock(container,y,dragEl){
+    var els=[].slice.call(container.children).filter(function(c){ return c!==dragEl && !c.classList.contains("preroll-spacer") && getComputedStyle(c).display!=="none"; });
+    return els.reduce(function(best,ch){ var b=ch.getBoundingClientRect(); var off=y-b.top-b.height/2; if(off<0&&off>best.off) return {off:off,el:ch}; return best; },{off:-Infinity}).el||null;
+  }
+  function makeRailSortable(container){
+    if(!container) return;
+    var railDrag=null;
+    [].slice.call(container.children).forEach(function(el,idx){
+      if(el.classList.contains("preroll-spacer")) return;
+      if(!el.dataset.blockid) el.dataset.blockid = el.getAttribute("data-unit-block") || el.id || ("blk"+idx);
+      if(el.querySelector(":scope > .rail-handle")) return;
+      if(getComputedStyle(el).position==="static") el.style.position="relative";
+      var h=document.createElement("span"); h.className="rail-handle"; h.textContent="⠿"; h.title="Drag to reorder";
+      el.appendChild(h);
+      h.addEventListener("mousedown",function(){ if(document.body.classList.contains("locked")) return; el.setAttribute("draggable","true"); });
+      el.addEventListener("dragstart",function(e){ railDrag=el; el.classList.add("rail-dragging"); e.dataTransfer.effectAllowed="move"; try{e.dataTransfer.setData("text/x-rail","1");}catch(_){}} );
+      el.addEventListener("dragend",function(){ el.classList.remove("rail-dragging"); el.removeAttribute("draggable"); railDrag=null; });
+    });
+    container.addEventListener("dragover",function(e){ if(!railDrag||railDrag.parentNode!==container) return; e.preventDefault(); var a=afterBlock(container,e.clientY,railDrag); if(a==null) container.appendChild(railDrag); else container.insertBefore(railDrag,a); });
+  }
+  var railStacks=[].slice.call(document.querySelectorAll(".wrap > .stack"));
+  var leftStack=railStacks[0], rightStack=railStacks[2];
+  makeRailSortable(leftStack); makeRailSortable(rightStack);
+  try{ if(new URLSearchParams(location.search).get("spotlight")) document.documentElement.classList.add("spotlight"); }catch(_){}
+  /* expose rail order for save/restore */
+  window.__railOrder=function(){ function ids(s){ return s?[].slice.call(s.children).filter(function(c){return c.dataset.blockid;}).map(function(c){return c.dataset.blockid;}):[]; } return {left:ids(leftStack),right:ids(rightStack)}; };
+  window.__applyRailOrder=function(o){ if(!o) return; [["left",leftStack],["right",rightStack]].forEach(function(p){ var arr=o[p[0]], stack=p[1]; if(!arr||!stack) return; arr.forEach(function(id){ var el=[].slice.call(stack.children).find(function(c){return c.dataset.blockid===id;}); if(el) stack.appendChild(el); }); }); };
 })();
 </script>
 
