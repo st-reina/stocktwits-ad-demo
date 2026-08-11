@@ -246,6 +246,9 @@ body.glow-on .adslot.filled{box-shadow:0 0 0 3px var(--glow),0 0 22px 2px color-
 .rel-ad-logo{width:26px;height:26px;border-radius:50%;flex:none;background:var(--chip)}
 .rel-ad-logo .adclear{display:none!important}
 .rel-ad-logo .adfill{object-fit:cover}
+.wtf-ad-logo{width:30px;height:30px;border-radius:50%;flex:none;background:var(--chip)}
+.wtf-ad-logo .adclear{display:none!important}
+.wtf-ad-logo .adfill{object-fit:cover}
 .rt-unit{display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid var(--line-2)}
 .rt-logo{width:36px;height:36px;border-radius:9px;flex:none;background:var(--chip)}
 .rt-logo .adfill{object-fit:cover}
@@ -286,12 +289,17 @@ body.takeover .takeover-only{display:block}
 .ctl{position:fixed;top:0;right:0;bottom:0;width:344px;z-index:65;background:#fff;border-left:1px solid var(--line);box-shadow:-10px 0 40px rgba(10,10,10,.14);transform:translateX(100%);transition:transform .28s;overflow-y:auto;padding:20px}
 .ctl.open{transform:none}
 .ctl h3{margin:0 0 4px;font-size:16px}.ctl .muted{color:var(--ink-3);font-size:12px;margin:0 0 16px}
-.ctl-sec{border-top:1px solid var(--line-2);padding:15px 0}.ctl-sec:first-of-type{border-top:none;padding-top:0}
+.ctl-sec{border-top:1px solid var(--line-2);padding:12px 0}.ctl-sec:first-of-type{border-top:none;padding-top:0}
 .ctl-sec h4{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-3)}
 .sec-title{display:flex;align-items:center;gap:7px;margin:0 0 12px;font-size:13px;font-weight:800;color:var(--ink);background:var(--chip);border-radius:8px;padding:8px 11px}
 .sec-sub{margin-left:auto;font-size:11px;font-weight:600;color:var(--ink-3);text-transform:none}
 .seg-fld{display:flex;align-items:center;justify-content:space-between;padding:9px 0}
 .seg-fld label{font-weight:700;font-size:13px}
+.numfld{width:64px;height:34px;border:1px solid var(--line);border-radius:8px;padding:0 8px;font-size:14px;text-align:center;font-family:inherit}
+.lbl{display:block;font-weight:700;font-size:12px;margin-bottom:5px}
+.row-inline{display:flex;gap:8px;margin-bottom:8px}
+.row-inline input[type=text]{flex:1;height:40px;border:1px solid var(--line);border-radius:9px;padding:0 12px;font-size:14px;font-family:inherit;min-width:0}
+.row-inline .btn{width:auto;flex:none;height:40px;padding:0 16px;white-space:nowrap;margin:0}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
 .seg button{border:none;background:#fff;padding:6px 14px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;color:var(--ink-2);border-left:1px solid var(--line)}
 .seg button:first-child{border-left:none}
@@ -313,7 +321,7 @@ body.takeover .takeover-only{display:block}
 .client-logo-prev{width:32px;height:32px;border-radius:7px;background:var(--chip);overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center}
 .client-logo-prev img{width:100%;height:100%;object-fit:cover}
 .cl-note{font-size:11px;color:var(--ink-3);line-height:1.35}
-.fld{margin-bottom:10px}.fld label{display:block;font-weight:700;font-size:12px;margin-bottom:4px}
+.fld{margin-bottom:8px}.fld label{display:block;font-weight:700;font-size:12px;margin-bottom:4px}
 .fld input,.fld textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:14px;font-family:inherit}
 .fld textarea{resize:vertical;min-height:52px}
 .row2{display:flex;gap:8px}.row2 .fld{flex:1}
@@ -660,7 +668,15 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     <div class="panel" id="whoFollowPanel">
       <div class="rr-head"><span>Who To Follow</span><span class="view">›</span></div>
       <div class="wtf-row"><span class="wtf-av" style="background:linear-gradient(135deg,#fde68a,#f59e0b)"></span><div><div class="rel-nm">BullishBanana</div><div class="rel-co">@Bullishbanana</div></div><span class="followbtn">Follow</span></div>
-      <div class="wtf-row"><span class="wtf-av" style="background:linear-gradient(135deg,#4ade80,#15803d)"></span><div><div class="rel-nm">Fidelity <span class="tag-ad">Ad</span></div><div class="rel-co">@FidelityInvestments</div></div><span class="followbtn">Learn More</span></div>
+      <!-- Promoted Who-To-Follow (Ad) — editable, toggled from Ad units -->
+      <div class="wtf-row" id="promotedWtfRow" data-unit-block="wtfad" style="display:none">
+        <div class="adslot wtf-ad-logo" data-role="Who To Follow · Promoted Logo" data-dim="Logo">
+          <button class="adclear" style="width:16px;height:16px;font-size:9px">✕</button><img class="adfill" alt="">
+          <div class="adempty" style="border-width:2px;font-size:0"></div>
+        </div>
+        <div><div class="rel-nm"><span id="wtfName">Fidelity</span> <span class="tag-ad">Ad</span></div><div class="rel-co" id="wtfHandle">@FidelityInvestments</div></div>
+        <span class="followbtn">Learn More</span>
+      </div>
       <div class="wtf-row"><span class="wtf-av" style="background:linear-gradient(135deg,#fca5a5,#ea580c)"></span><div><div class="rel-nm">StonkWizard</div><div class="rel-co">@StonkWizard</div></div><span class="followbtn">Follow</span></div>
       <div class="wtf-row"><span class="wtf-av" style="background:linear-gradient(135deg,#93c5fd,#6366f1)"></span><div><div class="rel-nm">DiamondDegen</div><div class="rel-co">@DiamondDegend</div></div><span class="followbtn">Follow</span></div>
     </div>
@@ -686,28 +702,34 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   <!-- ============ CLIENT / ADVERTISER (first) ============ -->
   <div class="ctl-sec">
     <div class="sec-title">🏷️ Client / advertiser</div>
-    <div class="fld"><label>Client name or ticker</label><input type="text" id="inClientName" placeholder="e.g. Voyager or VOYG" autocomplete="off"></div>
-    <button class="btn dark" id="btnClientPull">⤓ Pull client from Stocktwits</button>
-    <div id="clientPullStatus" class="pull-status"></div>
-    <button class="btn" id="btnClientLogo">Upload client logo instead</button>
-    <div class="client-logo-row" id="clientLogoRow" style="display:none"><span class="client-logo-prev" id="clientLogoPrev"></span><span class="cl-note">Client logo set — units with “Use client logo” will use this.</span></div>
-    <div class="fld-note" style="margin-top:8px">Pull by ticker to grab the logo &amp; name, or upload a logo. The name pre-fills each unit’s brand text; “Use client logo” reuses this logo. Both overridable per unit.</div>
+    <label class="lbl">Client name or ticker</label>
+    <div class="row-inline">
+      <input type="text" id="inClientName" placeholder="e.g. Voyager or VOYG" autocomplete="off">
+      <button class="btn dark" id="btnClientPull">⤓ Pull</button>
+    </div>
+    <div id="clientPullStatus" class="pull-status" style="margin:2px 2px 8px"></div>
+    <div class="client-logo-row" id="clientLogoRow" style="display:none;margin-bottom:8px"><span class="client-logo-prev" id="clientLogoPrev"></span><span class="cl-note">Client logo set — reused where “Use client logo” is on.</span></div>
+    <button class="btn" id="btnClientLogo" style="height:38px">Upload client logo instead</button>
+    <div class="fld-note" style="margin-top:8px">Pull grabs logo &amp; name; the name pre-fills each unit’s brand text and “Use client logo” reuses the logo — overridable per unit.</div>
   </div>
 
   <!-- ============ TICKER PAGE ============ -->
   <div class="ctl-sec">
     <div class="sec-title">📈 Ticker page</div>
-    <div class="fld"><label>Ticker</label><input type="text" id="inTicker" value="AAPL" autocomplete="off" spellcheck="false"></div>
-    <button class="btn dark" id="btnPull">⤓ Pull live from Stocktwits</button>
-    <div id="pullStatus" class="pull-status"></div>
+    <label class="lbl">Ticker</label>
+    <div class="row-inline">
+      <input type="text" id="inTicker" value="AAPL" autocomplete="off" spellcheck="false">
+      <button class="btn dark" id="btnPull">⤓ Pull</button>
+    </div>
+    <div id="pullStatus" class="pull-status" style="margin:2px 2px 8px"></div>
     <div class="fld"><label>Company name <span class="live">auto</span></label><input type="text" id="inName" value="Apple Inc"></div>
     <div class="row2">
       <div class="fld"><label>Price <span class="man">manual</span></label><input type="text" id="inPrice" value="$328.21"></div>
       <div class="fld"><label>Change <span class="man">manual</span></label><input type="text" id="inChg" value="↑ $1.62 (0.50%) Today"></div>
     </div>
-    <div class="fld-note">⚠︎ Price &amp; change don’t refresh live — type the figure you want on screen.</div>
+    <div class="fld-note">⚠︎ Price &amp; change don’t refresh live — type the value to show.</div>
     <div class="fld"><label>Watchers <span class="live">auto</span></label><input type="text" id="inWatch" value="983,677"></div>
-    <button class="btn" id="btnLogo">Upload page logo</button>
+    <button class="btn" id="btnLogo" style="height:38px">Upload page logo</button>
   </div>
 
   <!-- ============ AD UNITS ============ -->
@@ -777,6 +799,15 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       </div>
     </div>
     <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="wtfad"> Who To Follow (Promoted Ad)</div>
+      <div class="unit-body">
+        <div class="fld"><label>Account name</label><input type="text" id="inWtfName" data-autofill="1" value="Fidelity"></div>
+        <div class="fld"><label>Handle</label><input type="text" id="inWtfHandle" value="@FidelityInvestments"></div>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="wtfad"> Use client logo</label>
+        <button class="btn" id="btnWtfLogo">Upload logo</button>
+      </div>
+    </div>
+    <div class="unit">
       <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="half"> 300×600 Display</div>
       <div class="unit-body"><button class="btn slot-upload" data-slot="Right rail · 300x600 Half-page">Upload 300×600 creative</button></div>
     </div>
@@ -795,8 +826,8 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     <div class="switch"><span>Top Discussions</span><span class="sw on" id="swTopDisc"></span></div>
     <div class="switch"><span>Related Symbols</span><span class="sw on" id="swRelSym"></span></div>
     <div class="switch"><span>Who To Follow</span><span class="sw on" id="swWhoFollow"></span></div>
-    <div class="seg-fld"><label>Watchlist rows</label>
-      <div class="seg" id="wlSeg"><button data-n="2">2</button><button data-n="3">3</button><button class="on" data-n="6">6</button></div>
+    <div class="seg-fld"><label>Watchlist rows <span style="color:var(--ink-3);font-weight:500">(1–6)</span></label>
+      <input type="number" id="inWlCount" min="1" max="6" value="6" class="numfld">
     </div>
   </div>
 
@@ -879,6 +910,8 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   bind("inNativeDesc",function(v){ document.getElementById("nativeDesc").textContent=v; });
   bind("inRelSymTicker",function(v){ document.getElementById("relSymTicker").textContent=v; });
   bind("inRelSymName",function(v){ document.getElementById("relSymName").textContent=v; });
+  bind("inWtfName",function(v){ document.getElementById("wtfName").textContent=v; });
+  bind("inWtfHandle",function(v){ document.getElementById("wtfHandle").textContent=v; });
   bind("inPinUser",function(v){ document.getElementById("pinUser").textContent=v; });
   bind("inPinPill",function(v){ document.getElementById("pinPill").textContent=v; });
   bind("inPinDesc",function(v){ document.getElementById("pinDesc").textContent=v; });
@@ -896,6 +929,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   document.getElementById("btnPinLogo").addEventListener("click",function(){ uploadTo(setPinLogo); });
   document.getElementById("btnPinImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Pinned Post · Image"]'); target=s; picker.value=""; picker.click(); });
   document.getElementById("btnRelSymLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); target=s; picker.value=""; picker.click(); });
+  document.getElementById("btnWtfLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Who To Follow · Promoted Logo"]'); target=s; picker.value=""; picker.click(); });
   /* generic image-only unit uploads (left/right displays, video, 300x600, 728x90) */
   [].forEach.call(document.querySelectorAll(".slot-upload"),function(b){ b.addEventListener("click",function(){ var s=document.querySelector('[data-role="'+b.dataset.slot+'"]'); target=s; picker.value=""; picker.click(); }); });
 
@@ -922,13 +956,13 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   });
 
   /* ---------- Client / advertiser: name auto-fill + reusable logo ---------- */
-  var clientLogo=null, linked={pin:false,native:false,rel:false,newsimg:false};
-  function setUnitLogo(t,src){ if(t==="pin") setPinLogo(src); else if(t==="native") setNativeLogo(src); else if(t==="rel"){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); if(s) fill(s,src); } else if(t==="newsimg"){ var n=document.querySelector('[data-role="Sponsored News · Image"]'); if(n) fill(n,src); } }
+  var clientLogo=null, linked={pin:false,native:false,rel:false,newsimg:false,wtfad:false};
+  function setUnitLogo(t,src){ if(t==="pin") setPinLogo(src); else if(t==="native") setNativeLogo(src); else if(t==="rel"){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); if(s) fill(s,src); } else if(t==="newsimg"){ var n=document.querySelector('[data-role="Sponsored News · Image"]'); if(n) fill(n,src); } else if(t==="wtfad"){ var w=document.querySelector('[data-role="Who To Follow · Promoted Logo"]'); if(w) fill(w,src); } }
   function applyClientLogo(){ if(!clientLogo) return; Object.keys(linked).forEach(function(t){ if(linked[t]) setUnitLogo(t,clientLogo); }); }
   function showClientLogo(){ var p=document.getElementById("clientLogoPrev"); if(clientLogo){ p.innerHTML='<img alt="">'; p.firstChild.src=clientLogo; document.getElementById("clientLogoRow").style.display="flex"; } else { p.innerHTML=""; document.getElementById("clientLogoRow").style.display="none"; } }
   function setClientLogo(src){ clientLogo=src; showClientLogo();
     /* friendly default: the first time a client logo is set, link all logo units */
-    if(!linked.pin && !linked.native && !linked.rel && !linked.newsimg){ ["pin","native","rel","newsimg"].forEach(function(t){ linked[t]=true; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=true; }); }
+    if(!linked.pin && !linked.native && !linked.rel && !linked.newsimg && !linked.wtfad){ ["pin","native","rel","newsimg","wtfad"].forEach(function(t){ linked[t]=true; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=true; }); }
     applyClientLogo();
   }
   document.getElementById("btnClientLogo").addEventListener("click",function(){ uploadTo(setClientLogo); });
@@ -1004,11 +1038,9 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
 
   /* watchlist row count: show 2 / 3 / all 6 */
   var wlRows=[].slice.call(document.querySelectorAll(".wl-row[data-sym]"));
-  function applyWlCount(n){
-    wlRows.forEach(function(r,i){ r.style.display = i<n ? "" : "none"; });
-    [].forEach.call(document.querySelectorAll("#wlSeg button"),function(b){ b.classList.toggle("on", +b.dataset.n===n); });
-  }
-  document.getElementById("wlSeg").addEventListener("click",function(e){ var b=e.target.closest("button"); if(b) applyWlCount(+b.dataset.n); });
+  var inWlCount=document.getElementById("inWlCount");
+  function applyWlCount(n){ n=Math.max(1,Math.min(6,+n||6)); wlRows.forEach(function(r,i){ r.style.display = i<n ? "" : "none"; }); if(inWlCount) inWlCount.value=n; }
+  inWlCount.addEventListener("input",function(){ applyWlCount(this.value); });
   document.getElementById("swatches").addEventListener("click",function(e){ var s=e.target.closest(".swatch"); if(!s)return; [].forEach.call(this.children,function(c){c.classList.remove("sel");}); s.classList.add("sel"); document.documentElement.style.setProperty("--glow",s.dataset.c); });
   document.getElementById("btnClear").addEventListener("click",function(){ if(!confirm("Are you sure you want to delete all uploaded ads? This can’t be undone.")) return; slots.forEach(clear); });
 
@@ -1049,8 +1081,8 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     allFieldEls().forEach(function(el){ if(el.id && el.id!=="inSaveName") st.fields[el.id]=el.value; });
     slots.forEach(function(sl){ if(sl.classList.contains("filled")) st.slots[sl.dataset.id]=sl.querySelector(".adfill").src; });
     ["symLogo","nativeLogo","pinLogo"].forEach(function(id){ var im=document.querySelector("#"+id+" img"); st.logos[id]=im?im.src:null; });
-    st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow"), banner:document.getElementById("swBanner").classList.contains("on"), topDisc:document.getElementById("swTopDisc").classList.contains("on"), relSym:document.getElementById("swRelSym").classList.contains("on"), whoFollow:document.getElementById("swWhoFollow").classList.contains("on"), wlCount:(document.querySelector("#wlSeg button.on")||{}).dataset ? +document.querySelector("#wlSeg button.on").dataset.n : 6 };
-    st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel,newsimg:linked.newsimg};
+    st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow"), banner:document.getElementById("swBanner").classList.contains("on"), topDisc:document.getElementById("swTopDisc").classList.contains("on"), relSym:document.getElementById("swRelSym").classList.contains("on"), whoFollow:document.getElementById("swWhoFollow").classList.contains("on"), wlCount:+((document.getElementById("inWlCount")||{}).value)||6 };
+    st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel,newsimg:linked.newsimg,wtfad:linked.wtfad};
     st.units={}; [].forEach.call(document.querySelectorAll(".unit-tick"),function(cb){ st.units[cb.dataset.unit]=cb.checked; });
     st.railOrder = window.__railOrder ? window.__railOrder() : null;
     return st;
@@ -1063,7 +1095,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     if(st.logos){ if(st.logos.symLogo) setSymbolLogo(st.logos.symLogo); if(st.logos.nativeLogo) setNativeLogo(st.logos.nativeLogo); if(st.logos.pinLogo) setPinLogo(st.logos.pinLogo); }
     if(st.flags){ setFlag("glow-on",st.flags.glow,"swGlow"); setChartState(st.flags.chartCollapsed); setPopout(st.flags.popout); if(st.flags.glowColor) document.documentElement.style.setProperty("--glow",st.flags.glowColor.trim()); applyBanner(st.flags.banner!==false); applyTopDisc(st.flags.topDisc!==false); applyRelSym(st.flags.relSym!==false); applyWhoFollow(st.flags.whoFollow!==false); applyWlCount(st.flags.wlCount||6); }
     clientLogo=st.clientLogo||null; showClientLogo();
-    if(st.linked){ ["pin","native","rel","newsimg"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
+    if(st.linked){ ["pin","native","rel","newsimg","wtfad"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
     if(st.units){ [].forEach.call(document.querySelectorAll(".unit"),function(u){ var cb=u.querySelector(".unit-tick"); var n=cb.dataset.unit; if(st.units[n]!==undefined) cb.checked=st.units[n]; syncUnit(u); }); }
     if(window.__applyRailOrder) window.__applyRailOrder(st.railOrder);
   }
