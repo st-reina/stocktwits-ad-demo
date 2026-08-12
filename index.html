@@ -1060,8 +1060,11 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   var ctl=document.getElementById("ctl");
   document.getElementById("ctlToggle").addEventListener("click",function(){ ctl.classList.toggle("open"); });
   document.getElementById("ctlClose").addEventListener("click",function(){ ctl.classList.remove("open"); });
-  /* click outside the panel closes it */
-  document.addEventListener("click",function(e){ if(!ctl.classList.contains("open")) return; if(ctl.contains(e.target)) return; if(e.target.closest("#ctlToggle")||e.target.closest("#btnShot")) return; ctl.classList.remove("open"); });
+  /* click outside the panel closes it — but only if the press STARTED outside
+     (so dragging a text selection out of an input doesn't close it) */
+  var pressedInsideCtl=false;
+  document.addEventListener("mousedown",function(e){ pressedInsideCtl = ctl.contains(e.target) || !!(e.target.closest("#ctlToggle")||e.target.closest("#btnShot")); });
+  document.addEventListener("click",function(e){ if(!ctl.classList.contains("open")) return; if(pressedInsideCtl) return; if(ctl.contains(e.target)) return; if(e.target.closest("#ctlToggle")||e.target.closest("#btnShot")) return; ctl.classList.remove("open"); });
 
   /* ---------- full-page screenshot (camera button) ---------- */
   function loadH2C(cb){ if(window.html2canvas) return cb(); var sc=document.createElement("script"); sc.src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"; sc.onload=cb; sc.onerror=function(){ document.documentElement.classList.remove("capturing"); alert("Couldn’t load the screenshot tool — needs an internet connection."); }; document.head.appendChild(sc); }
