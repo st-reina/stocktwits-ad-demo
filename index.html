@@ -286,6 +286,9 @@ body.takeover .takeover-only{display:block}
 
 /* ===== CONTROL PANEL ===== */
 .ctl-toggle{position:fixed;top:12px;right:12px;z-index:60;background:var(--ink);color:#fff;border:none;border-radius:22px;padding:9px 15px;font-weight:800;cursor:pointer;box-shadow:0 6px 20px rgba(10,10,10,.25);display:flex;gap:8px;font-size:13px}
+.shot-btn{position:fixed;top:12px;right:170px;z-index:60;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 6px 20px rgba(10,10,10,.18);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center}
+.shot-btn:hover{background:var(--chip)}
+.capturing .ctl-toggle,.capturing #btnShot,.capturing .ctl,.capturing .rail-handle,.capturing .drag-handle{display:none!important}
 .ctl{position:fixed;top:0;right:0;bottom:0;width:344px;z-index:65;background:#fff;border-left:1px solid var(--line);box-shadow:-10px 0 40px rgba(10,10,10,.14);transform:translateX(100%);transition:transform .28s;overflow-y:auto;padding:20px}
 .ctl.open{transform:none}
 .ctl h3{margin:0 0 4px;font-size:16px}.ctl .muted{color:var(--ink-3);font-size:12px;margin:0 0 16px}
@@ -518,7 +521,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
             <div id="pinDesc" style="margin-top:8px;line-height:1.45">Your pinned post copy goes here — announce the news, milestone, or campaign in the brand's own voice.</div>
             <div class="adslot slot-exec" data-role="Pinned Post · Image" data-dim="Post image" style="margin-top:10px">
               <span class="adtag">Pinned</span><button class="adclear">✕</button><img class="adfill" alt="">
-              <div class="adempty"><span class="dim">Post Image / Creative</span><span class="role">the visual attached to the pinned post</span><span class="hint">click / drop</span></div>
+              <div class="adempty"><span class="dim">580 × 300</span><span class="role">Pinned post image</span><span class="hint">click / drop</span></div>
             </div>
             <div class="engage"><span>💬 2</span><span>↻ 1</span><span>♡ 7</span><span>↗</span></div>
           </div>
@@ -557,10 +560,27 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
               <div style="font-weight:700" id="nativeName">Your Brand</div>
             </div>
             <div id="nativeDesc" style="margin-bottom:8px;line-height:1.4">Your ad copy goes here — describe the partnership, product, or offer in a sentence or two.</div>
-            <a style="color:var(--blue);font-weight:700;font-size:13px;display:inline-block;margin-bottom:10px">＋ Add $<span class="jsSym">AAPL</span> to Watchlist</a>
+            <a style="color:var(--blue);font-weight:700;font-size:13px;display:inline-block;margin-bottom:10px">＋ Add $<span id="nwTicker">AAPL</span> to Watchlist</a>
             <div class="adslot slot-feednative" data-role="Add to Watchlist · Feed native" data-dim="Native creative">
               <span class="adtag">Native</span><button class="adclear">✕</button><img class="adfill" alt="">
               <div class="adempty"><span class="dim">580 × 300</span><span class="role">Watchlist Native</span><span class="hint">click / drop</span></div>
+            </div>
+            <div class="ad-caption"><span>Disclosures</span><span class="ad-word">Ad</span></div>
+          </div>
+
+          <!-- In-Feed Native Ad (same as Watchlist Native; CTA = "Learn more about [client]") -->
+          <div class="feed-card" data-card="infeed" data-unit-block="infeed" style="display:none">
+            <span class="feed-tag">In-Feed Native Ad</span><span class="drag-handle" title="Drag to reorder">⠿</span>
+            <div style="height:14px"></div>
+            <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
+              <span class="rel-ic" id="infeedLogo">AD</span>
+              <div style="font-weight:700" id="infeedName">Your Brand</div>
+            </div>
+            <div id="infeedDesc" style="margin-bottom:8px;line-height:1.4">Your ad copy goes here — describe the partnership, product, or offer in a sentence or two.</div>
+            <a style="color:var(--blue);font-weight:700;font-size:13px;display:inline-block;margin-bottom:10px">Learn more about <span id="infeedCtaName">Your Brand</span></a>
+            <div class="adslot slot-feednative" data-role="In-Feed Native · Creative" data-dim="Native creative">
+              <span class="adtag">Native</span><button class="adclear">✕</button><img class="adfill" alt="">
+              <div class="adempty"><span class="dim">580 × 300</span><span class="role">In-Feed Native</span><span class="hint">click / drop</span></div>
             </div>
             <div class="ad-caption"><span>Disclosures</span><span class="ad-word">Ad</span></div>
           </div>
@@ -693,6 +713,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
 </div>
 
 <!-- CONTROL PANEL -->
+<button class="shot-btn" id="btnShot" title="Screenshot the full page">📷</button>
 <button class="ctl-toggle" id="ctlToggle">⚙ Demo Controls</button>
 <div class="ctl" id="ctl">
   <button class="ctl-close" id="ctlClose">✕</button>
@@ -765,9 +786,21 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="unit-body">
         <div class="fld"><label>Brand name</label><input type="text" id="inNativeName" data-autofill="1" value="Your Brand"></div>
         <div class="fld"><label>Ad copy / description</label><textarea id="inNativeDesc">Your ad copy goes here — describe the partnership, product, or offer in a sentence or two.</textarea></div>
+        <div class="fld"><label>Add-to-Watchlist ticker <span style="color:var(--ink-3);font-weight:500">(client’s $)</span></label><input type="text" id="inNwTicker" value="AAPL"></div>
         <label class="use-client"><input type="checkbox" class="uc" data-target="native"> Use client logo</label>
         <button class="btn" id="btnNativeLogo">Upload brand logo</button>
         <button class="btn" id="btnNativeImg">Upload display image</button>
+      </div>
+    </div>
+    <div class="unit">
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="infeed"> In-Feed Native Ad</div>
+      <div class="unit-body">
+        <div class="fld"><label>Brand name</label><input type="text" id="inFeedName" data-autofill="1" value="Your Brand"></div>
+        <div class="fld"><label>Ad copy / description</label><textarea id="inFeedDesc">Your ad copy goes here — describe the partnership, product, or offer in a sentence or two.</textarea></div>
+        <div class="fld"><label>“Learn more about …” name <span style="color:var(--ink-3);font-weight:500">(client)</span></label><input type="text" id="inFeedCta" data-autofill="1" value="Your Brand"></div>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="infeedlogo"> Use client logo</label>
+        <button class="btn" id="btnFeedLogo">Upload brand logo</button>
+        <button class="btn slot-upload" data-slot="In-Feed Native · Creative">Upload display image</button>
       </div>
     </div>
 
@@ -908,6 +941,10 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   bind("inNewsHeadline",function(v){ document.getElementById("newsHeadline").textContent=v; });
   bind("inNativeName",function(v){ document.getElementById("nativeName").textContent=v; });
   bind("inNativeDesc",function(v){ document.getElementById("nativeDesc").textContent=v; });
+  bind("inNwTicker",function(v){ document.getElementById("nwTicker").textContent=(v||"").toUpperCase().replace(/^\$/,""); });
+  bind("inFeedName",function(v){ document.getElementById("infeedName").textContent=v; });
+  bind("inFeedDesc",function(v){ document.getElementById("infeedDesc").textContent=v; });
+  bind("inFeedCta",function(v){ document.getElementById("infeedCtaName").textContent=v; });
   bind("inRelSymTicker",function(v){ document.getElementById("relSymTicker").textContent=v; });
   bind("inRelSymName",function(v){ document.getElementById("relSymName").textContent=v; });
   bind("inWtfName",function(v){ document.getElementById("wtfName").textContent=v; });
@@ -924,6 +961,8 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   function uploadTo(cb){ var p=document.createElement("input"); p.type="file"; p.accept="image/*"; p.onchange=function(){ var f=p.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(){ cb(r.result); }; r.readAsDataURL(f); }; p.click(); }
   document.getElementById("btnLogo").addEventListener("click",function(){ uploadTo(setSymbolLogo); });
   document.getElementById("btnNativeLogo").addEventListener("click",function(){ uploadTo(setNativeLogo); });
+  function setInfeedLogo(src){ var box=document.getElementById("infeedLogo"); var img=new Image(); img.onload=function(){ box.textContent=""; box.appendChild(img); }; img.src=src; }
+  document.getElementById("btnFeedLogo").addEventListener("click",function(){ uploadTo(setInfeedLogo); });
   document.getElementById("btnNativeImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Add to Watchlist · Feed native"]'); target=s; picker.value=""; picker.click(); });
   function setPinLogo(src){ var box=document.getElementById("pinLogo"); var img=new Image(); img.onload=function(){ box.textContent=""; box.appendChild(img); }; img.src=src; }
   document.getElementById("btnPinLogo").addEventListener("click",function(){ uploadTo(setPinLogo); });
@@ -956,13 +995,13 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   });
 
   /* ---------- Client / advertiser: name auto-fill + reusable logo ---------- */
-  var clientLogo=null, linked={pin:false,native:false,rel:false,newsimg:false,wtfad:false};
-  function setUnitLogo(t,src){ if(t==="pin") setPinLogo(src); else if(t==="native") setNativeLogo(src); else if(t==="rel"){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); if(s) fill(s,src); } else if(t==="newsimg"){ var n=document.querySelector('[data-role="Sponsored News · Image"]'); if(n) fill(n,src); } else if(t==="wtfad"){ var w=document.querySelector('[data-role="Who To Follow · Promoted Logo"]'); if(w) fill(w,src); } }
+  var clientLogo=null, linked={pin:false,native:false,rel:false,newsimg:false,wtfad:false,infeedlogo:false};
+  function setUnitLogo(t,src){ if(t==="pin") setPinLogo(src); else if(t==="native") setNativeLogo(src); else if(t==="rel"){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); if(s) fill(s,src); } else if(t==="newsimg"){ var n=document.querySelector('[data-role="Sponsored News · Image"]'); if(n) fill(n,src); } else if(t==="wtfad"){ var w=document.querySelector('[data-role="Who To Follow · Promoted Logo"]'); if(w) fill(w,src); } else if(t==="infeedlogo"){ setInfeedLogo(src); } }
   function applyClientLogo(){ if(!clientLogo) return; Object.keys(linked).forEach(function(t){ if(linked[t]) setUnitLogo(t,clientLogo); }); }
   function showClientLogo(){ var p=document.getElementById("clientLogoPrev"); if(clientLogo){ p.innerHTML='<img alt="">'; p.firstChild.src=clientLogo; document.getElementById("clientLogoRow").style.display="flex"; } else { p.innerHTML=""; document.getElementById("clientLogoRow").style.display="none"; } }
   function setClientLogo(src){ clientLogo=src; showClientLogo();
     /* friendly default: the first time a client logo is set, link all logo units */
-    if(!linked.pin && !linked.native && !linked.rel && !linked.newsimg && !linked.wtfad){ ["pin","native","rel","newsimg","wtfad"].forEach(function(t){ linked[t]=true; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=true; }); }
+    if(!linked.pin && !linked.native && !linked.rel && !linked.newsimg && !linked.wtfad && !linked.infeedlogo){ ["pin","native","rel","newsimg","wtfad","infeedlogo"].forEach(function(t){ linked[t]=true; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=true; }); }
     applyClientLogo();
   }
   document.getElementById("btnClientLogo").addEventListener("click",function(){ uploadTo(setClientLogo); });
@@ -983,6 +1022,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       var s=data.symbol, title=(s.title||sym).split(" - ")[0].trim(), disp=s.symbol_display||sym;
       var cn=document.getElementById("inClientName"); cn.value=title; autofillFromClient(title);
       var rt=document.getElementById("inRelSymTicker"); if(rt && rt.dataset.dirty!=="1"){ rt.value=disp; rt.dispatchEvent(new Event("input")); }
+      var nw=document.getElementById("inNwTicker"); if(nw && nw.dataset.dirty!=="1"){ nw.value=disp; nw.dispatchEvent(new Event("input")); }
       var img=new Image(); img.onload=function(){ setClientLogo(img.src); }; img.onerror=function(){ setClientLogo("https://logos.stocktwits-cdn.com/"+sym+".png"); }; img.src=s.logo_url||("https://logos.stocktwits-cdn.com/"+sym+".png");
       cstatus("✓ Pulled "+title+": name & logo, applied to logo units.","ok");
     });
@@ -1019,6 +1059,26 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   var ctl=document.getElementById("ctl");
   document.getElementById("ctlToggle").addEventListener("click",function(){ ctl.classList.toggle("open"); });
   document.getElementById("ctlClose").addEventListener("click",function(){ ctl.classList.remove("open"); });
+  /* click outside the panel closes it */
+  document.addEventListener("click",function(e){ if(!ctl.classList.contains("open")) return; if(ctl.contains(e.target)) return; if(e.target.closest("#ctlToggle")||e.target.closest("#btnShot")) return; ctl.classList.remove("open"); });
+
+  /* ---------- full-page screenshot (camera button) ---------- */
+  function loadH2C(cb){ if(window.html2canvas) return cb(); var sc=document.createElement("script"); sc.src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"; sc.onload=cb; sc.onerror=function(){ document.documentElement.classList.remove("capturing"); alert("Couldn’t load the screenshot tool — needs an internet connection."); }; document.head.appendChild(sc); }
+  var shotBtn=document.getElementById("btnShot");
+  shotBtn.addEventListener("click",function(){
+    ctl.classList.remove("open");
+    document.documentElement.classList.add("capturing");
+    shotBtn.textContent="…";
+    loadH2C(function(){
+      var root=document.documentElement;
+      html2canvas(document.body,{backgroundColor:"#ffffff",useCORS:true,scale:2,scrollX:0,scrollY:0,windowWidth:root.scrollWidth,windowHeight:root.scrollHeight}).then(function(canvas){
+        document.documentElement.classList.remove("capturing"); shotBtn.textContent="📷";
+        var a=document.createElement("a"); a.download="stocktwits-ad-demo.png";
+        try{ a.href=canvas.toDataURL("image/png"); document.body.appendChild(a); a.click(); a.remove(); }
+        catch(err){ alert("Screenshot blocked by a cross-origin image. Turn on Present & Lock and use your OS screenshot instead."); }
+      }).catch(function(){ document.documentElement.classList.remove("capturing"); shotBtn.textContent="📷"; alert("Screenshot failed — please try again."); });
+    });
+  });
   function sw(id,cls,onInit,after){ var el=document.getElementById(id); if(onInit) el.classList.add("on");
     el.addEventListener("click",function(){ var on=!el.classList.contains("on"); el.classList.toggle("on",on); document.body.classList.toggle(cls,on); if(after)after(on); }); }
   sw("swGlow","glow-on",true);
@@ -1080,9 +1140,9 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     var st={fields:{},slots:{},logos:{},flags:{}};
     allFieldEls().forEach(function(el){ if(el.id && el.id!=="inSaveName") st.fields[el.id]=el.value; });
     slots.forEach(function(sl){ if(sl.classList.contains("filled")) st.slots[sl.dataset.id]=sl.querySelector(".adfill").src; });
-    ["symLogo","nativeLogo","pinLogo"].forEach(function(id){ var im=document.querySelector("#"+id+" img"); st.logos[id]=im?im.src:null; });
+    ["symLogo","nativeLogo","pinLogo","infeedLogo"].forEach(function(id){ var im=document.querySelector("#"+id+" img"); st.logos[id]=im?im.src:null; });
     st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow"), banner:document.getElementById("swBanner").classList.contains("on"), topDisc:document.getElementById("swTopDisc").classList.contains("on"), relSym:document.getElementById("swRelSym").classList.contains("on"), whoFollow:document.getElementById("swWhoFollow").classList.contains("on"), wlCount:+((document.getElementById("inWlCount")||{}).value)||6 };
-    st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel,newsimg:linked.newsimg,wtfad:linked.wtfad};
+    st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel,newsimg:linked.newsimg,wtfad:linked.wtfad,infeedlogo:linked.infeedlogo};
     st.units={}; [].forEach.call(document.querySelectorAll(".unit-tick"),function(cb){ st.units[cb.dataset.unit]=cb.checked; });
     st.railOrder = window.__railOrder ? window.__railOrder() : null;
     return st;
@@ -1092,10 +1152,10 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     Object.keys(st.fields||{}).forEach(function(id){ var el=document.getElementById(id); if(el){ el.value=st.fields[id]; el.dispatchEvent(new Event("input")); } });
     slots.forEach(clear);
     Object.keys(st.slots||{}).forEach(function(sid){ for(var i=0;i<slots.length;i++){ if(slots[i].dataset.id===sid){ fill(slots[i],st.slots[sid]); break; } } });
-    if(st.logos){ if(st.logos.symLogo) setSymbolLogo(st.logos.symLogo); if(st.logos.nativeLogo) setNativeLogo(st.logos.nativeLogo); if(st.logos.pinLogo) setPinLogo(st.logos.pinLogo); }
+    if(st.logos){ if(st.logos.symLogo) setSymbolLogo(st.logos.symLogo); if(st.logos.nativeLogo) setNativeLogo(st.logos.nativeLogo); if(st.logos.pinLogo) setPinLogo(st.logos.pinLogo); if(st.logos.infeedLogo) setInfeedLogo(st.logos.infeedLogo); }
     if(st.flags){ setFlag("glow-on",st.flags.glow,"swGlow"); setChartState(st.flags.chartCollapsed); setPopout(st.flags.popout); if(st.flags.glowColor) document.documentElement.style.setProperty("--glow",st.flags.glowColor.trim()); applyBanner(st.flags.banner!==false); applyTopDisc(st.flags.topDisc!==false); applyRelSym(st.flags.relSym!==false); applyWhoFollow(st.flags.whoFollow!==false); applyWlCount(st.flags.wlCount||6); }
     clientLogo=st.clientLogo||null; showClientLogo();
-    if(st.linked){ ["pin","native","rel","newsimg","wtfad"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
+    if(st.linked){ ["pin","native","rel","newsimg","wtfad","infeedlogo"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
     if(st.units){ [].forEach.call(document.querySelectorAll(".unit"),function(u){ var cb=u.querySelector(".unit-tick"); var n=cb.dataset.unit; if(st.units[n]!==undefined) cb.checked=st.units[n]; syncUnit(u); }); }
     if(window.__applyRailOrder) window.__applyRailOrder(st.railOrder);
   }
@@ -1213,7 +1273,9 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       dimLift:'[data-unit-block="news"]', dimHl:'[data-unit-block="news"]', sizeLabel:'News Unit · 64×64', dimBg:'#ffffff' },
     related:{ block:'rel', width:360, cropPanel:true, glowRow:true,
       copy:{ '#relSymTicker':'TSLA', '#relSymName':'Tesla' },
-      dimLift:'[data-unit-block="rel"]', dimHl:'[data-unit-block="rel"]', sizeLabel:'Related Symbols · 96×96', dimBg:'#ffffff' }
+      dimLift:'[data-unit-block="rel"]', dimHl:'[data-unit-block="rel"]', sizeLabel:'Related Symbols · 96×96', dimBg:'#ffffff' },
+    whotofollow:{ block:'wtfad', width:360, contextTop:true, liftPanel:'#whoFollowPanel', cropPanel:true, copy:{ '#wtfName':'Tesla', '#wtfHandle':'@Tesla' },
+      dimLift:'[data-unit-block="wtfad"]', dimHl:'[data-unit-block="wtfad"]', sizeLabel:'Who To Follow · 96×96', dimBg:'#ffffff' }
   };
   var cfg=CFG[spot]||{};
   var blockName=cfg.block||spot;
@@ -1247,11 +1309,42 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   }
 
   /* Custom Watchlist Display 300x250 card (styled like the spec sample) */
-  /* watchlist display 300×250 = the gold Tesla creative (keeps the whole deck on one creative) */
-  function wdCreative(){ return creative(300,250); }
+  /* watchlist display 300×250 = white "Add to Watchlist" card (Tesla), matches the watchlist context */
+  function wdCreative(){
+    var s='<svg xmlns="http://www.w3.org/2000/svg" width="300" height="250" viewBox="0 0 300 250">'
+      +'<rect width="300" height="250" fill="#ffffff"/>'
+      +'<rect x="242" y="16" width="34" height="19" rx="5" fill="#f2f2f7"/><text x="259" y="29" font-family="Helvetica,Arial,sans-serif" font-weight="700" font-size="10" fill="#8e8e93" text-anchor="middle">AD</text>'
+      +'<text x="22" y="42" font-family="Helvetica,Arial,sans-serif" font-weight="800" font-size="17" fill="#0a0a0a">The Future of</text>'
+      +'<text x="22" y="64" font-family="Helvetica,Arial,sans-serif" font-weight="800" font-size="17" fill="#0a0a0a">Sustainable Energy</text>'
+      +'<g transform="translate(22,80)"><rect width="36" height="36" rx="10" fill="#E31937"/><path transform="translate(8,8) scale(0.83)" fill="#fff" d="M12 5.362l2.475-3.026s4.245.09 8.471 2.054c-1.082 1.636-3.231 2.438-3.231 2.438-.146-1.439-1.154-1.79-4.354-1.79L12 24 8.639 5.038c-3.2 0-4.208.35-4.354 1.79 0 0-2.149-.801-3.231-2.438C5.28 2.427 9.525 2.336 9.525 2.336L12 5.362zm0-3.899c3.415-.03 7.326.528 11.328 2.28.535-.968.672-1.395.672-1.395C19.625.906 15.528.026 12 0 8.472.026 4.375.906 0 2.348c0 0 .195.539.672 1.396C4.674 1.991 8.585 1.433 12 1.463z"/></g>'
+      +'<text x="68" y="97" font-family="Helvetica,Arial,sans-serif" font-weight="700" font-size="13.5" fill="#0a0a0a">Meet <tspan fill="#1478ff">$TSLA</tspan></text>'
+      +'<text x="68" y="114" font-family="Helvetica,Arial,sans-serif" font-size="11.5" fill="#8e8e93">Accelerating the energy transition</text>'
+      +'<text x="22" y="150" font-family="Helvetica,Arial,sans-serif" font-size="11.5" fill="#3a3f49">Vehicles. Energy. Autonomy.</text>'
+      +'<text x="22" y="167" font-family="Helvetica,Arial,sans-serif" font-size="11.5" fill="#3a3f49">Add $TSLA to your watchlist and follow along.</text>'
+      +'<rect x="22" y="184" width="256" height="46" rx="23" fill="#0a0a0a"/>'
+      +'<text x="150" y="212" font-family="Helvetica,Arial,sans-serif" text-anchor="middle" font-weight="700" font-size="13.5" fill="#ffffff">+  Add to Watchlist</text>'
+      +'</svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);
+  }
   /* square brand logo tile for small / logo slots (news thumb 64×64, related-symbol logo 96×96) — Tesla red tile */
   function logoTile(){
     var s='<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" rx="30" fill="#E31937"/><g transform="translate(51,54) scale(4.1)"><path fill="#fff" d="M12 5.362l2.475-3.026s4.245.09 8.471 2.054c-1.082 1.636-3.231 2.438-3.231 2.438-.146-1.439-1.154-1.79-4.354-1.79L12 24 8.639 5.038c-3.2 0-4.208.35-4.354 1.79 0 0-2.149-.801-3.231-2.438C5.28 2.427 9.525 2.336 9.525 2.336L12 5.362zm0-3.899c3.415-.03 7.326.528 11.328 2.28.535-.968.672-1.395.672-1.395C19.625.906 15.528.026 12 0 8.472.026 4.375.906 0 2.348c0 0 .195.539.672 1.396C4.674 1.991 8.585 1.433 12 1.463z"/></g></svg>';
+    return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);
+  }
+  /* 728×90 horizontal "Add to Watchlist" card (Tesla) — used for the takeover bottom leaderboard */
+  function lbCreative(){
+    var s='<svg xmlns="http://www.w3.org/2000/svg" width="728" height="90" viewBox="0 0 728 90">'
+      +'<rect width="728" height="90" fill="#ffffff"/>'
+      +'<rect x="694" y="7" width="26" height="16" rx="4" fill="#f2f2f7"/><text x="707" y="19" font-family="Helvetica,Arial,sans-serif" font-weight="700" font-size="9" fill="#8e8e93" text-anchor="middle">AD</text>'
+      +'<text x="20" y="34" font-family="Helvetica,Arial,sans-serif" font-weight="800" font-size="16" fill="#0a0a0a">The Future of Sustainable Energy</text>'
+      +'<g transform="translate(20,46)"><rect width="26" height="26" rx="7" fill="#E31937"/><path transform="translate(5,5) scale(0.67)" fill="#fff" d="M12 5.362l2.475-3.026s4.245.09 8.471 2.054c-1.082 1.636-3.231 2.438-3.231 2.438-.146-1.439-1.154-1.79-4.354-1.79L12 24 8.639 5.038c-3.2 0-4.208.35-4.354 1.79 0 0-2.149-.801-3.231-2.438C5.28 2.427 9.525 2.336 9.525 2.336L12 5.362zm0-3.899c3.415-.03 7.326.528 11.328 2.28.535-.968.672-1.395.672-1.395C19.625.906 15.528.026 12 0 8.472.026 4.375.906 0 2.348c0 0 .195.539.672 1.396C4.674 1.991 8.585 1.433 12 1.463z"/></g>'
+      +'<text x="54" y="58" font-family="Helvetica,Arial,sans-serif" font-weight="700" font-size="13" fill="#0a0a0a">Meet <tspan fill="#1478ff">$TSLA</tspan></text>'
+      +'<text x="140" y="58" font-family="Helvetica,Arial,sans-serif" font-size="12" fill="#8e8e93">Accelerating the energy transition</text>'
+      +'<text x="452" y="39" font-family="Helvetica,Arial,sans-serif" font-weight="800" font-size="16" fill="#0a0a0a">$434.41</text>'
+      +'<text x="452" y="59" font-family="Helvetica,Arial,sans-serif" font-weight="700" font-size="12" fill="#12a150">↑ Strong Performance</text>'
+      +'<rect x="580" y="26" width="132" height="38" rx="19" fill="#0a0a0a"/>'
+      +'<text x="646" y="50" font-family="Helvetica,Arial,sans-serif" text-anchor="middle" font-weight="700" font-size="12.5" fill="#ffffff">+  Add to Watchlist</text>'
+      +'</svg>';
     return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);
   }
   function fillSlot(slot){
@@ -1347,6 +1440,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         banner.appendChild(lb);
         document.body.appendChild(banner);
         fillSlot(lb);
+        var lbimg=lb.querySelector('.adfill'); if(lbimg) lbimg.src=lbCreative();  /* 728×90 horizontal Tesla card */
         lb.style.outline='3px solid #7b5cff'; lb.style.outlineOffset='2px';
         lb.style.boxShadow='0 12px 34px rgba(0,0,0,.28), 0 0 26px 4px rgba(123,92,255,.6)';
         /* label anchored directly above the banner (fixed element — coordinate math is unreliable) */
@@ -1358,15 +1452,16 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       var tkScrim=document.createElement('div');
       tkScrim.style.cssText='position:fixed;inset:0;z-index:42;background:rgba(6,11,22,.52);pointer-events:none';
       document.body.appendChild(tkScrim);
-      /* lift only the pure-image ad blocks (300×600, 300×250) above the dim; the native card is left dimmed
-         so its avatar/name header dims with the page — only its 580×300 creative (highlighted below) stays bright */
-      ['[data-unit-block="half"]','[data-unit-block="left1"]'].forEach(function(s){var b=document.querySelector(s); if(b){ b.style.position='relative'; b.style.zIndex='45'; }});
+      /* lift the ad blocks above the dim so they stay bright (incl. the whole native post block) */
+      ['[data-unit-block="half"]','[data-unit-block="left1"]','[data-unit-block="native"]'].forEach(function(s){var b=document.querySelector(s); if(b){ b.style.position='relative'; b.style.zIndex='45'; }});
+      var nbLift=document.querySelector('[data-unit-block="native"]'); if(nbLift){ nbLift.style.background='#ffffff'; nbLift.style.borderRadius='12px'; }  /* whole native card bright */
+      var wdSlot=document.querySelector('[data-unit-block="left1"] .slot-300x250 .adfill'); if(wdSlot) wdSlot.src=wdCreative();  /* 300×250 → watchlist card */
       window.scrollTo(0,0);
       /* highlight + label the three showcase units */
       var TK_LABELS=[
         ['[data-unit-block="half"] .slot-300x600','Display Ad · 300×600'],
         ['[data-unit-block="left1"] .slot-300x250','Watchlist Display · 300×250'],
-        ['[data-unit-block="native"] .slot-feednative','In-Feed Native · 580×300']
+        ['[data-unit-block="native"]','In-Feed Native · 580×300']
       ];
       setTimeout(function(){
         TK_LABELS.forEach(function(pair){
@@ -1420,6 +1515,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       if(P.get('dim')==='1'){
         if(cfg.collapseHeader){ var cs=document.createElement('style'); cs.textContent='.chart-toggle,.chart-collapsible,.senti,.composer,.feed-filters{display:none!important}.sticky-lb{display:none!important}'; document.head.appendChild(cs); }
         setTimeout(function(){
+          if(cfg.liftPanel){ var pnl=document.querySelector(cfg.liftPanel); if(pnl&&pnl.parentNode){ var first=pnl.parentNode.querySelector(':scope > .panel'); if(first&&first!==pnl){ pnl.parentNode.insertBefore(pnl, first.nextSibling); } } }  /* place the panel directly BELOW the first (news) panel */
           window.scrollTo(0,0);
           var scrim=document.createElement('div'); scrim.style.cssText='position:fixed;inset:0;z-index:42;background:rgba(6,11,22,.52);pointer-events:none'; document.body.appendChild(scrim);
           var lift=document.querySelector(cfg.dimLift||('[data-unit-block="'+blockName+'"]')); if(lift){ lift.style.position='relative'; lift.style.zIndex='45'; if(cfg.dimBg){ lift.style.background=cfg.dimBg; lift.style.borderRadius='12px'; } }  /* cards/rows with no own bg would let the dim show through — brighten the whole block */
