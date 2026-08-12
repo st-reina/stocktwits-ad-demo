@@ -776,7 +776,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         <div class="fld"><label>Username</label><input type="text" id="inPinUser" data-autofill="1" value="voyagertech"></div>
         <div class="fld"><label>Official rep pill</label><input type="text" id="inPinPill" value="Official VOYG Representative"></div>
         <div class="fld"><label>Headline / summary</label><textarea id="inPinDesc">Your pinned post copy goes here — announce the news, milestone, or campaign in the brand's own voice.</textarea></div>
-        <label class="use-client"><input type="checkbox" class="uc" data-target="pin"> Use client logo</label>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="pin" checked> Use client logo</label>
         <button class="btn" id="btnPinLogo">Upload account avatar</button>
         <button class="btn" id="btnPinImg">Upload post image</button>
       </div>
@@ -787,18 +787,18 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
         <div class="fld"><label>Brand name</label><input type="text" id="inNativeName" data-autofill="1" value="Your Brand"></div>
         <div class="fld"><label>Ad copy / description</label><textarea id="inNativeDesc">Your ad copy goes here — describe the partnership, product, or offer in a sentence or two.</textarea></div>
         <div class="fld"><label>Add-to-Watchlist ticker <span style="color:var(--ink-3);font-weight:500">(client’s $)</span></label><input type="text" id="inNwTicker" value="AAPL"></div>
-        <label class="use-client"><input type="checkbox" class="uc" data-target="native"> Use client logo</label>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="native" checked> Use client logo</label>
         <button class="btn" id="btnNativeLogo">Upload brand logo</button>
         <button class="btn" id="btnNativeImg">Upload display image</button>
       </div>
     </div>
     <div class="unit">
-      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="infeed"> In-Feed Native Ad</div>
+      <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="infeed"> 580x300 In-Feed Native Unit</div>
       <div class="unit-body">
         <div class="fld"><label>Brand name</label><input type="text" id="inFeedName" data-autofill="1" value="Your Brand"></div>
         <div class="fld"><label>Ad copy / description</label><textarea id="inFeedDesc">Your ad copy goes here — describe the partnership, product, or offer in a sentence or two.</textarea></div>
         <div class="fld"><label>“Learn more about …” name <span style="color:var(--ink-3);font-weight:500">(client)</span></label><input type="text" id="inFeedCta" data-autofill="1" value="Your Brand"></div>
-        <label class="use-client"><input type="checkbox" class="uc" data-target="infeedlogo"> Use client logo</label>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="infeedlogo" checked> Use client logo</label>
         <button class="btn" id="btnFeedLogo">Upload brand logo</button>
         <button class="btn slot-upload" data-slot="In-Feed Native · Creative">Upload display image</button>
       </div>
@@ -814,7 +814,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="unit-body">
         <div class="fld"><label>Headline</label><textarea id="inNewsHeadline">Your sponsored headline goes here — a partnership, product launch, or milestone.</textarea></div>
         <div class="fld-note" style="margin:-2px 0 10px">Source stays “Stocktwits” — it’s a Stocktwits article about the client.</div>
-        <label class="use-client"><input type="checkbox" class="uc" data-target="newsimg"> Use client logo (thumbnail)</label>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="newsimg" checked> Use client logo (thumbnail)</label>
         <button class="btn" id="btnNewsImg">Upload thumbnail instead</button>
       </div>
     </div>
@@ -827,7 +827,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="unit-body">
         <div class="fld"><label>Ticker</label><input type="text" id="inRelSymTicker" value="NVDA"></div>
         <div class="fld"><label>Company name</label><input type="text" id="inRelSymName" data-autofill="1" value="NVIDIA"></div>
-        <label class="use-client"><input type="checkbox" class="uc" data-target="rel"> Use client logo</label>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="rel" checked> Use client logo</label>
         <button class="btn" id="btnRelSymLogo">Upload logo</button>
       </div>
     </div>
@@ -836,7 +836,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <div class="unit-body">
         <div class="fld"><label>Account name</label><input type="text" id="inWtfName" data-autofill="1" value="Fidelity"></div>
         <div class="fld"><label>Handle</label><input type="text" id="inWtfHandle" value="@FidelityInvestments"></div>
-        <label class="use-client"><input type="checkbox" class="uc" data-target="wtfad"> Use client logo</label>
+        <label class="use-client"><input type="checkbox" class="uc" data-target="wtfad" checked> Use client logo</label>
         <button class="btn" id="btnWtfLogo">Upload logo</button>
       </div>
     </div>
@@ -887,7 +887,8 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
       <select id="savedPages" style="width:100%;height:38px;border:1px solid var(--line);border-radius:9px;padding:0 10px;font-size:14px;font-family:inherit"></select>
     </div>
     <div class="row2"><button class="btn" id="btnLoadPage">Load</button><button class="btn warn" id="btnDeletePage">Delete</button></div>
-    <div class="fld-note" style="margin-top:10px">Saved pages live in <b>this browser</b> only for now. Cross-device saving is coming once we set up a backend.</div>
+    <div class="fld-note" style="margin-top:10px"><b>Share with a teammate:</b> export the page to a file, send it over, and they import it — everything (creatives, order, layout) comes across intact.</div>
+    <div class="row2"><button class="btn" id="btnExport">⭳ Export file</button><button class="btn" id="btnImport">⭱ Import file</button></div>
   </div>
 
   <div class="ctl-sec">
@@ -1005,7 +1006,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     applyClientLogo();
   }
   document.getElementById("btnClientLogo").addEventListener("click",function(){ uploadTo(setClientLogo); });
-  [].forEach.call(document.querySelectorAll(".uc"),function(cb){ cb.addEventListener("change",function(){ var t=cb.dataset.target; linked[t]=cb.checked; if(cb.checked){ if(clientLogo) setUnitLogo(t,clientLogo); else alert("Set a client logo first (pull from Stocktwits or upload, in the Client section)."); } }); });
+  [].forEach.call(document.querySelectorAll(".uc"),function(cb){ linked[cb.dataset.target]=cb.checked; /* default: all on */ cb.addEventListener("change",function(){ var t=cb.dataset.target; linked[t]=cb.checked; if(cb.checked){ if(clientLogo) setUnitLogo(t,clientLogo); else alert("Set a client logo first (pull from Stocktwits or upload, in the Client section)."); } }); });
   /* dirty-track the auto-fill fields so the client name won't overwrite a manual edit */
   [].forEach.call(document.querySelectorAll("[data-autofill]"),function(el){ el.addEventListener("input",function(e){ if(e.isTrusted) el.dataset.dirty="1"; }); });
   function autofillFromClient(v){ [].forEach.call(document.querySelectorAll("[data-autofill]"),function(el){ if(el.dataset.dirty!=="1"){ el.value=v; el.dispatchEvent(new Event("input")); } }); }
@@ -1145,6 +1146,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel,newsimg:linked.newsimg,wtfad:linked.wtfad,infeedlogo:linked.infeedlogo};
     st.units={}; [].forEach.call(document.querySelectorAll(".unit-tick"),function(cb){ st.units[cb.dataset.unit]=cb.checked; });
     st.railOrder = window.__railOrder ? window.__railOrder() : null;
+    st.feedOrder = [].map.call(document.querySelectorAll("#feed .feed-card"),function(c){ return c.getAttribute("data-card"); });
     return st;
   }
   function applyState(st){
@@ -1158,6 +1160,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     if(st.linked){ ["pin","native","rel","newsimg","wtfad","infeedlogo"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
     if(st.units){ [].forEach.call(document.querySelectorAll(".unit"),function(u){ var cb=u.querySelector(".unit-tick"); var n=cb.dataset.unit; if(st.units[n]!==undefined) cb.checked=st.units[n]; syncUnit(u); }); }
     if(window.__applyRailOrder) window.__applyRailOrder(st.railOrder);
+    if(st.feedOrder){ var feed=document.getElementById("feed"); st.feedOrder.forEach(function(dc){ var el=feed.querySelector('.feed-card[data-card="'+dc+'"]'); if(el) feed.appendChild(el); }); }
   }
 
   var PAGES="st_ad_demo_pages";
@@ -1168,6 +1171,12 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
   document.getElementById("btnLoadPage").addEventListener("click",function(){ var n=document.getElementById("savedPages").value; if(!n) return; applyState(loadPages()[n]); document.getElementById("inSaveName").value=n; });
   document.getElementById("btnDeletePage").addEventListener("click",function(){ var n=document.getElementById("savedPages").value; if(!n) return; if(!confirm("Delete saved page “"+n+"”?")) return; var o=loadPages(); delete o[n]; persistPages(o); refreshPageList(); });
   refreshPageList();
+
+  /* export the current page to a shareable file; import to restore it exactly */
+  document.getElementById("btnExport").addEventListener("click",function(){ var raw=(document.getElementById("inSaveName").value||"ad-demo").trim(); var fn=(raw.replace(/[^a-z0-9_-]+/gi,"_")||"ad-demo"); var blob=new Blob([JSON.stringify({name:raw,state:captureState()})],{type:"application/json"}); var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=fn+".stdemo.json"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(a.href); },1500); });
+  var importPicker=document.createElement("input"); importPicker.type="file"; importPicker.accept=".json,application/json";
+  document.getElementById("btnImport").addEventListener("click",function(){ importPicker.value=""; importPicker.click(); });
+  importPicker.addEventListener("change",function(){ var f=importPicker.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(){ try{ var d=JSON.parse(r.result); applyState(d.state||d); if(d.name) document.getElementById("inSaveName").value=d.name; }catch(e){ alert("That doesn’t look like a saved demo file."); } }; r.readAsText(f); });
 
   /* ---------- Lock (freeze creatives before presenting) ---------- */
   var swLock=document.getElementById("swLock");
