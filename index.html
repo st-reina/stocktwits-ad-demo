@@ -225,10 +225,10 @@ html.spotlight .rail-handle,html.spotlight .drag-handle{display:none!important}
 .adempty .role{font-size:11px;font-weight:600}.adempty .hint{font-size:10px;opacity:.85}
 .adslot.filled .adempty{display:none}
 .adslot.filled{border-radius:10px}
-body.glow-on .adslot.filled{box-shadow:0 0 0 3px var(--glow),0 0 22px 2px color-mix(in srgb,var(--glow) 55%,transparent),0 10px 30px rgba(10,10,10,.16);animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 3px var(--glow),0 0 18px 1px color-mix(in srgb,var(--glow) 45%,transparent),0 10px 28px rgba(10,10,10,.14)}
-  50%{box-shadow:0 0 0 3px var(--glow),0 0 30px 5px color-mix(in srgb,var(--glow) 70%,transparent),0 12px 32px rgba(10,10,10,.18)}}
-.adslot.dragover .adempty{border-color:var(--glow);background:color-mix(in srgb,var(--glow) 10%,#fff)}
+body.glow-on .adslot.filled{box-shadow:0 0 0 3px var(--glow),0 0 22px 2px var(--glow),0 10px 30px rgba(10,10,10,.16);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px var(--glow),0 0 18px 1px var(--glow),0 10px 28px rgba(10,10,10,.14)}
+  50%{box-shadow:0 0 0 3px var(--glow),0 0 30px 5px var(--glow),0 12px 32px rgba(10,10,10,.18)}}
+.adslot.dragover .adempty{border-color:var(--glow);background:#f6f7fb}
 .adclear{position:absolute;top:6px;right:6px;z-index:5;width:23px;height:23px;border-radius:50%;background:rgba(10,10,10,.72);color:#fff;border:none;cursor:pointer;font-size:12px;display:none;align-items:center;justify-content:center}
 .adslot.filled .adclear{display:flex}
 .adtag{position:absolute;top:6px;left:6px;z-index:5;background:var(--glow);color:#fff;font-size:9px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:2px 6px;border-radius:6px;display:none}
@@ -1071,13 +1071,19 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
     document.documentElement.classList.add("capturing");
     shotBtn.textContent="…";
     loadH2C(function(){
-      var root=document.documentElement;
-      html2canvas(document.body,{backgroundColor:"#ffffff",useCORS:true,scale:2,scrollX:0,scrollY:0,windowWidth:root.scrollWidth,windowHeight:root.scrollHeight}).then(function(canvas){
-        document.documentElement.classList.remove("capturing"); shotBtn.textContent="📷";
-        var a=document.createElement("a"); a.download="stocktwits-ad-demo.png";
-        try{ a.href=canvas.toDataURL("image/png"); document.body.appendChild(a); a.click(); a.remove(); }
-        catch(err){ alert("Screenshot blocked by a cross-origin image. Turn on Present & Lock and use your OS screenshot instead."); }
-      }).catch(function(){ document.documentElement.classList.remove("capturing"); shotBtn.textContent="📷"; alert("Screenshot failed — please try again."); });
+      var root=document.documentElement, w=root.scrollWidth, h=root.scrollHeight;
+      function done(){ document.documentElement.classList.remove("capturing"); shotBtn.textContent="📷"; }
+      function grab(scale){ return html2canvas(document.body,{backgroundColor:"#ffffff",useCORS:true,logging:false,imageTimeout:15000,scale:scale,scrollX:0,scrollY:0,windowWidth:w,windowHeight:h}); }
+      /* keep the canvas under the browser's max dimension (~16384px, lower on Safari) */
+      var safeScale=Math.min(2, 15000/Math.max(w,h));
+      grab(safeScale).catch(function(){ return grab(Math.min(1,safeScale)); }).catch(function(){ return grab(0.6); })
+        .then(function(canvas){
+          done();
+          var a=document.createElement("a"); a.download="stocktwits-ad-demo.png";
+          try{ a.href=canvas.toDataURL("image/png"); document.body.appendChild(a); a.click(); a.remove(); }
+          catch(err){ alert("Screenshot blocked by a cross-origin image. Turn on Present & Lock and use your OS screenshot instead."); }
+        })
+        .catch(function(){ done(); alert("Screenshot failed — the page may be very tall. Try turning off some units or use your OS screenshot."); });
     });
   });
   function sw(id,cls,onInit,after){ var el=document.getElementById(id); if(onInit) el.classList.add("on");
