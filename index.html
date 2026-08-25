@@ -225,9 +225,9 @@ html.spotlight .rail-handle,html.spotlight .drag-handle{display:none!important}
 .adempty .role{font-size:11px;font-weight:600}.adempty .hint{font-size:10px;opacity:.85}
 .adslot.filled .adempty{display:none}
 .adslot.filled{border-radius:10px}
-body.glow-on .adslot.filled{box-shadow:0 0 0 3px var(--glow),0 0 22px 2px var(--glow),0 10px 30px rgba(10,10,10,.16);animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 3px var(--glow),0 0 18px 1px var(--glow),0 10px 28px rgba(10,10,10,.14)}
-  50%{box-shadow:0 0 0 3px var(--glow),0 0 30px 5px var(--glow),0 12px 32px rgba(10,10,10,.18)}}
+body.glow-on .adslot.filled{box-shadow:0 0 0 2px var(--glow),0 0 14px 1px var(--glow),0 8px 22px rgba(10,10,10,.12);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 2px var(--glow),0 0 11px 0 var(--glow),0 8px 22px rgba(10,10,10,.11)}
+  50%{box-shadow:0 0 0 2px var(--glow),0 0 19px 3px var(--glow),0 10px 26px rgba(10,10,10,.14)}}
 .adslot.dragover .adempty{border-color:var(--glow);background:#f6f7fb}
 .adclear{position:absolute;top:6px;right:6px;z-index:5;width:23px;height:23px;border-radius:50%;background:rgba(10,10,10,.72);color:#fff;border:none;cursor:pointer;font-size:12px;display:none;align-items:center;justify-content:center}
 .adslot.filled .adclear{display:flex}
@@ -362,7 +362,7 @@ body.present .ctl-toggle{opacity:.12}body.present .ctl-toggle:hover{opacity:1}
 .page-pill{position:fixed;top:54px;left:16px;z-index:58;display:inline-flex;align-items:center;gap:2px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px;box-shadow:0 6px 18px rgba(10,10,10,.12)}
 .page-pill button{border:none;background:none;font:inherit;font-size:12.5px;font-weight:700;color:var(--ink-3);padding:6px 13px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;line-height:1;white-space:nowrap}
 .page-pill button.on{background:var(--ink);color:#fff}
-.page-pill svg{width:14px;height:14px;stroke-width:2;flex:none}
+.page-pill svg{width:14px;height:14px;stroke-width:1.5;flex:none}
 body.present .page-pill,body.locked .page-pill,.capturing .page-pill{display:none!important}
 html.spotlight .page-pill{display:none!important}
 
@@ -379,7 +379,7 @@ body.page-trending .wrap{grid-template-columns:312px minmax(0,1fr)}
 .tr-title{font-size:27px;font-weight:800;letter-spacing:-.4px;color:var(--ink);margin:0}
 .tr-sub{font-size:14px;color:var(--ink-3);margin:6px 0 0;max-width:760px;line-height:1.45}
 .tr-widget{flex:none;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:999px;cursor:pointer}
-.tr-widget svg{width:15px;height:15px;stroke-width:2}
+.tr-widget svg{width:15px;height:15px;stroke-width:1.5}
 .tr-tabs{display:flex;gap:26px;border-bottom:1px solid var(--line);margin:20px 0 0}
 .tr-tab{font-size:14.5px;font-weight:700;color:var(--ink-3);padding:0 0 12px;cursor:pointer;position:relative}
 .tr-tab.on{color:var(--ink)}
@@ -409,7 +409,7 @@ body.page-trending .wrap{grid-template-columns:312px minmax(0,1fr)}
 .tr-cell.mut{color:var(--ink-3);font-weight:600}
 .tr-watch{display:flex;justify-content:flex-end}
 .tr-plus{width:31px;height:31px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-3);cursor:pointer}
-.tr-plus svg{width:15px;height:15px;stroke-width:2}
+.tr-plus svg{width:15px;height:15px;stroke-width:1.5}
 .tr-plus.checked{border-color:var(--green);color:var(--green)}
 
 /* Promoted (AD) row */
@@ -421,6 +421,12 @@ body.page-trending .wrap{grid-template-columns:312px minmax(0,1fr)}
 .tr-logo .adempty .dim{font-size:8px}
 .tr-logo .adfill{border-radius:9px}
 body.page-trending .tr-logo .adtag{display:none}
+/* Promoted row: highlight the whole row, not the logo tile */
+body.page-trending .tr-logo.filled{box-shadow:none!important;animation:none!important}
+body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:inset 0 0 0 2px var(--glow),0 0 12px 0 var(--glow)}
+
+/* Lighter stroke weight throughout (2 -> 1.5, ~25% less) */
+[stroke-width="2"]{stroke-width:1.5}
 </style>
 </head>
 <body class="glow-on chart-collapsed page-ticker">
