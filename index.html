@@ -428,6 +428,70 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
 
 /* Lighter stroke weight throughout (2 -> 1.5, ~25% less) */
 [stroke-width="2"]{stroke-width:1.5}
+
+/* ============================================================
+   DEVICE SWITCHER (desktop <-> mobile)
+   ============================================================ */
+.switcher{position:fixed;top:54px;left:16px;z-index:58;display:flex;gap:8px;align-items:center}
+.page-pill{position:static}
+.device-toggle{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:inherit;font-size:12.5px;font-weight:700;color:var(--ink);cursor:pointer;box-shadow:0 6px 18px rgba(10,10,10,.12);line-height:1;white-space:nowrap}
+.device-toggle svg{width:15px;height:15px;stroke-width:1.5;flex:none}
+.device-toggle .dt-desk{display:none}
+body.device-mobile .device-toggle .dt-phone{display:none}
+body.device-mobile .device-toggle .dt-desk{display:inline-flex}
+body.device-mobile #pagePill{display:none}
+body.present .switcher,body.locked .switcher,.capturing .switcher{display:none!important}
+html.spotlight .switcher{display:none!important}
+
+body.device-mobile .topbar,body.device-mobile .tape,body.device-mobile .demo-banner,body.device-mobile .wrap,body.device-mobile .sticky-lb{display:none!important}
+
+/* ============================================================
+   MOBILE TRENDING PAGE  (pixel-matched to Trending Page - Mobile.svg, 375w)
+   ============================================================ */
+.mobile-stage{display:none;min-height:100vh;background:#f2f2f7;justify-content:center;align-items:flex-start;padding:26px 0}
+body.device-mobile .mobile-stage{display:flex}
+.mobile-frame{width:375px;background:#fff;border-radius:30px;box-shadow:0 12px 50px rgba(10,10,10,.20);overflow:hidden;font-size:14px}
+.m-status{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 22px 0 26px}
+.m-time{font-size:15px;font-weight:700;color:var(--ink);letter-spacing:.2px}
+.m-status-ic{display:flex;align-items:center;gap:6px}
+.m-status-ic svg{height:12px;width:auto;display:block}
+.m-head{display:flex;align-items:center;justify-content:space-between;padding:6px 18px 12px}
+.m-head .m-ico{width:24px;height:24px;color:var(--ink);flex:none}
+.m-head .m-ico svg{width:24px;height:24px;stroke-width:1.5}
+.m-title{font-size:18px;font-weight:800;color:var(--ink)}
+.m-tabs{display:flex;gap:24px;padding:0 18px;border-bottom:1px solid var(--line)}
+.m-tab{font-size:14px;font-weight:700;color:var(--ink-3);padding:0 0 11px;position:relative}
+.m-tab.on{color:var(--ink)}
+.m-tab.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--ink);border-radius:2px}
+.m-chips{display:flex;gap:8px;padding:14px 18px 8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.m-chips::-webkit-scrollbar{display:none}
+.m-chip{flex:none;font-size:12.5px;font-weight:700;color:var(--ink);background:var(--chip);border-radius:999px;padding:7px 14px;white-space:nowrap}
+.m-chip.on{background:var(--ink);color:#fff}
+
+.m-table{padding:2px 14px 6px}
+.m-cols{--mgrid:28px 56px minmax(0,1fr) 66px}
+.m-row{display:grid;grid-template-columns:var(--mgrid);align-items:center;gap:8px;height:54px;border-bottom:1px solid var(--line-2);padding:0 4px}
+.m-hdr{height:34px;border-bottom:1px solid var(--line)}
+.m-hdr>span{font-size:11px;font-weight:600;color:var(--ink-3)}
+.m-rank{font-size:13px;font-weight:600;color:var(--ink-3);text-align:center}
+.m-tk{font-size:14.5px;font-weight:700;color:var(--ink)}
+.m-nm{font-size:12.5px;color:#636366;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.m-pct{text-align:right;font-size:14px;font-weight:700}
+.m-pct.up{color:var(--green)}
+.m-pct.down{color:var(--red)}
+.m-hdr .m-pct{font-weight:600;color:var(--ink-3)}
+
+/* Mobile promoted (AD) row */
+.m-row.m-ad .m-tk,.m-row.m-ad .m-pct{font-weight:800}
+.m-adbadge{display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#5778c5;background:#e3ecfc;border-radius:4px;padding:3px 6px;margin:0 auto}
+body.glow-on .m-row.m-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 0 12px 0 var(--glow)}
+
+/* Mobile bottom nav */
+.m-nav{display:flex;justify-content:space-around;align-items:flex-start;padding:10px 8px 6px;border-top:1px solid var(--line)}
+.m-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:var(--ink-3);flex:1}
+.m-nav-item svg{width:23px;height:23px;stroke-width:1.5}
+.m-nav-item.on{color:#008fff}
+.m-homebar{height:5px;width:134px;background:#000;border-radius:3px;margin:6px auto 9px}
 </style>
 </head>
 <body class="glow-on chart-collapsed page-ticker">
@@ -456,10 +520,16 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
 
 <div class="demo-banner"><span style="font-size:15px">⚠️</span><span><b>Sales demo mockup — not a live page.</b> All prices, charts &amp; figures are placeholders for illustration only. Click any dashed slot to upload a creative; use ⠿ to reorder feed cards.</span></div>
 
-<!-- PAGE SWITCHER PILL -->
-<div class="page-pill" id="pagePill">
-  <button id="ppTicker" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Ticker</button>
-  <button id="ppTrending"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>Trending</button>
+<!-- PAGE + DEVICE SWITCHER -->
+<div class="switcher" id="switcher">
+  <div class="page-pill" id="pagePill">
+    <button id="ppTicker" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Ticker</button>
+    <button id="ppTrending"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>Trending</button>
+  </div>
+  <button class="device-toggle" id="deviceToggle" title="Switch device">
+    <span class="dt-phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg>Mobile</span>
+    <span class="dt-desk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Desktop</span>
+  </button>
 </div>
 
 <div class="wrap">
@@ -862,11 +932,11 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
       <div class="tr-row tr-ad" data-unit-block="trendad">
         <span class="tr-rank"><span class="tr-adbadge">AD</span></span>
         <span class="tr-sym">
-          <span class="tr-sym-txt"><span class="tr-tk" id="trendTk">MU</span><span class="tr-nm" id="trendNm">Micron Technology Corp</span></span>
+          <span class="tr-sym-txt"><span class="tr-tk" id="trendTk" data-val="trendTk">MU</span><span class="tr-nm" id="trendNm" data-val="trendNm">Micron Technology Corp</span></span>
         </span>
         <span class="tr-spark"><svg viewBox="0 0 72 26" fill="none"><polyline points="0,21 12,17 22,19 34,11 44,14 56,7 72,4" stroke="#128760" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="tr-num tr-px" id="trendPx">$904.61</span>
-        <span class="tr-num tr-pct up" id="trendPct">↑ 13.89%</span>
+        <span class="tr-num tr-pct up" id="trendPct" data-val="trendPct">↑ 13.89%</span>
         <span class="tr-num tr-cell" id="trendVol">23.23M</span>
         <span class="tr-num tr-cell" id="trendHi">$1,089.29</span>
         <span class="tr-num tr-cell" id="trendLo">$103.38</span>
@@ -966,6 +1036,115 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
   <div class="adslot slot-728x90" data-role="Bottom rail · 728x90" data-dim="728 × 90">
     <span class="adtag">728×90</span><button class="adclear">✕</button><img class="adfill" alt="">
     <div class="adempty"><span class="dim">728 × 90</span><span class="role">Watchlist Display</span><span class="hint">click / drop</span></div>
+  </div>
+</div>
+
+
+<!-- ================= MOBILE TRENDING PAGE ================= -->
+<div class="mobile-stage" id="mobileStage">
+  <div class="mobile-frame">
+    <div class="m-status">
+      <span class="m-time">9:41</span>
+      <span class="m-status-ic"><svg viewBox="0 0 18 12" fill="#0a0a0a"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12" fill="#0a0a0a"><path d="M8 11.2l2.1-2.5a3.2 3.2 0 0 0-4.2 0L8 11.2z"/><path d="M8 3.2c2.2 0 4.2.8 5.7 2.2l-1.4 1.6A6.3 6.3 0 0 0 8 5.3a6.3 6.3 0 0 0-4.3 1.7L2.3 5.4A8.4 8.4 0 0 1 8 3.2z"/></svg><svg viewBox="0 0 26 12" fill="none"><rect x="1" y="1" width="21" height="10" rx="3" stroke="#0a0a0a" stroke-width="1"/><rect x="3" y="3" width="15" height="6" rx="1.5" fill="#0a0a0a"/><rect x="23.4" y="4" width="1.8" height="4" rx="0.9" fill="#0a0a0a"/></svg></span>
+    </div>
+    <div class="m-head">
+      <span class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span>
+      <span class="m-title">Trending</span>
+      <span class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span>
+    </div>
+    <div class="m-tabs">
+      <span class="m-tab on">All</span>
+      <span class="m-tab">Equities</span>
+      <span class="m-tab">Crypto</span>
+    </div>
+    <div class="m-chips">
+      <span class="m-chip on">Trending</span>
+      <span class="m-chip">Most Active</span>
+      <span class="m-chip">Watchers</span>
+      <span class="m-chip">Top Gainers</span>
+    </div>
+    <div class="m-table m-cols">
+      <div class="m-row m-hdr">
+        <span class="m-rank">Rank</span>
+        <span>Symbol</span>
+        <span>Name</span>
+        <span class="m-pct">% Change</span>
+      </div>
+      <div class="m-row">
+        <span class="m-rank">1</span>
+        <span class="m-tk">IREN</span>
+        <span class="m-nm">IREN Limited</span>
+        <span class="m-pct up">↑ 2.59%</span>
+      </div>
+      <div class="m-row">
+        <span class="m-rank">2</span>
+        <span class="m-tk">UNH</span>
+        <span class="m-nm">Unitedhealth Grou…</span>
+        <span class="m-pct up">↑ 4.10%</span>
+      </div>
+      <div class="m-row">
+        <span class="m-rank">3</span>
+        <span class="m-tk">BTC</span>
+        <span class="m-nm">Bitcoin</span>
+        <span class="m-pct down">↓ 0.58%</span>
+      </div>
+      <!-- PROMOTED TRENDING ROW (mobile) -->
+      <div class="m-row m-ad" data-unit-block="trendad">
+        <span class="m-rank"><span class="m-adbadge">AD</span></span>
+        <span class="m-tk" data-val="trendTk">MU</span>
+        <span class="m-nm" data-val="trendNm">Micron Technology Corp</span>
+        <span class="m-pct up" data-val="trendPct">↑ 13.89%</span>
+      </div>
+      <div class="m-row">
+        <span class="m-rank">4</span>
+        <span class="m-tk">CIFR</span>
+        <span class="m-nm">Cipher Mining Inc</span>
+        <span class="m-pct up">↑ 17.43%</span>
+      </div>
+      <div class="m-row">
+        <span class="m-rank">5</span>
+        <span class="m-tk">KVUE</span>
+        <span class="m-nm">Kenvue Inc</span>
+        <span class="m-pct up">↑ 9.01%</span>
+      </div>
+      <div class="m-row">
+        <span class="m-rank">6</span>
+        <span class="m-tk">MTEX</span>
+        <span class="m-nm">Mannatech Inc</span>
+        <span class="m-pct up">↑ 0.91%</span>
+      </div>
+      <div class="m-row">
+        <span class="m-rank">7</span>
+        <span class="m-tk">RUM</span>
+        <span class="m-nm">Rumble Inc</span>
+        <span class="m-pct up">↑ 34.56%</span>
+      </div>
+      <div class="m-row">
+        <span class="m-rank">8</span>
+        <span class="m-tk">LCID</span>
+        <span class="m-nm">Lucid Group Inc</span>
+        <span class="m-pct up">↑ 6.78%</span>
+      </div>
+      <div class="m-row">
+        <span class="m-rank">9</span>
+        <span class="m-tk">ADA</span>
+        <span class="m-nm">Cardano</span>
+        <span class="m-pct up">↑ 9.12%</span>
+      </div>
+      <div class="m-row">
+        <span class="m-rank">10</span>
+        <span class="m-tk">QS</span>
+        <span class="m-nm">QuantumScape Gr…</span>
+        <span class="m-pct down">↓ 1.22%</span>
+      </div>
+    </div>
+    <div class="m-nav">
+      <span class="m-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</span>
+      <span class="m-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Explore</span>
+      <span class="m-nav-item on"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2c.5 3-1.5 4.5-2.8 6C9 9.4 8 10.7 8 12.8A4 4 0 0 0 16 13c0-1.6-.7-2.8-1.4-3.7C15.8 9.7 17 11 17 13.2A5 5 0 1 1 7 13c0-4 3.5-6 6-11z"/></svg>Trending</span>
+      <span class="m-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>Notifications</span>
+    </div>
+    <div class="m-homebar"></div>
   </div>
 </div>
 
@@ -1257,7 +1436,7 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
     var cb=u.querySelector(".unit-tick"), name=cb.dataset.unit, on=cb.checked;
     if(!on) u.classList.remove("open"); else if(autoOpen) u.classList.add("open"); /* on/off is separate from expand */
     if(name==="bottom"){ document.body.classList.toggle("takeover",on); }
-    else { var b=unitBlock(name); if(b) b.style.display = on ? "" : "none"; }
+    else { [].forEach.call(document.querySelectorAll('[data-unit-block="'+name+'"]'),function(b){ b.style.display = on ? "" : "none"; }); }
   }
   var swAllUnits=document.getElementById("swAllUnits");
   function updateMaster(){ if(!swAllUnits) return; var all=[].every.call(document.querySelectorAll(".unit-tick"),function(c){return c.checked;}); swAllUnits.classList.toggle("on",all); }
@@ -1290,8 +1469,9 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
 
   /* ---------- data-bind: control input -> on-page span (Trending promoted row) ---------- */
   [].forEach.call(document.querySelectorAll("[data-bind]"),function(inp){
-    var span=document.getElementById(inp.getAttribute("data-bind"));
-    if(span){ inp.addEventListener("input",function(){ span.textContent=inp.value; }); }
+    var key=inp.getAttribute("data-bind");
+    var targets=document.querySelectorAll('[data-val="'+key+'"]');
+    if(targets.length){ inp.addEventListener("input",function(){ [].forEach.call(targets,function(t){ t.textContent=inp.value; }); }); }
   });
 
   /* ---------- page switcher: Ticker <-> Trending ---------- */
@@ -1307,6 +1487,17 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
   var _ppa=document.getElementById("ppTicker"), _ppb=document.getElementById("ppTrending");
   if(_ppa) _ppa.addEventListener("click",function(){ setPage("ticker"); });
   if(_ppb) _ppb.addEventListener("click",function(){ setPage("trending"); });
+
+  /* ---------- device switcher: desktop <-> mobile ---------- */
+  function setDevice(d){
+    var mob=(d==="mobile");
+    document.body.classList.toggle("device-mobile",mob);
+    if(mob){ setPage("trending"); } /* mobile currently shows the Trending page */
+    try{ window.scrollTo(0,0); }catch(e){}
+  }
+  window.__setDevice=setDevice;
+  var _dt=document.getElementById("deviceToggle");
+  if(_dt) _dt.addEventListener("click",function(){ setDevice(document.body.classList.contains("device-mobile")?"desktop":"mobile"); });
 
   function autofillFromClient(v){ [].forEach.call(document.querySelectorAll("[data-autofill]"),function(el){ if(el.dataset.dirty!=="1"){ el.value=v; el.dispatchEvent(new Event("input")); } }); }
   document.getElementById("inClientName").addEventListener("input",function(e){ if(!e.isTrusted) return; autofillFromClient(this.value); });
@@ -1451,7 +1642,7 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
     allFieldEls().forEach(function(el){ if(el.id && el.id!=="inSaveName") st.fields[el.id]=el.value; });
     slots.forEach(function(sl){ if(sl.classList.contains("filled")) st.slots[sl.dataset.id]=sl.querySelector(".adfill").src; });
     ["symLogo","nativeLogo","pinLogo","infeedLogo"].forEach(function(id){ var im=document.querySelector("#"+id+" img"); st.logos[id]=im?im.src:null; });
-    st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow"), banner:document.getElementById("swBanner").classList.contains("on"), topDisc:document.getElementById("swTopDisc").classList.contains("on"), relSym:document.getElementById("swRelSym").classList.contains("on"), whoFollow:document.getElementById("swWhoFollow").classList.contains("on"), wlCount:+((document.getElementById("inWlCount")||{}).value)||6, page:(document.body.classList.contains("page-trending")?"trending":"ticker") };
+    st.flags={ glow:document.body.classList.contains("glow-on"), chartCollapsed:document.body.classList.contains("chart-collapsed"), popout:popoutOn, glowColor:document.documentElement.style.getPropertyValue("--glow"), banner:document.getElementById("swBanner").classList.contains("on"), topDisc:document.getElementById("swTopDisc").classList.contains("on"), relSym:document.getElementById("swRelSym").classList.contains("on"), whoFollow:document.getElementById("swWhoFollow").classList.contains("on"), wlCount:+((document.getElementById("inWlCount")||{}).value)||6, page:(document.body.classList.contains("page-trending")?"trending":"ticker"), device:(document.body.classList.contains("device-mobile")?"mobile":"desktop") };
     st.clientLogo=clientLogo; st.linked={pin:linked.pin,native:linked.native,rel:linked.rel,newsimg:linked.newsimg,wtfad:linked.wtfad,infeedlogo:linked.infeedlogo,trend:linked.trend};
     st.units={}; [].forEach.call(document.querySelectorAll(".unit-tick"),function(cb){ st.units[cb.dataset.unit]=cb.checked; });
     st.railOrder = window.__railOrder ? window.__railOrder() : null;
@@ -1464,7 +1655,7 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
     slots.forEach(clear);
     Object.keys(st.slots||{}).forEach(function(sid){ for(var i=0;i<slots.length;i++){ if(slots[i].dataset.id===sid){ fill(slots[i],st.slots[sid]); break; } } });
     if(st.logos){ if(st.logos.symLogo) setSymbolLogo(st.logos.symLogo); if(st.logos.nativeLogo) setNativeLogo(st.logos.nativeLogo); if(st.logos.pinLogo) setPinLogo(st.logos.pinLogo); if(st.logos.infeedLogo) setInfeedLogo(st.logos.infeedLogo); }
-    if(st.flags){ setFlag("glow-on",st.flags.glow,"swGlow"); setChartState(st.flags.chartCollapsed); setPopout(st.flags.popout); if(st.flags.glowColor) document.documentElement.style.setProperty("--glow",st.flags.glowColor.trim()); applyBanner(st.flags.banner!==false); applyTopDisc(st.flags.topDisc!==false); applyRelSym(st.flags.relSym!==false); applyWhoFollow(st.flags.whoFollow!==false); applyWlCount(st.flags.wlCount||6); if(window.__setPage) window.__setPage(st.flags.page||"ticker"); }
+    if(st.flags){ setFlag("glow-on",st.flags.glow,"swGlow"); setChartState(st.flags.chartCollapsed); setPopout(st.flags.popout); if(st.flags.glowColor) document.documentElement.style.setProperty("--glow",st.flags.glowColor.trim()); applyBanner(st.flags.banner!==false); applyTopDisc(st.flags.topDisc!==false); applyRelSym(st.flags.relSym!==false); applyWhoFollow(st.flags.whoFollow!==false); applyWlCount(st.flags.wlCount||6); if(window.__setPage) window.__setPage(st.flags.page||"ticker"); if(window.__setDevice) window.__setDevice(st.flags.device||"desktop"); }
     clientLogo=st.clientLogo||null; showClientLogo();
     if(st.linked){ ["pin","native","rel","newsimg","wtfad","infeedlogo","trend"].forEach(function(t){ linked[t]=!!st.linked[t]; var cb=document.querySelector('.uc[data-target="'+t+'"]'); if(cb) cb.checked=linked[t]; }); }
     if(st.units){ [].forEach.call(document.querySelectorAll(".unit"),function(u){ var cb=u.querySelector(".unit-tick"); var n=cb.dataset.unit; if(st.units[n]!==undefined) cb.checked=st.units[n]; syncUnit(u); }); }
