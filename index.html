@@ -862,10 +862,6 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
       <div class="tr-row tr-ad" data-unit-block="trendad">
         <span class="tr-rank"><span class="tr-adbadge">AD</span></span>
         <span class="tr-sym">
-          <span class="adslot tr-logo filled" data-role="Trending · Promoted Logo" data-dim="40 × 40">
-            <span class="adtag">40×40</span><button class="adclear">✕</button><img class="adfill" alt="" src="https://logos.stocktwits-cdn.com/MU.png">
-            <div class="adempty"><span class="dim">logo</span><span class="role">Promoted</span><span class="hint">click / drop</span></div>
-          </span>
           <span class="tr-sym-txt"><span class="tr-tk" id="trendTk">MU</span><span class="tr-nm" id="trendNm">Micron Technology Corp</span></span>
         </span>
         <span class="tr-spark"><svg viewBox="0 0 72 26" fill="none"><polyline points="0,21 12,17 22,19 34,11 44,14 56,7 72,4" stroke="#128760" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -1117,7 +1113,7 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
     <div class="unit">
       <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="trendad" checked> Trending Promoted Row <span class="pos">· native</span></div>
       <div class="unit-body">
-        <div class="fld-note" style="margin:-2px 0 8px">The “AD” row promoted into the Trending table. Ticker, name &amp; logo pull from the client above; the stats below are editable placeholders.</div>
+        <div class="fld-note" style="margin:-2px 0 8px">The “AD” row promoted into the Trending table. Ticker &amp; name pull from the client above; the stats below are editable placeholders.</div>
         <div class="fld"><label>Ticker</label><input type="text" id="inTrendTk" data-bind="trendTk" value="MU"></div>
         <div class="fld"><label>Company name</label><input type="text" id="inTrendNm" data-autofill="1" data-bind="trendNm" value="Micron Technology Corp"></div>
         <div class="row2">
@@ -1132,8 +1128,6 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
           <div class="fld" style="flex:1;min-width:0"><label>52W High</label><input type="text" id="inTrendHi" data-bind="trendHi" value="$1,089.29"></div>
           <div class="fld" style="flex:1;min-width:0"><label>52W Low</label><input type="text" id="inTrendLo" data-bind="trendLo" value="$103.38"></div>
         </div>
-        <label class="use-client"><input type="checkbox" class="uc" data-target="trend" checked> Use client logo</label>
-        <button class="btn" id="btnTrendLogo">Upload promoted logo</button>
       </div>
     </div>
   </div>
@@ -1254,9 +1248,7 @@ body.glow-on .tr-row.tr-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 
   document.getElementById("btnPinLogo").addEventListener("click",function(){ uploadTo(setPinLogo); });
   document.getElementById("btnPinImg").addEventListener("click",function(){ var s=document.querySelector('[data-role="Pinned Post · Image"]'); target=s; picker.value=""; picker.click(); });
   document.getElementById("btnRelSymLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Related Symbol · Promoted Logo"]'); target=s; picker.value=""; picker.click(); });
-  document.getElementById("btnWtfLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Who To Follow · Promoted Logo"]'); target=s; picker.value=""; picker.click(); });
-  document.getElementById("btnTrendLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Trending · Promoted Logo"]'); target=s; picker.value=""; picker.click(); });
-  /* generic image-only unit uploads (left/right displays, video, 300x600, 728x90) */
+  document.getElementById("btnWtfLogo").addEventListener("click",function(){ var s=document.querySelector('[data-role="Who To Follow · Promoted Logo"]'); target=s; picker.value=""; picker.click(); });  /* generic image-only unit uploads (left/right displays, video, 300x600, 728x90) */
   [].forEach.call(document.querySelectorAll(".slot-upload"),function(b){ b.addEventListener("click",function(){ var s=document.querySelector('[data-role="'+b.dataset.slot+'"]'); target=s; picker.value=""; picker.click(); }); });
 
   /* ---------- Ad units: tick = show on page + open its editor; untick = remove + collapse ---------- */
