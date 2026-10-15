@@ -500,7 +500,7 @@ body.glow-on .m-row.m-ad{border-radius:9px;box-shadow:0 0 0 2px var(--glow),0 0 
 
 <style id="m-screens-css">
 /* ===== mobile screen switcher ===== */
-body.device-mobile .mobile-stage{flex-direction:column;gap:14px}
+body.device-mobile .mobile-stage{flex-direction:column;gap:14px;align-items:center}
 .m-screenswitch{display:none;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px;box-shadow:0 6px 18px rgba(10,10,10,.12)}
 body.device-mobile .m-screenswitch{display:inline-flex}
 .m-screenswitch button{border:none;background:none;font:inherit;font-size:12.5px;font-weight:700;color:var(--ink-3);padding:7px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}
@@ -570,6 +570,11 @@ body.device-mobile .m-screenswitch{display:inline-flex}
 .me-input-box{flex:1;background:#f2f2f7;border-radius:999px;padding:11px 16px;font-size:13.5px;color:#8e8e93}
 .me-input-ic{display:flex;gap:12px;color:#c7c7cc}
 .me-input-ic svg{width:22px;height:22px}
+.mw-logo svg{height:19px;width:auto;display:block}
+.mob-only{display:none}
+body.device-mobile .mob-only{display:block}
+body.device-mobile .desk-only{display:none!important}
+.ctl .fld textarea{width:100%;font:inherit;font-size:13px;line-height:1.35;padding:8px 10px;border:1px solid var(--line);border-radius:8px;resize:vertical;box-sizing:border-box;color:var(--ink)}
 </style>
 </head>
 <body class="glow-on chart-collapsed page-ticker">
@@ -1230,14 +1235,14 @@ body.device-mobile .m-screenswitch{display:inline-flex}
     </div>
     </div><!--/mscr-trending-->
     <div class="m-screen" id="mscr-watchlist">
-      <div class="mw-head"><span class="mw-logo">stocktwits</span>
+      <div class="mw-head"><span class="mw-logo"><svg viewBox="0 0 130 20" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stocktwits"><path d="M34.5347 3.39742C29.3093 3.39742 27.0191 7.65747 25.8133 11.3534C24.6596 14.8626 24.0586 19.9989 29.6844 19.9989C34.8797 19.9989 37.1254 15.8648 38.3382 12.1058C39.492 8.59664 40.1006 3.39742 34.5347 3.39742ZM33.9567 11.8868C32.9447 14.7673 31.9554 15.3314 30.785 15.3007C30.0932 15.2377 29.3225 14.5175 30.3484 11.5417C31.3167 8.75266 32.3813 8.09555 33.5203 8.12783C34.9382 8.22082 34.6324 9.97542 33.9567 11.8868ZM63.034 11.6678L64.7656 19.686H59.6248L58.2821 13.3739L56.2155 19.686H51.1684L57.5889 0.017334H62.6551L59.3804 10.0085L63.8979 3.7102H69.2831L63.0333 11.6678H63.034ZM99.5778 3.70944L91.0154 19.686H85.7578L86.9121 10.1322L83.0994 19.686H77.5219L79.4096 3.70944H84.6326L82.9241 13.2633L86.7423 3.70944H91.85L90.0794 13.4201L94.168 3.70944H99.5778ZM105.885 3.70713L100.655 19.686H95.7236L100.954 3.70713H105.885ZM20.5142 13.7713C20.1599 14.682 20.5142 15.1847 21.5254 15.1847H23.7282L22.2525 19.693H18.2546C15.6438 19.693 14.1728 17.664 14.9852 15.1831L19.953 0.0181025H25.7895L21.9782 3.70713H26.5719L25.0984 8.20776H22.3295L20.5142 13.7713ZM72.1499 13.7713C71.7956 14.682 72.1499 15.1847 73.1611 15.1847H76.1447L74.6692 19.693H69.8903C67.2796 19.693 65.8085 17.664 66.6209 15.1831L71.588 0.0181025H77.4244L73.6131 3.70713H78.2068L76.7334 8.20776H73.9643L72.1491 13.7713H72.1499ZM9.21336 9.5581C10.6483 10.2544 13.2575 11.192 13.5972 13.2018C13.9153 15.1885 12.8409 17.5587 10.4453 18.8529C8.84677 19.7498 7.04298 19.693 4.95713 19.693H0L1.48253 15.1654L7.27047 15.1962C7.976 15.1923 8.38026 14.4361 7.91299 13.968C7.84457 13.8996 7.76235 13.8474 7.67473 13.8059C6.22216 13.1134 3.72977 12.1227 3.39776 10.1537C2.66302 7.1364 5.86018 3.69714 9.78209 3.70944L16.8712 3.70713L15.3948 8.21622C15.3948 8.21622 11.064 8.20084 9.70677 8.21314C8.93745 8.21697 8.43482 9.16306 9.21414 9.5604V9.5581H9.21336ZM52.0368 12.8044C50.7726 16.359 48.4947 19.9989 43.6198 19.9989C37.9939 19.9989 38.595 14.8626 39.7486 11.3534C40.9537 7.65747 43.2448 3.39742 48.4701 3.39742C53.292 3.39742 53.4796 7.29934 52.6932 10.6241H48.2796C48.6168 9.26297 48.5508 8.20006 47.4555 8.12783C46.3166 8.09555 45.2529 8.75266 44.2838 11.5417C43.2577 14.5175 44.0287 15.2377 44.7203 15.3007C45.7539 15.3276 46.6455 14.8895 47.5371 12.8044H52.0368ZM121.677 9.5604V9.5581C123.112 10.2544 125.722 11.192 126.061 13.2018C126.379 15.1885 125.305 17.5587 122.909 18.8529C121.312 19.7498 119.507 19.693 117.421 19.693H112.127L112.168 19.5347L112.117 19.693H107.349C104.738 19.6938 103.267 17.664 104.079 15.1831L109.046 0.0181025H114.883L111.072 3.70713H115.666L114.192 8.20776H111.424L109.608 13.7713C109.253 14.682 109.608 15.1847 110.62 15.1847H113.021L112.127 17.9122L112.692 17.5172L112.87 17.3927L115.99 15.2069V15.1962H119.579C120.439 15.1931 120.844 14.4361 120.376 13.9688C120.308 13.9004 120.226 13.8481 120.138 13.8066C118.685 13.1142 116.193 12.1235 115.86 10.1545C115.126 7.1364 118.323 3.69792 122.245 3.70944L129.335 3.70713L127.858 8.21622C127.858 8.21622 123.527 8.20084 122.169 8.21237C121.4 8.21622 120.897 9.16306 121.677 9.5604Z" fill="currentColor"></path></svg></span>
         <span class="mw-head-ic">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
           <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
           <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
         </span></div>
       <div class="mw-wlhead"><b>Watchlist</b><span class="mw-sub">All ▾ A-Z ▾</span></div>
-      <div class="mw-list"><div class="mw-row"><div class="mw-l"><div class="mw-tk">AAPL</div><div class="mw-nm">Apple Inc.</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,6 10,9 18,7 26,14 34,11 42,16 52,18 60,21" fill="none" stroke="#e5484d" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$161.07</div><div class="mw-chg mdn">↓ 0.32%</div></div></div><div class="mw-row"><div class="mw-l"><div class="mw-tk">ABNB</div><div class="mw-nm">Airbnb Inc.</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,20 10,16 18,18 26,11 34,14 42,8 52,6 60,3" fill="none" stroke="#1aa865" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$119.46</div><div class="mw-chg mup">↑ 1.47%</div></div></div><div class="mw-row mw-adrow" data-unit-block="wlad"><div class="mw-l"><div><span class="mw-tk">REXSHARES</span><span class="mw-adbadge">AD</span></div><div class="mw-nm">RexShares 2x daily</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,20 10,16 18,18 26,11 34,14 42,8 52,6 60,3" fill="none" stroke="#1aa865" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><button class="mw-watch">Watch&nbsp;+</button></div></div><div class="mw-row"><div class="mw-l"><div class="mw-tk">AMC</div><div class="mw-nm">AMC Entertainment…</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,20 10,16 18,18 26,11 34,14 42,8 52,6 60,3" fill="none" stroke="#1aa865" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$4.35</div><div class="mw-chg mup">↑ 0.23%</div></div></div><div class="mw-row"><div class="mw-l"><div class="mw-tk">BRK.A</div><div class="mw-nm">Berkshire Hathaway…</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,20 10,16 18,18 26,11 34,14 42,8 52,6 60,3" fill="none" stroke="#1aa865" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$607,200.00</div><div class="mw-chg mup">↑ 0.67%</div></div></div><div class="mw-row"><div class="mw-l"><div class="mw-tk">C</div><div class="mw-nm">Citigroup Inc.</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,6 10,9 18,7 26,14 34,11 42,16 52,18 60,21" fill="none" stroke="#e5484d" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$43.36</div><div class="mw-chg mdn">↓ 0.85%</div></div></div><div class="mw-row"><div class="mw-l"><div class="mw-tk">DIS</div><div class="mw-nm">Walt Disney Co.</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,20 10,16 18,18 26,11 34,14 42,8 52,6 60,3" fill="none" stroke="#1aa865" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$93.57</div><div class="mw-chg mup">↑ 1.99%</div></div></div></div>
+      <div class="mw-list"><div class="mw-row"><div class="mw-l"><div class="mw-tk">AAPL</div><div class="mw-nm">Apple Inc.</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,6 10,9 18,7 26,14 34,11 42,16 52,18 60,21" fill="none" stroke="#e5484d" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$161.07</div><div class="mw-chg mdn">↓ 0.32%</div></div></div><div class="mw-row"><div class="mw-l"><div class="mw-tk">ABNB</div><div class="mw-nm">Airbnb Inc.</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,20 10,16 18,18 26,11 34,14 42,8 52,6 60,3" fill="none" stroke="#1aa865" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$119.46</div><div class="mw-chg mup">↑ 1.47%</div></div></div><div class="mw-row mw-adrow" data-unit-block="wlad"><div class="mw-l"><div><span class="mw-tk" data-val="wlAdName">REXSHARES</span><span class="mw-adbadge">AD</span></div><div class="mw-nm" data-val="wlAdSub">RexShares 2x daily</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,20 10,16 18,18 26,11 34,14 42,8 52,6 60,3" fill="none" stroke="#1aa865" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><button class="mw-watch">Watch&nbsp;+</button></div></div><div class="mw-row"><div class="mw-l"><div class="mw-tk">AMC</div><div class="mw-nm">AMC Entertainment…</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,20 10,16 18,18 26,11 34,14 42,8 52,6 60,3" fill="none" stroke="#1aa865" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$4.35</div><div class="mw-chg mup">↑ 0.23%</div></div></div><div class="mw-row"><div class="mw-l"><div class="mw-tk">BRK.A</div><div class="mw-nm">Berkshire Hathaway…</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,20 10,16 18,18 26,11 34,14 42,8 52,6 60,3" fill="none" stroke="#1aa865" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$607,200.00</div><div class="mw-chg mup">↑ 0.67%</div></div></div><div class="mw-row"><div class="mw-l"><div class="mw-tk">C</div><div class="mw-nm">Citigroup Inc.</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,6 10,9 18,7 26,14 34,11 42,16 52,18 60,21" fill="none" stroke="#e5484d" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$43.36</div><div class="mw-chg mdn">↓ 0.85%</div></div></div><div class="mw-row"><div class="mw-l"><div class="mw-tk">DIS</div><div class="mw-nm">Walt Disney Co.</div></div><svg class="mw-spark" viewBox="0 0 60 26"><polyline points="0,20 10,16 18,18 26,11 34,14 42,8 52,6 60,3" fill="none" stroke="#1aa865" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg><div class="mw-r"><div class="mw-price">$93.57</div><div class="mw-chg mup">↑ 1.99%</div></div></div></div>
       <div class="m-nav">
         <span class="m-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</span>
         <span class="m-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Explore</span>
@@ -1254,7 +1259,7 @@ body.device-mobile .m-screenswitch{display:inline-flex}
           <span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
         </span></div>
       <div class="me-titlerow"><div>
-          <div class="me-title">TSLA Q1 '24 Earnings Call</div>
+          <div class="me-title" data-val="earnTitle">TSLA Q1 '24 Earnings Call</div>
           <div class="me-meta"><span class="me-live">Live</span>
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#636366" stroke-width="1.8" style="vertical-align:-2px"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="3" y="13" width="4" height="6" rx="1.3"/><rect x="17" y="13" width="4" height="6" rx="1.3"/></svg>
             581 · <b>$201.39</b> <span class="mup" style="font-weight:800">↑ 1.26%</span></div>
@@ -1265,9 +1270,9 @@ body.device-mobile .m-screenswitch{display:inline-flex}
       <div class="me-chat">
         <div class="me-msg"><span class="me-av" style="background:#f2b8c6"></span><div class="me-msg-b"><span class="me-user">ShortSqueeze22</span><span class="me-dim">Think we might see a sell-off.</span></div></div><div class="me-msg"><span class="me-av" style="background:#ffd98a"></span><div class="me-msg-b"><span class="me-user">CryptoKing7</span><span class="me-dim">super bearish</span></div></div><div class="me-msg"><span class="me-av" style="background:#b8e0c2"></span><div class="me-msg-b"><span class="me-user">Dividends4Life</span><span class="me-dim">I'm predicting a 7% pop post-earnings. The last 4 earnings they've done at least 5%, and their revenue looks even better right now.</span></div></div><div class="me-msg"><span class="me-av" style="background:#b8c6f2"></span><div class="me-msg-b"><span class="me-user">Icarus61</span><span class="me-dim">k</span></div></div><div class="me-msg"><span class="me-av" style="background:#d9c2f2"></span><div class="me-msg-b"><span class="me-user">Invested4Lyfe</span><span class="me-dim">No mention of the new product yet.</span></div></div><div class="me-msg"><span class="me-av" style="background:#c7c7cc"></span><div class="me-msg-b"><span class="me-user">Robbo500</span><span class="me-dim">Phew, dividend is safe! ◼</span></div></div><div class="me-msg"><span class="me-av" style="background:#f2c6a0"></span><div class="me-msg-b"><span class="me-user">PiPiper</span><span class="me-dim">Alright, I'm converting to a bull.</span></div></div><div class="me-msg"><span class="me-av" style="background:#2b2b2e"></span><div class="me-msg-b"><span class="me-user">ShadowRealm</span><span class="me-dim">Liking the positive tone so far.</span></div></div><div class="me-msg"><span class="me-av" style="background:#a0d8f2"></span><div class="me-msg-b"><span class="me-user">TRex0101</span><span class="me-dim">What positive tone?</span></div></div><div class="me-msg"><span class="me-av" style="background:#f2a0a0"></span><div class="me-msg-b"><span class="me-user">TraderX</span><span class="me-dim">Yeah, what positive tone bro?</span></div></div><div class="me-msg"><span class="me-av" style="background:#2b2b2e"></span><div class="me-msg-b"><span class="me-user">ShadowRealm</span><span class="me-dim">Shhhh</span></div></div><div class="me-msg"><span class="me-av" style="background:#ffd98a"></span><div class="me-msg-b"><span class="me-user">CryptoKing7</span><span class="me-dim">Still super bearish, this is terrible</span></div></div><div class="me-msg"><span class="me-av" style="background:#c2b8a0"></span><div class="me-msg-b"><span class="me-user">StockGuru92</span><span class="me-dim">hahaha</span></div></div>
         <div class="me-popup" id="mearnPopup">
-          <div class="me-popup-head"><span class="me-rex-sm">REX</span><b>RexShares</b><span class="me-x" id="mearnX">✕</span></div>
-          <div class="me-popup-body">REX Shares is an innovative ETP provider that specializes in alternative-strategy ETFs and ETNs.</div>
-          <div class="me-popup-foot"><button class="me-learn">Learn More</button><span class="me-sponsored">Sponsored</span></div>
+          <div class="me-popup-head"><span class="me-rex-sm">REX</span><b data-val="earnAdName">RexShares</b><span class="me-x" id="mearnX">✕</span></div>
+          <div class="me-popup-body" data-val="earnAdBody">REX Shares is an innovative ETP provider that specializes in alternative-strategy ETFs and ETNs.</div>
+          <div class="me-popup-foot"><button class="me-learn" data-val="earnAdCta">Learn More</button><span class="me-sponsored">Sponsored</span></div>
         </div>
       </div>
       <div class="me-input"><div class="me-input-box">Type your message</div>
@@ -1318,7 +1323,7 @@ body.device-mobile .m-screenswitch{display:inline-flex}
   </div>
 
   <!-- ============ TICKER PAGE ============ -->
-  <div class="ctl-sec">
+  <div class="ctl-sec desk-only">
     <div class="sec-title">📈 Ticker page</div>
     <label class="lbl">Ticker</label>
     <div class="row-inline">
@@ -1342,7 +1347,7 @@ body.device-mobile .m-screenswitch{display:inline-flex}
     <div class="fld-note" style="margin:-4px 0 10px">Tick a unit to add it to the page and edit it. Unticked units don’t appear. Use the ▾ to collapse a unit’s fields without removing it.</div>
     <div class="switch" style="margin:0 0 12px"><span><b>All ad units</b> <span style="color:var(--ink-3);font-weight:500">on / off</span></span><span class="sw" id="swAllUnits"></span></div>
 
-    <div class="unit-cat">Left Rail</div>
+    <div class="desk-only"><div class="unit-cat">Left Rail</div>
     <div class="unit">
       <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="left1"> 300×250 Watchlist Display <span class="pos">· upper</span></div>
       <div class="unit-body"><button class="btn slot-upload" data-slot="Left rail · Display 1">Upload 300×250 creative</button></div>
@@ -1435,7 +1440,7 @@ body.device-mobile .m-screenswitch{display:inline-flex}
     </div>
     <div class="switch" style="margin-top:8px"><span>Pre-roll video pop-out on scroll</span><span class="sw" id="swPopout"></span></div>
 
-    <div class="unit-cat">Trending Page</div>
+    </div><div class="unit-cat">Trending Page</div>
     <div class="unit">
       <div class="unit-head"><input type="checkbox" class="unit-tick" data-unit="trendad" checked> Trending Promoted Row <span class="pos">· native</span></div>
       <div class="unit-body">
@@ -1458,7 +1463,20 @@ body.device-mobile .m-screenswitch{display:inline-flex}
     </div>
   </div>
 
-  <div class="ctl-sec">
+    <div class="ctl-sec mob-only">
+    <div class="sec-title">📱 Mobile ad units</div>
+    <p class="muted" style="margin:-4px 0 10px">Editable copy for the Watchlist &amp; Earnings Call units. Switch the mobile screen with the pills by the phone.</p>
+    <div class="unit-cat">Watchlist · Watch+ native</div>
+    <div class="fld"><label>Advertiser</label><input type="text" data-bind="wlAdName" value="REXSHARES"></div>
+    <div class="fld"><label>Subtitle</label><input type="text" data-bind="wlAdSub" value="RexShares 2x daily"></div>
+    <div class="unit-cat" style="margin-top:14px">Earnings Call</div>
+    <div class="fld"><label>Call title</label><input type="text" data-bind="earnTitle" value="TSLA Q1 '24 Earnings Call"></div>
+    <div class="unit-cat" style="margin-top:14px">Earnings Call · pop-up ad</div>
+    <div class="fld"><label>Advertiser</label><input type="text" data-bind="earnAdName" value="RexShares"></div>
+    <div class="fld"><label>Body copy</label><textarea data-bind="earnAdBody" rows="3">REX Shares is an innovative ETP provider that specializes in alternative-strategy ETFs and ETNs.</textarea></div>
+    <div class="fld"><label>Button text</label><input type="text" data-bind="earnAdCta" value="Learn More"></div>
+  </div>
+  <div class="ctl-sec desk-only">
     <div class="sec-title">📄 Page sections</div>
     <div class="switch"><span>Demo disclaimer bar <span style="color:var(--ink-3);font-weight:500">(yellow banner)</span></span><span class="sw on" id="swBanner"></span></div>
     <div class="switch"><span>Top Discussions</span><span class="sw on" id="swTopDisc"></span></div>
